@@ -1,0 +1,25 @@
+.second-nav{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 28px;
+    font-size: 12px;
+    margin: 30px auto;
+}
+li.second-nav-item{
+    cursor: pointer;
+    display: inline-block;
+    color: #999999;
+}
+li.second-nav-item--active{
+    color: #ffffff;
+    background: #1d91ff;
+    padding: 2px 10px;
+}
+li.second-nav-item--active a:hover{
+    color: #ffffff;
+}
+li.second-nav-item a:hover{
+    color:#999999;
+}

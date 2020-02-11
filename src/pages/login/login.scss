@@ -1,0 +1,100 @@
+img.login-illus{
+position: absolute;
+    z-index: 1000;
+    top: 5rem;
+    left:5.25rem;
+}
+div.content{
+    position: absolute;
+    display: inline-block;
+    width: 60.1875rem ;
+    height: 640px;
+    width: 95%;
+    min-width: 1150px;
+    top: 2.75rem;
+    border:1px solid #ffffff;
+    box-sizing: content-box;
+    box-shadow: 4px 4px 8px 12px #dfecf4;
+    z-index: 10;
+   
+   
+}
+canvas{
+    position: absolute;
+    z-index: 100;
+}
+.usr-content{
+    width: 360px;
+    position: absolute;
+    right: 15%;
+    top: 70px;
+    height: 410px;
+
+}
+.login-icon{
+    margin-bottom: 60px;
+}
+.usr-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+
+}
+.usr-login-form i{
+    margin-right: 16px;
+    margin-left: 16px;
+}
+.usr-login-form span{
+    font-size: 20px;
+    line-height: 50px;
+    width: 320px;
+    height: 50px;
+    background: #e1edf4;
+    display: flex;
+    align-items: center;
+    margin-bottom: 36px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 8px;
+}
+.usr-login-form input{
+    background: #e1edf4;
+    font-size: 20px;
+    line-height: 50px;
+    width: 90%;
+
+}
+.login-button{
+    font-size: 20px;
+    width:320px;
+    height: 50px;
+    margin-top: 60px;
+    border-radius: 4px;
+    color: #ffffff;
+    background:#1d91ff ;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    box-shadow:
+    4px 4px 4px 2px #8ed0f7 ,
+    6px 6px 10px 10px #b4dffa;
+}
+.usr-icon{
+    background: url('./imgs/usr-icon.png') no-repeat;
+    width: 24px;
+    height: 25px;
+    display: inline-block;
+}
+.pass-icon{
+    display: inline-block;
+    background: url('./imgs//password-icon.png')no-repeat;
+    width:24px;
+    height: 24px;
+
+}

@@ -1,0 +1,242 @@
+main.file-list,
+main.meeting-list,
+main.vip-list,
+main.vip-info {
+    width: 820px;
+    background: #ffffff;
+    margin: 0 auto;
+    padding-top: 18px;
+    // padding-right: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+
+    div.addBtn {
+        background: #d0e9f4;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            z-index: 10;
+
+        }
+
+    }
+
+    div.file-list-item,
+    div.meeting-list-item {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 14px;
+        margin-right: 1px;
+
+        width: 186px;
+        height: 244px;
+        border: 2px solid #d0e9f4;
+        margin-bottom: 18px;
+
+        div.file-list-item-img,
+        div.meeting-list-item-img {
+            border-bottom: #d0e9f4 solid 1px;
+
+            img {}
+        }
+
+        .file-list-detail {
+            padding: 10px;
+
+            p.bk-name {
+                color: #333333;
+                font-size: 12px;
+                line-height: 1.5;
+
+                span {
+                    font-size: 12px;
+                    color: #ffffff;
+                    line-height: 2;
+                    background: #1d91ff;
+                    padding-left: 2px;
+                    padding-right: 2px;
+
+                }
+            }
+
+            p.bk-introduction {
+                color: #333333;
+                font-size: 9px;
+
+                span.bk-intrduction-txt {
+                    width: 110px;
+                    vertical-align: middle;
+                    display: inline-block;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    line-height: 1.1;
+                    vertical-align: -webkit-baseline-middle;
+                    height: 20px;
+                    margin-left: 2px;
+                }
+
+                span.bk-intrduction-label {
+                    font-size: 12px;
+                    color: #ffffff;
+                    line-height: 2;
+                    background: #f36868;
+                    padding-left: 2px;
+                    padding-right: 2px;
+
+                }
+            }
+
+            p.bk-time {
+                color: #999999;
+                font-size: 9px;
+                text-align: right;
+                line-height: 2;
+
+            }
+        }
+
+        .meeting-list-detail {
+            padding: 10px;
+
+            p.meet-name {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                text-align: center;
+                font-size: 14px;
+                color: #333333;
+            }
+
+            p.meet-time {
+
+                color: #999999;
+                font-size: 9px;
+                text-align: right;
+                line-height: 5;
+
+            }
+        }
+    }
+
+    div.addBtn {
+        display: flex;
+      
+    }
+}
+main.vip-list {
+    div.add-btn {
+        display: flex;
+       
+        align-items: center;
+        justify-content: center;
+     
+      img {
+  
+      }
+    }
+  
+    div.vip-list-item {
+        display: inline-block;
+        
+        margin-left: 9px;
+        margin-right: 9px;
+
+        width: 186px;
+        height: 190px;
+        
+        margin-bottom: 18px;
+      
+        
+      div.vip-list-img {
+        cursor: pointer;
+          width: 186px;
+          height: 141px;
+          background: #d0e9f4;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        img {
+  
+        }
+      }
+  
+      p.vip-list-name {
+  
+        text-align: center;
+    line-height: 3;
+    font-size: 13px;
+    color: #333333;
+      }
+    }
+   
+
+  }
+  main.vip-info {
+    div.vip-title {
+        width: 186px;
+        height: 50px;
+      i {
+          display: inline-block;
+          width: 8px;
+          height: 20px;
+          background: #1d91ff;
+  
+      }
+  
+      div.vip-img {
+          margin-left: 24px;
+          display: inline-block;
+        img {
+  
+        }
+      }
+  
+      p.vip-url {
+          margin-left: 14px;
+          color: #999999;
+          font-size: 10px;
+        a {
+  
+        }
+      }
+    }
+  
+    div.vip-info-list {
+        margin-top: 50px;
+      
+      div.vip-info-list-item {
+       
+        margin-left: 18px;
+        
+        margin-bottom: 18px;
+          background: #d7ecf6 ;
+          color: #6e8aa2;
+          font-size: 12px;
+          display: inline-flex;
+          justify-content: center;
+          flex-direction: column;
+          width: 186px ;
+          border-radius: 4px;
+          height: 104px;
+          padding-left: 14px;
+          line-height: 1.5;
+          p.vip-num{
+        
+  
+        }
+  
+        p.vip-pass {
+  
+        }
+  
+        p.vip-time {
+           
+  
+        }
+      }
+    }
+  }

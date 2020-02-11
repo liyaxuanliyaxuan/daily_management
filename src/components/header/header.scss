@@ -1,0 +1,103 @@
+div.header {
+
+  div.header-content {
+    width: 820px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    background: transparent;
+    height: 56px;
+    color: #6e8aa2;
+    font-size: 18px;
+
+    a.logo {
+      img {}
+    }
+  }
+
+  span.main-nav {
+
+    padding: 0 2px;
+    line-height: 1.8;
+
+
+    .usr-portrait {
+      display: flex;
+      width: 52px;
+      height: 52px;
+      border: 2px #b1d9ff solid;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+
+      img {}
+    }
+
+
+    .usr-name {
+      font-size: 12px;
+
+    }
+
+    .exit-button {
+      font-size: 12px;
+      color: #6e8aa2;
+
+    }
+  }
+
+  .nav-item:hover,
+  .exit-button:hover {
+    cursor: pointer;
+  }
+
+  .main-nav--active {
+    border-bottom: solid 2px #1d91ff;
+  }
+
+  .main-nav-file:hover .filedrop {
+    position: absolute;
+    display: flex;
+
+
+  }
+
+  .main-nav-login {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    vertical-align: center;
+
+    width: 132px;
+
+    span {
+      display: inline-block;
+    }
+  }
+}
+
+.filedrop {
+  position: absolute;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  font-size: 16px;
+  line-height: 2;
+  z-index: 100;
+  padding-left: 8px;
+  padding-right: 8px;
+  display: none;
+
+  .file-drop-item {
+    margin: 4px;
+    border-bottom: 1px solid #f4f4f4;
+  }
+}

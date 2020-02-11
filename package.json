@@ -1,0 +1,58 @@
+{
+  "name": "demo",
+  "version": "0.1.0",
+  "private": true,
+  "proxy":"http://120.24.93.68:8081",
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "antd": "^3.26.9",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "customize-cra": "^0.9.1",
+    "http-proxy-middleware": "^0.20.0",
+    "node-sass": "^4.13.1",
+    "react": "^16.12.0",
+    "react-app-rewired": "^2.1.5",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-cookies": "^0.1.1",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "sass-loader": "^8.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "re-start": "react-app-rewired start",
+    "build": "react-scripts build",
+    "re-build": "react-app-rewired build",
+    "test": "react-scripts test",
+    "re-test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "re-eject": "react-app-rewired eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "compression-webpack-plugin": "^3.1.0",
+    "customize-cra": "^0.9.1",
+    "react-app-rewired": "^2.1.5"
+  }
+}

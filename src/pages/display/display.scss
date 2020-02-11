@@ -1,0 +1,265 @@
+div.display-page {
+
+    div.diaplay-top {
+        width: 820px;
+        margin: 0 auto;
+        height: 206px;
+        background: #ffffff;
+        color: #333333;
+        padding-left: 28px;
+        display: flex;
+        align-items: flex-start;
+
+        div.display-top-contnet {
+
+            padding-right: 22px;
+            display: inline-block;
+            width: 560px;
+
+            h1.display-top-title {
+                font-size: 18px;
+                text-align: center;
+            }
+
+            p.display-top-txt {
+                text-indent: 24px;
+                font-size: 12px;
+            }
+
+
+        }
+
+        div.diaplay-top-right-pic {
+            display: inline-block;
+            margin-top: 16px;
+
+            img {}
+        }
+    }
+
+    div.display-bottom {
+
+        margin: 15px auto;
+        width: 820px;
+        position: relative;
+        color: #333333;
+        font-size: 12px;
+
+        div.navs-left {
+            background: #ffffff;
+            position: absolute;
+            left: 0;
+            padding-top: 14px;
+            padding-bottom: 14px;
+
+            nav.studying-prj {
+
+                title.studying-prj-title {
+                    font-size: 18px;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+
+                    i {
+                        display: inline-block;
+                        background: #5fb1ff;
+                        width: 8px;
+                        height: 26px;
+                        margin-right: 8px;
+
+                    }
+                }
+
+                ul.studying-prj-list {
+                    font-size: 12px;
+
+                    li.studying-prj-list-item,li.studying-prj-list-item--active {
+                        cursor: pointer;
+                        padding-left: 8px;
+                        padding-right: 8px;
+                        border-bottom: 1px solid #e1f0ff;
+                        line-height: 26px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+
+                        a {
+
+                            max-width: 100px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            width: 100%;
+
+                        }
+                        a:hover{
+                            color: #333333;
+                        }
+
+                        i.see-info {
+
+                            color: #5fb1ff;
+                            font-size: 16px;
+                        }
+                    }
+                    li.studying-prj-list-item--active{
+                        background: #5fb1ff;
+                    }
+                }
+
+                p.more {
+                    padding: 0 8px;
+                    text-align: right;
+                    cursor: pointer;
+
+                    span {
+
+                        color: #5fb1ff;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            nav.end-prj {
+                margin-top: 16px;
+
+                title.end-prj-title {
+                    display: flex;
+                    align-items: center;
+                    font-size: 18px;
+                    margin-bottom: 10px;
+
+                    i {
+
+                        display: inline-block;
+                        background: #5fb1ff;
+                        width: 8px;
+                        margin-right: 8px;
+
+                        height: 26px;
+                    }
+                }
+
+                ul.end-prj-list {
+                    li.end-prj-list-item, li.end-prj-list-item--active {
+                        padding-left: 8px;
+                        padding-right: 8px;
+                        cursor: pointer;
+                        border-bottom: 1px solid #e1f0ff;
+                        line-height: 26px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+
+                        a {
+                            max-width: 100px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            width:100%;
+                        }
+                        a:hover{
+                            color: #333333;
+                        }
+
+
+                        i.see-info {
+
+                            color: #5fb1ff;
+                            font-size: 16px;
+                            
+                        }
+                    }
+                    li.end-prj-list-item--active{
+                        background: #5fb1ff;
+                    }
+                }
+
+                p.more {
+                    padding: 0 8px;
+                    text-align: right;
+
+                    span {
+                        color: #5fb1ff;
+                        font-size: 12px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        div.prj-detail {
+
+            width: 678px;
+            position: absolute;
+            right: 0;
+            background: #ffffff;
+            color: #333333;
+            font-size: 12px;
+            padding-top: 6px;
+            padding-bottom: 36px;
+
+            div.result-info {
+                margin-bottom: 10px;
+
+                div.result-info-title {
+                    display: flex;
+                    align-items: center;
+
+                    i {
+
+                        display: inline-block;
+                        background: #5fb1ff;
+                        margin-right: 28px;
+                        width: 8px;
+                        height: 26px;
+                    }
+
+                    h1 {
+                        font-size: 18px;
+                        color: #333333;
+                        font-weight: normal;
+                        display: inline;
+
+                    }
+                }
+
+            }
+
+            div.rewards-info {
+                div.rewards-info-title {
+                    display: flex;
+                    align-items: center;
+                    font-size: 18px;
+
+                    i {
+                        display: inline-block;
+                        background: #5fb1ff;
+                        margin-right: 28px;
+                        width: 8px;
+                        height: 26px;
+
+                    }
+
+                    h1 {
+
+                        font-size: 18px;
+                        color: #333333;
+                        font-weight: normal;
+                        display: inline;
+                    }
+                }
+
+            }
+
+            section.info-txt {
+                padding: 0 36px;
+                line-height: 16px;
+            }
+        }
+    }
+}
