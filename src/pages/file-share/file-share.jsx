@@ -19,46 +19,182 @@ class FileList extends Component {
 
         this.state = {
             path: this.props.location.pathname,//此处父组件props改变不能影响他的state，使用时用props来区分，请求数据
-            currentBookName:'',
+            currentBookName: '',
             addModalVisible: false,
-            bookModalVisible: false
+            bookModalVisible: false,
+            bookList: []
         }
-        this.bookList = [
-            {
-                name: '循序渐进linux',
-                intruduction: '循序渐进linux循序渐进linux循序渐进linux',
-                pic: '../../static/linux-bk.png',
-                time: '2019.12.19',
-            },
-            {
-                name: '网络技术',
-                intruduction: '网络技术网络技术网络发第五二公分技术网络技术网络技术网络技术',
-                pic: '../../static/bk-inter.png',
-                time: '2019.12.19',
-            },
-            {
-                name: '循序渐进linux',
-                intruduction: '循序渐进linux循序渐进linux循序渐进linux',
-                pic: '../../static/linux-bk.png',
-                time: '2019.12.19',
-            },
-            {
-                name: '网络技术',
-                intruduction: '网络技术网络技术网络技术网络技术网络技术网络技术',
-                pic: '../../static/bk-inter.png',
-                time: '2019.12.19',
-            },
-            {
-                name: '网络技术',
-                intruduction: '暂无',
-                time: '2020.2.2',
-                pic: '',
-            },
 
-        ]
     }
     componentDidMount() {
-         console.log(this.state.path);
+        const _this = this
+        const currentPathName = this.state.path
+                  if (currentPathName.includes('server')) {
+
+
+                this.$axios
+                    .get('/infoshare/book1')
+                    .then(
+                        res => {
+
+                            _this.setState({
+                                bookList: res.data
+                            })
+                        }
+
+                    )
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            } else if (currentPathName.includes('product')) {
+                this.$axios
+                    .get('/infoshare/book2')
+                    .then(
+                        res => {
+
+                            _this.setState({
+                                bookList: res.data
+                            })
+                        }
+
+                    )
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            } else if (currentPathName.includes('client')) {
+                this.$axios
+                    .get('/infoshare/book3')
+                    .then(
+                        res => {
+
+                            _this.setState({
+                                bookList: res.data
+                            })
+
+                        }
+
+                    )
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            } else if (currentPathName.includes('hardware')) {
+                this.$axios
+                    .get('/infoshare/book4')
+                    .then(
+                        res => {
+
+                            _this.setState({
+                                bookList: res.data
+                            })
+
+                        }
+
+                    )
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            } else if (currentPathName.includes('search')) {
+                this.setState({
+                    bookList: JSON.parse(localStorage.getItem('fileSearch'))
+                })
+
+            } else {
+                return null
+            }
+
+    }
+    componentWillReceiveProps(nextprops) {
+        const _this = this
+        const nextPathName = nextprops.location.pathname
+        const currentPathName = this.props.location.pathname
+        // console.log(nextprops);
+        // console.log(pathname);
+        if (nextPathName !== currentPathName) {
+            if (nextPathName.includes('server')) {
+
+
+                this.$axios
+                    .get('/infoshare/book1')
+                    .then(
+                        res => {
+
+                            _this.setState({
+                                bookList: res.data
+                            })
+                        }
+
+                    )
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            } else if (nextPathName.includes('product')) {
+                this.$axios
+                    .get('/infoshare/book2')
+                    .then(
+                        res => {
+
+                            _this.setState({
+                                bookList: res.data
+                            })
+                        }
+
+                    )
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            } else if (nextPathName.includes('client')) {
+                this.$axios
+                    .get('/infoshare/book3')
+                    .then(
+                        res => {
+
+                            _this.setState({
+                                bookList: res.data
+                            })
+
+                        }
+
+                    )
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            } else if (nextPathName.includes('hardware')) {
+                this.$axios
+                    .get('/infoshare/book4')
+                    .then(
+                        res => {
+
+                            _this.setState({
+                                bookList: res.data
+                            })
+
+                        }
+
+                    )
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            } else if (nextPathName.includes('search')) {
+                this.setState({
+                    bookList: JSON.parse(localStorage.getItem('fileSearch'))
+                })
+
+            } else {
+                return null
+            }
+
+        } else {
+            return null
+        }
+
     }
     handleAddOk = e => {
         console.log(e);
@@ -73,63 +209,69 @@ class FileList extends Component {
             addModalVisible: false,
         });
     };
-    handleBookCancel = e =>{
+    handleBookCancel = e => {
         this.setState({
             bookModalVisible: false,
         })
     }
-    handleBookOk = e =>{
+    handleBookOk = e => {
         this.setState({
             bookModalVisible: false,
         })
     }
     render() {
-        let { addModalVisible, bookModalVisible, currentBookName } = { ...this.state }
+        const { addModalVisible,
+            bookModalVisible,
+            currentBookName,
+            bookList } = { ...this.state }
         return (
 
             <main className='file-list'>
-                     <AddModal 
-                visible={addModalVisible} 
-                handleCancel={this.handleAddCancel.bind(this)}
-                handleOk={this.handleAddOk.bind(this)}/>
+                <AddModal
+                    visible={addModalVisible}
+                    handleCancel={this.handleAddCancel.bind(this)}
+                    handleOk={this.handleAddOk.bind(this)} />
 
-                <BookModal 
-                visible={bookModalVisible} 
-                currentBookName={currentBookName}
-                handleCancel={this.handleBookCancel.bind(this)}
-                handleOk={this.handleBookOk.bind(this)}      
+                <BookModal
+                    visible={bookModalVisible}
+                    currentBookName={currentBookName}
+                    handleCancel={this.handleBookCancel.bind(this)}
+                    handleOk={this.handleBookOk.bind(this)}
                 />
-                <div 
-                onClick={() => { 
-                    this.setState({ 
-                        addModalVisible: !addModalVisible}) }} 
-                        className='addBtn file-list-item'>
+                <div
+                    onClick={() => {
+                        this.setState({
+                            addModalVisible: !addModalVisible
+                        })
+                    }}
+                    className='addBtn file-list-item'>
                     <img src={require('../../static/add-icon.png')} alt="" />
                 </div>
                 {
-                    this.bookList.map((item, index) => {
+                    bookList.map((item, index) => {
                         return (
-                            <div key={ index } 
-                            onClick={() => { 
-                                this.setState({
-                                     bookModalVisible: !bookModalVisible,
-                                     currentBookName: item.name 
-                                    }) }} 
-                            className='file-list-item'>
+                            <div key={index}
+                                onClick={() => {
+                                    this.setState({
+                                        bookModalVisible: !bookModalVisible,
+                                        currentBookName: item.bname
+                                    })
+                                }}
+                                className='file-list-item'>
                                 <div className='file-list-item-img'>
-                                    <img width='180' height='144' src={require('../../static/bk-inter.png')} alt="" />
+                                    <img width='180' height='144' src={item.ipath} alt="" />
                                 </div>
                                 <div className='file-list-detail'>
-                                    <p className='bk-name'><span>书名：</span>{'《' + item.name + '》'}</p>
+                                    <p className='bk-name'><span>书名：</span>{'《' + item.bname + '》'}</p>
                                     <p className='bk-introduction'>
                                         <span className='bk-intrduction-label'>简介：</span>
                                         <span className='bk-intrduction-txt'>
-                                            {item.intruduction}
+                                            {item.introduction}
                                         </span>
                                     </p>
-                                    <p className='bk-time'>{item.time}</p>
+                                    <p className='bk-time'>{item.edition}</p>
                                 </div>
-                                
+
                             </div>
                         )
                     })
@@ -137,7 +279,9 @@ class FileList extends Component {
 
             </main>
         );
+
     }
+
 }
 
 
@@ -146,21 +290,43 @@ class FileShare extends Component {
         super(props);
 
         this.state = {
-            path: this.props.location.pathname
+            path: this.props.location.pathname,
+            fileNav:''
         }
     }
     componentDidMount() {
         //console.log(this.path);
+        const fileNavIndex = localStorage.getItem('fileNavIndex') || '0'
+        switch(fileNavIndex){
+            case '0':this.setState({
+                fileNav:'server'
+            })
+            break;
+            case '1':this.setState({
+                fileNav:'product'
+            })
+            break;
+            case '2':this.setState({
+                 fileNav:'client'
+            })
+            break;
+            case '3':this.setState({
+                fileNav:'hardware'
+            })
+            break;
+           
+        }
     }
     render() {
-        let { path } = { ...this.state }
+        const { path, fileNav } = { ...this.state }
+        
         return (<div>
-            <Header path={path} />
+            <Header path={path}/>
             <Search path={path} />
             <SecondNav path={path} />
             <Switch>
                 <Route exact path='/file-share'>
-                    <Redirect to='/file-share/server' />
+                    <Redirect to={`/file-share/${fileNav}`}/>
                 </Route>
                 <Route path='/file-share/server' component={FileList}>
 
@@ -168,6 +334,7 @@ class FileShare extends Component {
                 <Route exact path='/file-share/product' component={FileList}></Route>
                 <Route exact path='/file-share/client' component={FileList}></Route>
                 <Route exact path='/file-share/hardware' component={FileList}></Route>
+                <Route path='/file-share/search' component={FileList}></Route>
             </Switch>
 
         </div>)

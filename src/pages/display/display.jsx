@@ -6,27 +6,117 @@ import { Switch, Route, Link } from 'react-router-dom'
 
 import './display.scss'
 
-class InfoText extends Component {
+class ResultInfoText extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            prjName: ''
-        }
+           
+            currentPrj: {},
+            defaultPrj: {}
+        }//通过项目名称获取项目的相关信息
         this.deFaultName = '日常管理系统'
+    }
+    componentDidMount(){
+        const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+        console.log(allPrj);
+        this.setState({
+            defaultPrj:allPrj[0]
+        })
+        const prjName = this.props.match.params.prjName
+        for(let prjItem of allPrj){
+            if(prjName === prjItem.pname){
+                this.setState({
+                    currentPrj: prjItem
+                })
+            }
+
+        }
+    }
+    componentWillReceiveProps(nextProps){
+        const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+        const prjName = nextProps.match.params.prjName
+        for(let prjItem of allPrj){
+            if(prjName === prjItem.pname){
+                this.setState({
+                    currentPrj: prjItem
+                })
+            }
+
+        }
     }
 
     render() {
+        const {currentPrj, defaultPrj} = {...this.state}
         return (
+           
             <section className='info-txt'>
                 {
-                    this.props.match.params ? this.props.match.params.prjName : this.deFaultName
+                    currentPrj.pname ? (
+                        <p>{currentPrj.pname}</p>
+                    ):(
+                    <p>{defaultPrj.pname}</p>)
                 }
             </section>
         );
     }
 
 }
+class RewardsInfoText extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentPrj:{},
+            defaultPrj:{}
+        }//通过项目名称获取项目的相关信息
+      
+    }
+    componentDidMount(){
+        const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+        console.log(allPrj);
+        const prjName = this.props.match.params.prjName
+        this.setState({
+            defaultPrj:allPrj[0]
+        })
+        for(let prjItem of allPrj){
+            if(prjName === prjItem.pname){
+                this.setState({
+                    currentPrj: prjItem
+                })
+            }
 
+        }
+    }
+    componentWillReceiveProps(nextProps){
+        const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+        const prjName = nextProps.match.params.prjName
+        for(let prjItem of allPrj){
+            if(prjName === prjItem.pname){
+                this.setState({
+                    currentPrj: prjItem
+                })
+            }
+
+        }
+    }
+
+    render() { 
+        const {currentPrj, defaultPrj} = {...this.state}
+        return (
+           
+            <section className='info-txt'>
+                {
+                    (currentPrj.pname)?(
+                        <p>项目名称：{currentPrj.pname}</p>
+                        
+                    ):(
+                        <p>{defaultPrj.pname}</p>
+                    )
+                }
+            </section>
+        );
+    }
+
+}
 
 
 
@@ -44,7 +134,8 @@ class PrjDetail extends Component {
                         <h1>相关成果</h1>
                     </div>
 
-                    <Route path={'/display/:prjName'} component={InfoText}>
+                    <Route path={['/display/:prjName','/display']}
+                     component={ResultInfoText}>
 
                     </Route>
 
@@ -55,7 +146,8 @@ class PrjDetail extends Component {
                         <h1>相关奖项</h1>
                     </div>
 
-                    <Route path={'/display/:prjName'} component={InfoText}>
+                    <Route path={['/display/:prjName','/display']} 
+                    component={RewardsInfoText}>
 
                     </Route>
 
@@ -70,91 +162,54 @@ class Navs extends Component {
         super(props);
         this.state = {
             currentPrjName:'',
+            ifSeeMoreIng: false,
+            ifSeeMoreEnd: false,
+            studyingPrj:[],
+            endPrj:[]
         }
-        this.studingPrj = [
-            {
-                name: '日常管理系统',
-                rewards: {
+     
+    }
+    componentDidMount(){
+        const _this = this
+        this.$axios.get('/show/ing')
+        .then((res)=>{
+        
+            _this.setState({
+                studyingPrj: res.data
+            })
+            localStorage.setItem('ing',JSON.stringify(res.data))
+            // console.log(JSON.parse(localStorage.getItem('ing')));
+        }).catch((err)=>{
+            console.log(err);
+        })
+        this.$axios.get('/show/end')
+        .then((res)=>{
+            _this.setState({
+                endPrj: res.data
+            })
+            localStorage.setItem('end',JSON.stringify(res.data))
+        }).catch((err)=>{
+            console.log(err);
+        })
 
-                },
-                result: {
-
-                }
-            },
-            {
-                name: '微信展览助手',
-                rewards: {
-
-                },
-                result: {
-
-                }
-            },
-            {
-                name: 'homework提交系统',
-                rewards: {
-
-                },
-                result: {
-
-                }
-            },
-            {
-                name: 'AR图趣',
-                rewards: {
-
-                },
-                result: {
-
-                }
-            }
-        ]
-        this.endPrj = [
-            {
-                name: '日常管理',
-                rewards: {
-
-                },
-                result: {
-
-                }
-            },
-            {
-                name: '微信展览',
-                rewards: {
-
-                },
-                result: {
-
-                }
-            },
-            {
-                name: 'homework提交',
-                rewards: {
-
-                },
-                result: {
-
-                }
-            },
-            {
-                name: '图趣',
-                rewards: {
-
-                },
-                result: {
-
-                }
-            }
-        ]
     }
     handleSeeEnd(){
+        this.setState({
+            ifSeeMoreEnd: !this.state.ifSeeMoreEnd
+        })
 
     }
+
     handleSeeStudying(){
-        
+        this.setState({
+            ifSeeMoreIng: !this.state.ifSeeMoreIng
+        })
     }
     render() {
+    
+        const { endPrj, studyingPrj, ifSeeMoreEnd, ifSeeMoreIng } = {...this.state}
+        const renderIngPrj = ifSeeMoreIng? studyingPrj:studyingPrj.slice(0,1)
+        const renderEndPrj = ifSeeMoreEnd? endPrj:endPrj.slice(0,1)  
         return (
             <div className='navs-left'>
                 <nav className='studying-prj'>
@@ -164,15 +219,17 @@ class Navs extends Component {
                             </title>
                     <ul className='studying-prj-list'>
                         {
-                            this.studingPrj.map((item, index) => {
+                           
+                        
+                           renderIngPrj.map((item, index) => {
                                 return (
                                 <li onClick={()=>{this.setState({
 
-                                    currentPrjName: item.name
+                                    currentPrjName: item.pname
                                 })}} 
-                                className={ this.state.currentPrjName===item.name?'studying-prj-list-item--active':'studying-prj-list-item'}
+                                className={ this.state.currentPrjName===item.pname?'studying-prj-list-item--active':'studying-prj-list-item'}
                                  key={index}>
-                                        <Link className='studying-prj-list-item-name' to={'/display/' + item.name}>{item.name}</Link>
+                                        <Link className='studying-prj-list-item-name' to={'/display/' + item.pname}>{item.pname}</Link>
                                         <i className='see-info'>></i>
                                     </li>
                                 )
@@ -180,7 +237,9 @@ class Navs extends Component {
                         }
                     </ul>
                     <p className='more' onClick={this.handleSeeStudying.bind(this)}>
-                        <span>更多</span>
+                        {
+                            ifSeeMoreIng?(<span>收起</span>):(<span>更多</span>)
+                        }
                     </p>
                 </nav>
                 <nav className='end-prj'>
@@ -190,16 +249,16 @@ class Navs extends Component {
                             </title>
                     <ul className='end-prj-list'>
                         {
-                            this.endPrj.map((item, index) => {
+                           renderEndPrj.map((item, index) => {
                                 return (
                                     <li key={index} 
                                     onClick={()=>{
                                         this.setState({
-                                            currentPrjName: item.name
+                                            currentPrjName: item.pname
                                         })
                                     }}
-                                    className={this.state.currentPrjName===item.name?'end-prj-list-item--active':'end-prj-list-item'}>
-                                        <Link className='end-prj-list-item-name' to={'/display/' + item.name}>{item.name}</Link>
+                                    className={this.state.currentPrjName===item.pname?'end-prj-list-item--active':'end-prj-list-item'}>
+                                        <Link className='end-prj-list-item-name' to={'/display/' + item.pname}>{item.pname}</Link>
                                         <i className='see-info'>></i>
                                     </li>
                                 )
@@ -207,7 +266,9 @@ class Navs extends Component {
                         }
                     </ul>
                     <p onClick={this.handleSeeEnd.bind(this)} className='more'>
-                        <span>更多</span>
+                        {
+                            ifSeeMoreEnd?(<span>收起</span>):(<span>更多</span>)
+                        }
                     </p>
                 </nav>
             </div>

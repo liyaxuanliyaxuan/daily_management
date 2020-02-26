@@ -16,8 +16,16 @@ class SecondNav extends Component {
             meetingNavIndex: 0,
          }       
     }
+    componentDidMount(){
+        this.setState({
+            fileNavIndex: localStorage.getItem('fileNavIndex')||0,
+            meetingNavIndex: localStorage.getItem('meetingNavIndex')||0,
+        })
+    }
+
     render() { 
-        let { path, fileNavIndex, meetingNavIndex } = {...this.state}
+        const { path, fileNavIndex, meetingNavIndex } = {...this.state}
+       
         return (  
             <ul className='second-nav'>
                 <Switch>
@@ -28,10 +36,13 @@ class SecondNav extends Component {
                                     <li key={index+item.key} 
                                     onClick={()=>{
                                         this.setState({
-                                            fileNavIndex: index
+                                            fileNavIndex: index,
+                                            
+
                                         })
+                                        localStorage.setItem('fileNavIndex',index)
                                     }}
-                                    className={(fileNavIndex===index)?'second-nav-item--active':'second-nav-item'} 
+                                    className={(fileNavIndex==index)?'second-nav-item--active':'second-nav-item'} 
                                     >
                                         <Link to={'/file-share/'+item.key}>{ item.name}</Link>
                                     </li>
@@ -48,8 +59,9 @@ class SecondNav extends Component {
                                         this.setState({
                                             meetingNavIndex: index
                                         })
+                                        localStorage.setItem('meetingNavIndex',index)
                                     }}
-                                    className={(meetingNavIndex===index)?'second-nav-item--active':'second-nav-item'} 
+                                    className={(meetingNavIndex==index)?'second-nav-item--active':'second-nav-item'} 
                                     key={ index+item.key }>
                                     <Link to={'/meeting/'+item.key}>{ item.name }</Link></li>
                                 )

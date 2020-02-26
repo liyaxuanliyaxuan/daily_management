@@ -6,7 +6,8 @@ class VipInfo extends Component {
         
         this.state = { 
             path:this.props.location.pathname,
-            vipName:this.props.match.params.vipName
+            vipName:this.props.match.params.vipName,
+            VipInfoList:[]
          }
         this.VipInfoList = [
             {
@@ -46,23 +47,39 @@ class VipInfo extends Component {
             }
         ]
     }
+    componentDidMount(){
+     
+        const _this = this
+        this.$axios.get(`/infoshare/findvip?vnam=${this.state.vipName}`
+        )
+        .then((res)=>{
+
+            _this.setState({
+                VipInfoList: res.data
+            })
+
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
     render() { 
+        const { VipInfoList, vipName } = {...this.state}
         return (<main className='vip-info'>
             <div className='vip-title'>
                 <i></i>
                 <div className='vip-img'>
-                    <img width='82' height='22' src={require('../../static/爱奇艺-01.png')} alt=""/>
+                   {vipName}
                 </div>
                 <p className='vip-url'>网址：<a href="">https://www.iqiyi.com</a></p>
             </div>
             <div className='vip-info-list'>
                 {
-                    this.VipInfoList.map((item, index) =>{
+                    VipInfoList.map((item, index) =>{
                         return(
-                            <div key={item.num} className='vip-info-list-item'>
-                                <p className='vip-num'>账号：{item.num}</p>
-                                <p className='vip-pass'>密码：{item.passwrd}</p>
-                                <p className='vip-time'>截至日期：{item.deadTime}</p>
+                            <div key={item.vid} className='vip-info-list-item'>
+                                <p className='vip-num'>账号：{item.vaccount}</p>
+                                <p className='vip-pass'>密码：{item.vpassword}</p>
+                                <p className='vip-time'>截至日期：{item.endTime}</p>
                             </div>
                         )
                     })

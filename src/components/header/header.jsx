@@ -8,11 +8,11 @@ import './header.scss'
 
 
 
-const FileDrop = () =>{
-  
+const FileDrop = (props) =>{
+ 
     return (
         <div className='filedrop'>
-            <Link className='file-drop-item' to='/file-share'>书籍借阅</Link>
+            <Link className='file-drop-item' to={`/file-share`}>书籍借阅</Link>
             <Link className='file-drop-item' to='/vip-source'>会员资源</Link>
             <Link className='file-drop-item' to='/meeting'>会议资料</Link>
         </div>
@@ -27,18 +27,18 @@ class Header extends Component {
         
         this.state = {
             path:this.props.path,
-            usrId:''
+            ifLogin:''//username
             
         }
       
     } 
     componentWillMount(){
-        this.state.usrId = cookie.load('cid')
+        this.state.ifLogin = cookie.load('ifLogin')
     }   
     handleLogState(){
-        if(this.state.usrId){
+        if(this.state.ifLogin){
 
-          cookie.remove('cid',{path:'/'})
+          cookie.remove('ifLogin',{path:'/'})
         }else{
         
             
@@ -46,7 +46,8 @@ class Header extends Component {
     }
     
     render() { 
-        let { path, usrId } = { ...this.state }
+        const { path, ifLogin } = { ...this.state }
+        const { fileNav } = {...this.props}
         return ( 
             <div className="header">
                 <div className='header-content'>
@@ -61,25 +62,25 @@ class Header extends Component {
                         成果展示
                         </Link>
                         </span>
-                <span className={(path ==='/file-share'||path==='/meeting'||path==='/vip-source')?'main-nav--active main-nav-file main-nav':'main-nav-file main-nav'}>
+                <span className={(path.includes('/file-share')||path==='/meeting'||path==='/vip-source')?'main-nav--active main-nav-file main-nav':'main-nav-file main-nav'}>
                     资源共享
-                <FileDrop/>
+                <FileDrop />
                 </span>
                 <span className='main-nav main-nav-login'>
                     <span className='usr-portrait'>
                         <img width='42' height='42' src={ require('../../static/usr-por.png')} alt=""/></span>
-                    <span className='usr-name'>{usrId?`于风雪`:`游客`}</span>
+                    <span className='usr-name'>{ifLogin?ifLogin:`游客`}</span>
                     <button 
                     onClick={this.handleLogState.bind(this)}
                     className='exit-button'>
-                        <Link to={usrId?'/display':'/'}>
-                        {usrId?`退出`:`点击登录`}
+                        <Link to={ifLogin?'/display':'/'}>
+                        {ifLogin?`退出`:`点击登录`}
                         </Link>
                     </button>
                     </span>
                 </div>
                 
-                
+               
             </div>
          );
     }

@@ -28,7 +28,7 @@ main.vip-info {
     div.file-list-item,
     div.meeting-list-item {
         display: inline-block;
-        cursor: pointer;
+      
         margin-left: 14px;
         margin-right: 1px;
 
@@ -39,6 +39,9 @@ main.vip-info {
 
         div.file-list-item-img,
         div.meeting-list-item-img {
+          background: url('../../static/bk-null.png') no-repeat center;
+            width: 180px;
+            height: 144px;
             border-bottom: #d0e9f4 solid 1px;
 
             img {}
@@ -159,8 +162,11 @@ main.vip-list {
           display: flex;
           align-items: center;
           justify-content: center;
-        img {
+        .vip-list-img-get{
   
+          object-fit: contain;
+          width: 80%;
+          height: 80%;
         }
       }
   
@@ -177,8 +183,10 @@ main.vip-list {
   }
   main.vip-info {
     div.vip-title {
-        width: 186px;
+        // width: 186px;
         height: 50px;
+        display: flex;
+        align-items: center;
       i {
           display: inline-block;
           width: 8px;
@@ -188,7 +196,12 @@ main.vip-list {
       }
   
       div.vip-img {
+        
+        width: 82px;
+        height: 24px;
+        background:  no-repeat center;
           margin-left: 24px;
+          color: #1d91ff;
           display: inline-block;
         img {
   
@@ -210,7 +223,7 @@ main.vip-list {
       
       div.vip-info-list-item {
        
-        margin-left: 18px;
+        margin-left: 15px;
         
         margin-bottom: 18px;
           background: #d7ecf6 ;

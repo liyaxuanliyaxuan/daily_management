@@ -2,7 +2,6 @@
   "name": "demo",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://120.24.93.68:8081",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -13,6 +12,7 @@
     "customize-cra": "^0.9.1",
     "http-proxy-middleware": "^0.20.0",
     "node-sass": "^4.13.1",
+    "qs": "^6.9.1",
     "react": "^16.12.0",
     "react-app-rewired": "^2.1.5",
     "react-bootstrap": "^1.0.0-beta.16",
@@ -53,6 +53,7 @@
   "devDependencies": {
     "compression-webpack-plugin": "^3.1.0",
     "customize-cra": "^0.9.1",
+    "less-loader": "^5.0.0",
     "react-app-rewired": "^2.1.5"
   }
 }

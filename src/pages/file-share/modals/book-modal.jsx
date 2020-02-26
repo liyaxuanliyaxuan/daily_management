@@ -16,15 +16,14 @@ class BookModal extends Component {
         return (
             
             <Modal
-                title="Basic Modal"
+                title="查看书籍"
                 visible={visible}
                 onOk={handleOk.bind(this)}
                 onCancel={handleCancel.bind(this)}
                 centered={true}
             >
                 <p>{currentBookName}</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+                       
             </Modal>
         );
     }

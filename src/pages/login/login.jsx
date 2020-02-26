@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom'
 
 import cookie from 'react-cookies'
-import axios from 'axios'
+
 import './login.scss'
+import sendLoginForm from './sendUserForm'
+import paintCanvas from './paintCanvas'
 
 class Login extends Component {
     constructor(props) {
@@ -12,54 +14,21 @@ class Login extends Component {
             username:'',
             password:'',
             ifLogin:false,
-            usrId:''
+            
          }
         this.canvas = React.createRef()
     }
     componentWillMount() {
-        this.state.ifLogin = cookie.load('cid')
-        this.state.usrId = cookie.load('cid')
+        this.state.ifLogin = cookie.load('ifLogin')
+        
         
       }
     componentDidMount(){
-        const canvas = this.canvas.current;
-        if (canvas&&canvas.getContext) {
-            let ctx = canvas.getContext("2d");
-            ctx.fillStyle = '#bce0f0';
-            ctx.shadowOffsetX = 20;
-            ctx.shadowOffsetY = -10;
-            ctx.shadowBlur = 14;
-            ctx.shadowColor = "#b9ddef";
-            ctx.strokeStyle = '#fff'
-            ctx.beginPath();
-            ctx.moveTo(468, 0);
-            ctx.lineTo(572, 28);
-            ctx.lineTo(0,28);
-            ctx.lineTo(0, 0);
-            ctx.fill();
-            ctx.shadowOffsetY = 0;
-            ctx.shadowOffsetX = 20;
-            ctx.shadowBlur = 14;
-       
-            ctx.beginPath();
-            
-            ctx.moveTo(572, 28);
-            ctx.lineTo(408, 714);
-            ctx.lineTo(0, 714);
-            ctx.lineTo(0, 0);
-            ctx.fill();
-       
+  
+        const that = this
+        paintCanvas(that)
 
-            ctx.shadowColor = "#b9ddef";
-            ctx.beginPath();
-            ctx.moveTo(468, 0);
-            ctx.lineTo(572, 28);
-            ctx.lineTo(408, 714);
-            ctx.stroke();
-    
-
-        }
-
+  
     }
     handleChange(name,e){
         let newState = {}
@@ -68,19 +37,15 @@ class Login extends Component {
             newState
         )
     }
-    handleSubmit(){
+    handleSubmit() {
+
+        //表单验证
+
+        //发送请求
+        const that = this
         
-            axios.defaults.baseURL = ''
-            axios.post('/login',{
-            password:this.state.password,
-            username:this.state.username,
-            
-        }).then((res)=>{
-            console.log(res);
-            
-        }).catch((err)=>{
-            console.log(err);
-        })
+        sendLoginForm(that)
+
     }
     render() { 
         let {username, password, ifLogin} = {...this.state}
@@ -123,7 +88,9 @@ class Login extends Component {
                       <button 
                       onClick={this.handleSubmit.bind(this)}
                       className='login-button'
-                        type='button'>登录</button>
+                        type='button'>
+                            登录                          
+                        </button>
                   </form>
               </div>
             
