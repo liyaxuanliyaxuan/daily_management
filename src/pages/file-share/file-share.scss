@@ -42,9 +42,15 @@ main.vip-info {
           background: url('../../static/bk-null.png') no-repeat center;
             width: 180px;
             height: 144px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-bottom: #d0e9f4 solid 1px;
 
-            img {}
+            img {
+              width: 80%;
+              height: 80%;
+            }
         }
 
         .file-list-detail {

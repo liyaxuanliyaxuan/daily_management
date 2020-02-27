@@ -47,15 +47,15 @@ class ResultInfoText extends Component {
 
     render() {
         const {currentPrj, defaultPrj} = {...this.state}
+        const renderPrj = currentPrj.name === defaultPrj.name?currentPrj:defaultPrj
         return (
            
             <section className='info-txt'>
-                {
-                    currentPrj.pname ? (
-                        <p>{currentPrj.pname}</p>
-                    ):(
-                    <p>{defaultPrj.pname}</p>)
-                }
+                <p>项目名称：{renderPrj.pname}</p>
+                <p>开始时间：{renderPrj.beginTime}</p>
+                <p>截止日期：{renderPrj.closeTime}</p>
+                <p>负责人： {renderPrj.pRealname}</p>
+              
             </section>
         );
     }
@@ -101,17 +101,13 @@ class RewardsInfoText extends Component {
 
     render() { 
         const {currentPrj, defaultPrj} = {...this.state}
+        const renderPrj = currentPrj.name === defaultPrj.name?currentPrj:defaultPrj;
         return (
            
             <section className='info-txt'>
-                {
-                    (currentPrj.pname)?(
-                        <p>项目名称：{currentPrj.pname}</p>
-                        
-                    ):(
-                        <p>{defaultPrj.pname}</p>
-                    )
-                }
+         {
+             renderPrj.pname
+         }
             </section>
         );
     }

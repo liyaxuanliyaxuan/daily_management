@@ -11,7 +11,8 @@ import {
     Icon,
     Input,
     DatePicker,
-    Select
+    Select,
+    message
 } from 'antd';
 
 const {Option} = Select;
@@ -20,13 +21,30 @@ class UpLoadMeetingModal extends Component {
         super(props);
         this.state = {
             meetingName:'',
+            meetingTime:'',
+            meetingtype:'项目汇报',
             confirmLoading: false,
             fileList:[]
 
         }
     }
-    handleTypeChange(){
+    componentWillReceiveProps(nextProps){
 
+        if(nextProps.visible){
+            this.setState({
+                meetingName:'',
+                meetingTime:'',
+                meetingtype:'项目汇报',
+                confirmLoading: false,
+                fileList:[]
+            })
+        }
+    }
+    handleTypeChange(val){
+
+        this.setState({
+            meetingtype:val
+        })
     }
     handleInputChandge(type, e){
         let newState = {}
@@ -34,17 +52,62 @@ class UpLoadMeetingModal extends Component {
         console.log(e.target.value);
         this.setState(newState)
     }
-    handleOk(){
+    handleOk=()=>{
+        const { fileList, meetingName, meetingtype, meetingTime} = {...this.state}
         this.props.handleOk.call(this)//关闭选择框
         //表单检验、发送数据、处理回调
-        const { fileList } = this.state;
+        const file = fileList[fileList.length-1].originFileObj;
+      
         const formData = new FormData();
+        const _this = this;
+        formData.append('file', file);
+        if(meetingName&&meetingTime){
+            formData.append('fname',meetingName);
+            formData.append('ftype',meetingtype);
+            formData.append('time',meetingTime);
+            this.setState({
+                confirmLoading: true,
+                okText: `上传中`
+            })
+            this.$axios.post(
+                '/infoshare/insertdoc',
+                formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            }).then(
+                (res) => {
+                    if (res.code === 200) {
+                        
+                        _this.setState({
+                            confirmLoading: false,
+                            okText: `确定`
+                        })
+                        _this.props.handleOk.call(_this);
+                    } else {
+                        message.error('似乎出现了一些错误')
+                    }
 
-        formData.append('file', fileList[fileList.length]);
+
+                }
+
+            ).then(() => { 
+                message.success(`上传成功`);
+                window.history.go(0) })
+                .catch((err) => {
+                    message.error('似乎出现了一些错误')
+                    console.log(err);
+                })
+            
+
+        }else{
+            message.error(`请输入完整信息哦~`)
+        }
     }
     pickDate(date,dateString){
 
-        console.log(date,dateString);
+        // console.log(date,dateString);
+        this.setState({
+            meetingTime:dateString
+        })
     }
     beforeUpload(file) {
 
@@ -81,12 +144,7 @@ class UpLoadMeetingModal extends Component {
                 destroyOnClose={true}
                 confirmLoading={confirmLoading}
                 visible={visible}
-                onOk={()=>{
-                    handleOk.call(this) 
-                    this.setState({
-                        fileList:[]
-                    })
-                 }}
+                onOk={this.handleOk}
                 onCancel={()=>{
                    handleCancel.call(this) 
                    this.setState({

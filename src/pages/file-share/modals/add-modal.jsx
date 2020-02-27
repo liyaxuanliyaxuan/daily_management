@@ -14,6 +14,7 @@ import {
 } from 'antd';
 
 import './modal.scss'
+import Axios from 'axios';
 
 
 
@@ -41,7 +42,7 @@ class AddModal extends Component {
             okText: '确定',
             bookName: '',
             bookIntroduction: '',
-            bookType: '',
+            bookType: '服务器',
             imageUrl: '',
             loading: false,
             uploading: false,
@@ -50,6 +51,19 @@ class AddModal extends Component {
             previewImage: '',
 
         }
+    }
+    componentWillReceiveProps(nextprops) {
+        //初始化表格数据
+        if (nextprops.visible) {
+            this.setState({
+                fileList: [],
+                bookIntroduction: '',
+                bookName: '',
+                bookType: '服务器',
+                confirmLoading: false,
+            })
+        }
+
     }
     handleTypeChange(val) {
         this.setState({
@@ -65,28 +79,60 @@ class AddModal extends Component {
         console.log(e.target.value);
         this.setState(newState)
     }
-    handleOk() {
-        const { bookType, bookName, bookIntroduction } = { ...this.state }
-        const { fileList } = this.state;
+    handleOk = () => {
+        const { bookType, bookName, bookIntroduction, fileList } = { ...this.state }
+        //    console.log(fileList[0]);
+        // const file = fileList[0].orginFileObject
         const formData = new FormData();
-
-        formData.append('file', fileList[0]);
-
+        const _this = this
 
 
+
+
+        formData.append('file', fileList[0].originFileObj);
         console.log(formData);
+        if (bookIntroduction && bookName) {
+            formData.append('bname', bookName);
+            formData.append('introduction', bookIntroduction);
+            formData.append('btype', bookType);
 
-        this.setState({
-            confirmLoading: true,
-            okText: `上传中`
-        })
-        setTimeout(() => {
             this.setState({
-                confirmLoading: false,
-                okText: `确定`
+                confirmLoading: true,
+                okText: `上传中`
             })
-            this.props.handleOk.call(this);
-        }, 5000)
+            this.$axios.post(
+                '/infoshare/insertbook',
+                formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            }).then(
+                (res) => {
+                    if (res.code === 200) {
+                        
+                        _this.setState({
+                            confirmLoading: false,
+                            okText: `确定`
+                        })
+                        _this.props.handleOk.call(_this);
+                    } else {
+                        message.error('似乎出现了一些错误')
+                    }
+
+
+                }
+
+            ).then(() => { 
+                message.success(`上传成功`);
+                window.history.go(0) })
+                .catch((err) => {
+                    message.error('似乎出现了一些错误')
+                    console.log(err);
+                })
+
+        } else {
+            message.error(`请输入完整的信息哦~`)
+        }
+
+
 
         //表单检验、发送数据、处理回调（页面跳转刷新）
     }
@@ -124,7 +170,7 @@ class AddModal extends Component {
         );
 
         const { okText, confirmLoading, bookIntroduction, bookName, fileList, previewVisible, previewImage } = { ...this.state }
-        const { handleOk, handleCancel, visible } = { ...this.props }
+        const { handleCancel, visible } = { ...this.props }
         return (
             <Modal
 
@@ -136,16 +182,11 @@ class AddModal extends Component {
                 confirmLoading={confirmLoading}
                 mask
                 visible={visible}
-                onOk= {()=>{
-                    handleOk.call(this) 
-                    this.setState({
-                        fileList:[]
-                    })
-                 }}
-                onCancel={()=>{
+                onOk={this.handleOk}
+                onCancel={() => {
                     handleCancel.call(this)
                     this.setState({
-                        fileList:[]
+                        fileList: []
                     })
                 }}
             >

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 
 import { Modal } from 'antd'
 
@@ -25,7 +25,20 @@ class VipModal extends Component {
             vipPassword: '',
             vipTime: '',
             completed: false,
-            vipName: ''
+            vipName: '',
+            loading: false,
+        }
+    }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.visible){
+            this.setState({
+                vipId: '',
+                vipPassword: '',
+                vipTime: '',
+                completed: false,
+                vipName: '',
+                loading: false,
+            })
         }
     }
     handleTypeChange(val) {
