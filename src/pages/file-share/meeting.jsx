@@ -200,12 +200,17 @@ class MeetingList extends Component {
                         return(
                             <div
                             onClick={()=>{
-                                message.success(`为您下载：${item.fname}~`)}}
-                            key={item.fid+index} 
+                               
+                                message.success(`为您下载：${item.fname}~`);
+                                window.location.href = item.fpath
+                                console.log(item);
+                                                           
+                            }}
+                            key={item.fid+`${index}`} 
                             className='meeting-list-item'>
                                 <div className='file-list-item-img'>
-                                    <a target='blank' download={item.fname} href={item.fpath}>
-                                    <img width='180' height='144' alt=""/>
+                                    <a className='file-list-item-img-a' href={item.fpath}>
+                                    <img width='180' height='144' src={item.ftype==='会议纪要'?require('../../static/会议纪要 .png'):null} alt=""/>
                                     </a>
                                     </div>
                                     <div className='meeting-list-detail'>

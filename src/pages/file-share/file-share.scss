@@ -39,6 +39,7 @@ main.vip-info {
 
         div.file-list-item-img,
         div.meeting-list-item-img {
+          cursor: pointer;
           background: url('../../static/bk-null.png') no-repeat center;
             width: 180px;
             height: 144px;
@@ -46,6 +47,7 @@ main.vip-info {
             align-items: center;
             justify-content: center;
             border-bottom: #d0e9f4 solid 1px;
+
 
             img {
               width: 80%;
@@ -258,4 +260,7 @@ main.vip-list {
         }
       }
     }
+  }
+  .file-list-item-img-a{
+    text-align: center; 
   }
