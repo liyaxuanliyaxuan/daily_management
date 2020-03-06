@@ -183,8 +183,8 @@ class MeetingList extends Component {
         return ( 
             <main className='meeting-list'>
                 <UpLoadMeetingModal
-                handleCancel = {this.handleMeetCancel.bind(this)}
-                handleOk = {this.handleMeetOk.bind(this)}
+                handleCancel = {this.handleMeetCancel}
+                handleOk = {this.handleMeetOk}
                 visible={MeetingModalVisible}/>
                 <div 
                 onClick={()=>{

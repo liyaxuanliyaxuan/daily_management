@@ -133,7 +133,7 @@ class UpLoadMeetingModal extends Component {
       
      
         const { meetingName, confirmLoading, fileList} = {...this.state}
-        const { handleOk, handleCancel, visible } = { ...this.props }
+        const {  handleCancel, visible } = { ...this.props }
         
         return (
 
@@ -146,7 +146,7 @@ class UpLoadMeetingModal extends Component {
                 visible={visible}
                 onOk={this.handleOk}
                 onCancel={()=>{
-                   handleCancel.call(this) 
+                   handleCancel()
                    this.setState({
                        fileList:[]
                    })

@@ -18,8 +18,8 @@ class BookModal extends Component {
             <Modal
                 title="查看书籍"
                 visible={visible}
-                onOk={handleOk.bind(this)}
-                onCancel={handleCancel.bind(this)}
+                onOk={handleOk}
+                onCancel={handleCancel}
                 centered={true}
             >
                 <p>{currentBookName}</p>

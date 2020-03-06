@@ -229,14 +229,14 @@ class FileList extends Component {
             <main className='file-list'>
                 <AddModal
                     visible={addModalVisible}
-                    handleCancel={this.handleAddCancel.bind(this)}
-                    handleOk={this.handleAddOk.bind(this)} />
+                    handleCancel={this.handleAddCancel}
+                    handleOk={this.handleAddOk} />
 
                 <BookModal
                     visible={bookModalVisible}
                     currentBookName={currentBookName}
-                    handleCancel={this.handleBookCancel.bind(this)}
-                    handleOk={this.handleBookOk.bind(this)}
+                    handleCancel={this.handleBookCancel}
+                    handleOk={this.handleBookOk}
                 />
                 <div
                     onClick={() => {

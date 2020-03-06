@@ -4,7 +4,6 @@ import { Modal } from 'antd'
 
 import {
     Form,
-    Button,
     Upload,
     Icon,
     Input,
@@ -184,7 +183,7 @@ class AddModal extends Component {
                 visible={visible}
                 onOk={this.handleOk}
                 onCancel={() => {
-                    handleCancel.call(this)
+                    handleCancel()
                     this.setState({
                         fileList: []
                     })
