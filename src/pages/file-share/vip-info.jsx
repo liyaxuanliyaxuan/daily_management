@@ -5,62 +5,38 @@ class VipInfo extends Component {
         super(props);
         
         this.state = { 
-            path:this.props.location.pathname,
+           
             vipName:this.props.match.params.vipName,
             VipInfoList:[]
          }
-        this.VipInfoList = [
-            {
-                num:'123456789',
-                passwrd:'987654321',
-                deadTime:'2021.10.3'
-            },
-            {
-                num:'123456789',
-                passwrd:'987654321',
-                deadTime:'2021.10.3'
-            },
-            {
-                num:'123456789',
-                passwrd:'987654321',
-                deadTime:'2021.10.3'
-            },
-            {
-                num:'123456789',
-                passwrd:'987654321',
-                deadTime:'2021.10.3'
-            },
-            {
-                num:'123456789',
-                passwrd:'987654321',
-                deadTime:'2021.10.3'
-            },
-            {
-                num:'123456789',
-                passwrd:'987654321',
-                deadTime:'2021.10.3'
-            },
-            {
-                num:'123456789',
-                passwrd:'987654321',
-                deadTime:'2021.10.3'
-            }
-        ]
+    }
+    getRenderVipList = (path) =>{
+
+        if(path.includes('search')){
+            this.setState({
+                vipInfoList:JSON.parse(localStorage.getItem('vipSearch'))
+            })
+        }else{
+            const _this = this
+            this.$axios.get(`/infoshare/findvip?vnam=${this.state.vipName}`
+            )
+            .then((res)=>{
+    
+                _this.setState({
+                    VipInfoList: res.data
+                })
+    
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }
+
+
     }
     componentDidMount(){
-     
-        const _this = this
-        this.$axios.get(`/infoshare/findvip?vnam=${this.state.vipName}`
-        )
-        .then((res)=>{
+    const path = this.props.location.pathname
+     this.getRenderVipList(path)
 
-            _this.setState({
-                VipInfoList: res.data
-            })
-
-        }).catch((err)=>{
-            console.log(err);
-        })
     }
     render() { 
         const { VipInfoList, vipName } = {...this.state}

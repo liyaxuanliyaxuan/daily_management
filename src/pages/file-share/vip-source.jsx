@@ -18,7 +18,6 @@ class VipList extends Component {
         super(props);
     
         this.state = {
-            path:this.props.location.pathname,//此处父组件props改变不能影响他的state，使用时用props来区分，请求数据
             vipModalVisible: false,
             vipList:[]
         }
@@ -90,50 +89,7 @@ class VipList extends Component {
     }
 }
 
-class VipSearchList extends Component {
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-            
-            path:this.props.location.pathname,//此处父组件props改变不能影响他的state，使用时用props来区分，请求数据
-            vipModalVisible: false,
-            vipList:[]
-        }
-       
-    }
-    componentDidMount(){
- 
-        this.setState({
-            vipList:JSON.parse(localStorage.getItem('vipSearch'))
-        })
-    }
 
-    render() {
-        const { vipModalVisible, vipList } = { ...this.state }
-        return (
-            <main className='vip-info'> 
-           
-            <div className='vip-info-list'>
-                 {
-                    vipList.map((item, index) => {
-                        return (
-                            <div key={item.vid} className='vip-info-list-item'>
-                                <p>{item.vnam}</p>
-                                <p className='vip-num'>账号：{item.vaccount}</p>
-                                <p className='vip-pass'>密码：{item.vpassword}</p>
-                                <p className='vip-time'>截至日期：{item.endTime}</p>
-                                
-                            </div>
-                        )
-                        
-                    })
-                }
-            </div>
-            </main>
-        );
-    }
-}
 
 class VipSource extends Component {
     constructor(props) {
@@ -158,7 +114,7 @@ class VipSource extends Component {
                 <Route exact path='/vip-source' component={VipList}></Route>
                 <Route path='/vip-source/vip-info/:vipName' component={VipInfo}>
                 </Route>
-                <Route path='/vip-source/search/:vipName' component={VipSearchList}></Route>
+                <Route path='/vip-source/search/:vipName' component={VipInfo}></Route>
             </Switch>
 
 

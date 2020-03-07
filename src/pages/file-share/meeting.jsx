@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom'
 
-import {Modal, message} from 'antd'
+import { message} from 'antd'
 
 import Header from '../../components/header/header'
 
@@ -13,161 +13,65 @@ import SecondNav from '../../components/second-nav/second-nav'
 import UpLoadMeetingModal from './modals/meeting-modal'
 
 class MeetingList extends Component {
+    static defaultProps = {
+        test:''
+    }
     constructor(props) {
         super(props);
   
         this.state = { 
-            path:this.props.location.pathname,//根据path请求数据list//此处父组件props改变不能影响他的state，使用时用props来区分，请求数据
+            //path:this.props.location.pathname,//根据path请求数据list//此处父组件props改变不能影响他的state，使用时用props来区分，请求数据
 
             MeetingModalVisible: false,
             meetingList:[]
          }
        
     }
-    componentDidMount(){
-        const path = this.props.location.pathname
-        const _this = this
-        if(path.includes('all')){
-
-            this.$axios.get('/infoshare/alldoc')
-            .then((res)=>{
+    renderMeetingList = ((path) =>{
     
-                _this.setState({
-                    meetingList: res.data
-                })
-                localStorage.setItem('meetingList',JSON.stringify(res.data))
-    
-            }).catch((err)=>{
-                console.log(err);
-            })
-
-        }else if(path.includes('prj')){
-
-            this.$axios.get('/infoshare/doc1')
-            .then((res)=>{
-    
-                _this.setState({
-                    meetingList: res.data
-                })
-                
-    
-            }).catch((err)=>{
-                console.log(err);
-            })
-
-        }else if(path.includes('tech')){
-
-            this.$axios.get('/infoshare/doc2')
-            .then((res)=>{
-    
-                _this.setState({
-                    meetingList: res.data
-                })
-            
-    
-            }).catch((err)=>{
-                console.log(err);
-            })
-
-        }else if(path.includes('meet-record')){
-
-            this.$axios.get('/infoshare/doc3')
-            .then((res)=>{
-    
-                _this.setState({
-                    meetingList: res.data
-                })
-              
-            }).catch((err)=>{
-                console.log(err);
-            })
-
-        }else if(path.includes('search')){
+ 
+        const pathToUrl = new Map([
+            ['all','/infoshare/alldoc'],
+            ['tech','/infoshare/doc1'],
+            ['prj','/infoshare/doc2'],
+            ['meet-record','/infoshare/doc3']
+        ])
+        if(path.includes('search')){
             this.setState({
+
                 meetingList: JSON.parse(localStorage.getItem('meetSearch'))
             })
+            
         }
-        else{
-            return null
-        }
-   
+        pathToUrl.forEach((url,key)=>{
+            if(path.includes(key)){
+                this.$axios.get(url)
+                .then((res)=>{
+        
+                   this.setState({
+                       meetingList: res.data
+                   })
+                }).catch((err)=>{
+                    console.log(err);
+                })
+            }
+        })
+       
+    })
+    componentDidMount(){
+        const path = this.props.location.pathname
+        this.renderMeetingList(path)
+     
     }
     componentWillReceiveProps(nextprops){
         const nextPathName = nextprops.location.pathname
         const currentPathName = this.props.location.pathname
-        const _this = this
+    
         if( nextPathName !== currentPathName){
-
-            if(nextPathName.includes('all')){
-
-                this.$axios.get('/infoshare/alldoc')
-                .then((res)=>{
-        
-                    _this.setState({
-                        meetingList: res.data
-                    })
-                    localStorage.setItem('meetingList',JSON.stringify(res.data))
-        
-                }).catch((err)=>{
-                    console.log(err);
-                })
-    
-            }else if(nextPathName.includes('prj')){
-    
-                this.$axios.get('/infoshare/doc1')
-                .then((res)=>{
-        
-                    _this.setState({
-                        meetingList: res.data
-                    })
-                    
-        
-                }).catch((err)=>{
-                    console.log(err);
-                })
-    
-            }else if(nextPathName.includes('tech')){
-    
-                this.$axios.get('/infoshare/doc2')
-                .then((res)=>{
-        
-                    _this.setState({
-                        meetingList: res.data
-                    })
-                
-        
-                }).catch((err)=>{
-                    console.log(err);
-                })
-    
-            }else if(nextPathName.includes('meet-record')){
-    
-                this.$axios.get('/infoshare/doc3')
-                .then((res)=>{
-        
-                    _this.setState({
-                        meetingList: res.data
-                    })
-                  
-                }).catch((err)=>{
-                    console.log(err);
-                })
-    
-            }else if(nextPathName.includes('search')){
-                this.setState({
-                    meetingList: JSON.parse(localStorage.getItem('meetSearch'))
-                })
-            }
-            else{
-                return null
-            }
-
-        }else{
-            return null
-
-        }
+            this.renderMeetingList(nextPathName)
 
     }
+  }
     handleMeetOk = e => {
         this.setState({
             MeetingModalVisible: false,
@@ -240,26 +144,11 @@ class Meeting extends Component {
          }
     }
     componentDidMount(){
-        const meetingNavIndex = localStorage.getItem('meetingNavIndex') || '0'
-        switch(meetingNavIndex){
-            case '0':this.setState({
-                meetingNav:'all'
-            })
-            break;
-            case '1':this.setState({
-                meetingNav:'prj'
-            })
-            break;
-            case '2':this.setState({
-                 meetingNav:'tech'
-            })
-            break;
-            case '3':this.setState({
-                meetingNav:'meet-record'
-            })
-            break;
-           
-        }
+        const meetingNavIndex = JSON.parse(localStorage.getItem('meetingNavIndex')) || 0
+        const meetingNavArr = ['all','prj','tech','meet-record']
+        this.setState({
+            meetingNav: meetingNavArr[meetingNavIndex]
+        })
     }
     render() { 
         let { path, meetingNav } = {...this.state}

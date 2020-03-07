@@ -26,176 +26,53 @@ class FileList extends Component {
         }
 
     }
-    componentDidMount() {
+    getRenderFileList = (path) => {
         const _this = this
-        const currentPathName = this.state.path
-                  if (currentPathName.includes('server')) {
+        const pathToUrl = new Map([
+            ['server','/infoshare/book1'],
+            ['product','/infoshare/book2'],
+            ['client','/infoshare/book3'],
+            ['hardware','/infoshare/book4']
+        ])
+        if (path.includes('search')) {
+            this.setState({
+                bookList: JSON.parse(localStorage.getItem('fileSearch'))
+            })
+            return
+        }
+        pathToUrl.forEach((url,key) =>{
+            if(path.includes(key)){
+                _this.$axios.get(url)
+                .then(
+                    res => {
 
+                        _this.setState({
+                            bookList: res.data
+                        })
+                    }
 
-                this.$axios
-                    .get('/infoshare/book1')
-                    .then(
-                        res => {
-
-                            _this.setState({
-                                bookList: res.data
-                            })
-                        }
-
-                    )
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-            } else if (currentPathName.includes('product')) {
-                this.$axios
-                    .get('/infoshare/book2')
-                    .then(
-                        res => {
-
-                            _this.setState({
-                                bookList: res.data
-                            })
-                        }
-
-                    )
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-            } else if (currentPathName.includes('client')) {
-                this.$axios
-                    .get('/infoshare/book3')
-                    .then(
-                        res => {
-
-                            _this.setState({
-                                bookList: res.data
-                            })
-
-                        }
-
-                    )
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-            } else if (currentPathName.includes('hardware')) {
-                this.$axios
-                    .get('/infoshare/book4')
-                    .then(
-                        res => {
-
-                            _this.setState({
-                                bookList: res.data
-                            })
-
-                        }
-
-                    )
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-            } else if (currentPathName.includes('search')) {
-                this.setState({
-                    bookList: JSON.parse(localStorage.getItem('fileSearch'))
+                )
+                .catch((err) => {
+                    console.log(err);
                 })
 
-            } else {
-                return null
             }
-
+        })
+    }
+    componentDidMount() {
+       
+        const currentPathName = this.state.path
+        this.getRenderFileList(currentPathName)
+  
     }
     componentWillReceiveProps(nextprops) {
-        const _this = this
         const nextPathName = nextprops.location.pathname
         const currentPathName = this.props.location.pathname
-        // console.log(nextprops);
-        // console.log(pathname);
+      
         if (nextPathName !== currentPathName) {
-            if (nextPathName.includes('server')) {
-
-
-                this.$axios
-                    .get('/infoshare/book1')
-                    .then(
-                        res => {
-
-                            _this.setState({
-                                bookList: res.data
-                            })
-                        }
-
-                    )
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-            } else if (nextPathName.includes('product')) {
-                this.$axios
-                    .get('/infoshare/book2')
-                    .then(
-                        res => {
-
-                            _this.setState({
-                                bookList: res.data
-                            })
-                        }
-
-                    )
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-            } else if (nextPathName.includes('client')) {
-                this.$axios
-                    .get('/infoshare/book3')
-                    .then(
-                        res => {
-
-                            _this.setState({
-                                bookList: res.data
-                            })
-
-                        }
-
-                    )
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-            } else if (nextPathName.includes('hardware')) {
-                this.$axios
-                    .get('/infoshare/book4')
-                    .then(
-                        res => {
-
-                            _this.setState({
-                                bookList: res.data
-                            })
-
-                        }
-
-                    )
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-            } else if (nextPathName.includes('search')) {
-                this.setState({
-                    bookList: JSON.parse(localStorage.getItem('fileSearch'))
-                })
-
-            } else {
-                return null
-            }
-
-        } else {
-            return null
-        }
-
+            this.getRenderFileList(nextPathName)
     }
+}
     handleAddOk = e => {
         console.log(e);
         this.setState({
@@ -296,26 +173,11 @@ class FileShare extends Component {
     }
     componentDidMount() {
         //console.log(this.path);
-        const fileNavIndex = localStorage.getItem('fileNavIndex') || '0'
-        switch(fileNavIndex){
-            case '0':this.setState({
-                fileNav:'server'
-            })
-            break;
-            case '1':this.setState({
-                fileNav:'product'
-            })
-            break;
-            case '2':this.setState({
-                 fileNav:'client'
-            })
-            break;
-            case '3':this.setState({
-                fileNav:'hardware'
-            })
-            break;
-           
-        }
+        const fileNavIndex = JSON.parse(localStorage.getItem('fileNavIndex'))|| 0
+        const navArray = ['server','product','client','hardware']
+        this.setState({
+            fileNav:navArray[fileNavIndex]
+        })
     }
     render() {
         const { path, fileNav } = { ...this.state }
