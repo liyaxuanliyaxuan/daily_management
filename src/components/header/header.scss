@@ -26,7 +26,7 @@ div.header {
       display: flex;
       width: 52px;
       height: 52px;
-      border: 2px #b1d9ff solid;
+      border: 1px #b1d9ff solid;
       border-radius: 50%;
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
@@ -35,8 +35,25 @@ div.header {
       align-items: center;
       justify-content: center;
       background: #fff;
+      position: relative;
 
-      img {}
+      .usr-portrait-img {
+        width: 60%;
+        height: 80%;
+      }
+      .usr-vip-icon{
+        position: absolute;
+        z-index: 100;
+        right: -10%;
+        top: -10%;
+      }
+      .usr-vip-icon-none{
+        position: absolute;
+        display: none;
+        z-index: 100;
+        right: -10%;
+        top: -10%;
+      }
     }
 
 

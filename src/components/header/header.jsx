@@ -27,6 +27,7 @@ class Header extends Component {
 
         this.state = {
             path: this.props.path,
+            ifAdmin: false,
             ifLogin: ''//username
 
         }
@@ -34,6 +35,13 @@ class Header extends Component {
     }
     componentWillMount() {
         this.state.ifLogin = cookie.load('ifLogin')
+    }
+    componentDidMount(){
+       let ifAdmin = (this.state.ifLogin && sessionStorage.getItem('ifAdmin'))?true:false
+        this.setState({
+            ifAdmin
+        })
+
     }
     handleLogState() {
         if (this.state.ifLogin) {
@@ -45,17 +53,17 @@ class Header extends Component {
     }
 
     render() {
-        const { path, ifLogin } = { ...this.state }
+        const { path, ifLogin, ifAdmin } = { ...this.state }
         const { fileNav } = { ...this.props }
         const mainNav = [
             {
                 title: '个人主页',
-                url: '/personal',
+                url: '/home',
                 active: false
             },
             {
                 title: '博客',
-                url: '/blog',
+                url: '/pages/Pubilcblog',
                 active: false
             },
             {
@@ -74,7 +82,8 @@ class Header extends Component {
         return (
             <div className="header">
                 <div className='header-content'>
-                    <a className='logo' href=' '><img width='120' height='36' src={require('../../static/head-nmid-logo.png')} alt="" /></a>
+                    <a className='logo' href=' '>
+                        <img width='120' height='36' src={require('../../static/head-nmid-logo.png')} alt="" /></a>
 
                     {
                         mainNav.map((navItem, index) => {
@@ -91,7 +100,9 @@ class Header extends Component {
                     </span>
                     <span className='main-nav main-nav-login'>
                         <span className='usr-portrait'>
-                            <img width='42' height='42' src={require('../../static/usr-por.png')} alt="" /></span>
+                            <img className='usr-portrait-img' src={require('../../static/usr-por.png')} alt="" />
+                            <img className={ifAdmin? 'usr-vip-icon':'usr-vip-icon-none'} src={require('../../static/vip.png')} alt=""/>
+                            </span>
                         <span className='usr-name'>{ifLogin ? ifLogin : `游客`}</span>
                         <button
                             onClick={this.handleLogState.bind(this)}

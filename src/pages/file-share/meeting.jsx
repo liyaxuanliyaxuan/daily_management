@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom'
 
 import { message} from 'antd'
-
+import axios from 'axios'
 import Header from '../../components/header/header'
 
 import Search from '../../components/search/search'
@@ -45,7 +45,7 @@ class MeetingList extends Component {
         }
         pathToUrl.forEach((url,key)=>{
             if(path.includes(key)){
-                this.$axios.get(url)
+                axios.get( 'http://39.105.232.155:8081'+url)
                 .then((res)=>{
         
                    this.setState({

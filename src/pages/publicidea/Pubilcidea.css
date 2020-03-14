@@ -1,0 +1,252 @@
+/*css*/
+
+* { padding: 0; margin: 0; font-family: Adobe 黑体 Std; }
+li { list-style: none; }
+img { border: none; }
+a { text-decoration: none; cursor: pointer; }
+a:hover { text-decoration: none}
+button { border: none; cursor: pointer;}
+
+#pubilcidea_bg {
+    height: 705px;
+    width: 1020px;
+    position: absolute;
+    left: 50%;
+    margin-left: -510px;
+    background-image: url(../../img/summary_bg.png);
+}
+#pubilcidea_header{
+    position: absolute;
+    height: 47px;
+    width: 626px;
+    left: 294px;
+    top: 18px;
+}
+.pubilcidea_header_a {
+    display: block;
+    float: left;
+    height: 30px;
+    width: 72px;
+    margin-left: 38px;
+    color: #7790a7;
+    font-size: 18px;
+    text-align: center;
+}
+.pubilcidea_header_a1{
+    border-bottom: 3px solid #1d91ff;
+}
+.pubilcidea_header_a3{
+    margin-left: 0;
+}
+.pubilcidea_header_loge {
+    position: absolute;
+    right: 110px;
+    top: -10px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #2996fe;
+    border-radius: 50%;
+    background-image: url(../../img/homepage_bg.png) ;
+    overflow: hidden;
+}
+#pubilcidea_header p{
+    position: absolute;
+    left: 525px;
+    top: 4px;
+    font-size: 12px;
+    color: #7790a7;
+}
+.pubilcidea_header_a2{
+    position: absolute;
+    right: 22px;
+    top: 4px;
+    font-size: 12px;
+    margin-left: 0;
+}
+#pubilcidea_left {
+    position: absolute;
+    left: 100px;
+    top: 60px;
+    height: 495px;
+    width: 164px;
+    background-color: #fff;
+
+}
+.pubilcidea_elseidea {
+    width: 82px;
+    height: 24px;
+    border-left: 8px solid #1d91ff;
+    margin-top: 10px;
+    color: #333333;
+    font-size: 14px;
+    line-height: 24px;
+    padding-left: 5px;
+}
+#pubilcidea_left ul {
+    position: absolute;
+    width: 100%;
+    height: 452px;
+    bottom: 0px;
+    overflow-y: auto;
+}
+#pubilcidea_left li {
+    position: relative;
+    height: 54px;
+    width: 164px;
+    overflow: hidden;
+    cursor: pointer;
+}
+#pubilcidea_left li img {
+    position: absolute;
+    left: 8px;
+    height: 3px;
+    width: 47px;
+    height: 47px;
+    border-radius: 4px;
+    background: url(../../img/personword_img1.png) no-repeat;
+}
+.pubilcidea_left_num {
+    position: absolute;
+    left: 65px;
+    top: 0px;
+    font-size: 14px;
+    color: #333333;
+}
+.pubilcidea_left_word {
+    position: absolute;
+    left: 66px;
+    top: 19px;
+    font-size: 12px;
+    color: #b6b6b6;
+}
+#pubilcidea_right {
+    position: absolute;
+    right: 100px;
+    top: 60px;
+    width: 650px;
+    height: 578px;
+    background-color: #fff;
+}
+.pubilcidea_right_head {
+    position: absolute;
+    width: 654px;
+    background-color: #bde1f0;
+    border-radius: 10px;
+    box-shadow: 5px 10px 30px #bde1f0;
+    border: 1px solid #fff;
+    z-index: 100;
+}
+.pubilcidea_right_p1 {
+    margin-top: 6px;
+    margin-left: 12px;
+    font-size: 14px;
+    color: #000;
+}
+.pubilcidea_right_p2 {
+    margin-top: 12px;
+    margin-left: 12px;
+    font-size: 12px;
+    color: #a7b6bd;
+    line-height: 16px;
+    margin-top: 0px;
+}
+.pubilcidea_input {
+    position: absolute;
+    bottom: 55px;
+    left: 15px;
+    width: 623px;
+    height: 36px;
+    border: 1px solid #4aa7ff;
+    border-radius: 18px;
+}
+.pubilcidea_submit {
+    position: absolute;
+    bottom: 58px;
+    right: 30px;
+    cursor: pointer;
+}
+.pubilcidea_input::-webkit-input-placeholder {
+    color: #d6d6d6;
+    font-size: 9px;
+    padding-left: 19px;
+}
+.pubilcidea_chat_hidden {
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    width: 100%;
+    height: 380px;
+    overflow-y: auto;
+}
+.pubilcidea_chat {
+    left: 0px;
+    width: 100%;
+}
+.pubilcidea_chat li {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.mychat .pubilcidea_chat_logo {
+    position: absolute;
+    right: 36px;
+    top: 0px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #319bff;
+    background: url(../../img/personmessage_logo2.png) no-repeat;
+    border-radius: 50%;
+}
+.mychat .pubilcidea_chat_name {
+    position: absolute;
+    font-size: 9px;
+    color: #d0d0d0;
+    right: 104px;
+    top: 9px;
+}
+.clear {
+    clear: both;
+}
+.mychat .pubilcidea_chat_word {
+    width:auto;
+    display:inline-block !important; 
+    display:inline; 
+    margin-right: 89px;
+    margin-top: 25px;
+    padding: 10px 10px;
+    font-size: 12px;
+    color: #000;
+    background-color: #bee2f0;
+    border-radius: 20px;
+    float: right;
+}
+.otherchat .pubilcidea_chat_logo {
+    position: absolute;
+    left: 36px;
+    top: 0px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #319bff;
+    background: url(../../img/personmessage_logo2.png) no-repeat;
+    border-radius: 50%;
+}
+.otherchat .pubilcidea_chat_name {
+    position: absolute;
+    font-size: 9px;
+    color: #d0d0d0;
+    left: 104px;
+    top: 9px;
+}
+.otherchat .pubilcidea_chat_word {
+    width: auto;
+    display:inline-block !important; 
+    display:inline; 
+    margin-left: 89px;
+    margin-top: 25px;
+    padding: 10px 10px;
+    font-size: 12px;
+    color: #000;
+    background-color: #bee2f0;
+    border-radius: 20px;
+    float: left;
+}

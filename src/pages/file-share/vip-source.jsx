@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
 import { Modal } from 'antd'
-
+import axios from 'axios'
 import VipInfo from './vip-info'
 
 import Header from '../../components/header/header'
@@ -25,7 +25,7 @@ class VipList extends Component {
     }
     componentDidMount(){
         const _this = this
-        this.$axios.get('/infoshare/allviptype')
+        axios.get('http://39.105.232.155:8081/infoshare/allviptype')
         .then((res)=>{
 
             _this.setState({

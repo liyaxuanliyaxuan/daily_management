@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios'
 import { Modal } from 'antd'
 
 import {
@@ -13,7 +13,7 @@ import {
 } from 'antd';
 
 import './modal.scss'
-import Axios from 'axios';
+
 
 
 
@@ -85,9 +85,6 @@ class AddModal extends Component {
         const formData = new FormData();
         const _this = this
 
-
-
-
         formData.append('file', fileList[0].originFileObj);
         console.log(formData);
         if (bookIntroduction && bookName) {
@@ -99,8 +96,8 @@ class AddModal extends Component {
                 confirmLoading: true,
                 okText: `上传中`
             })
-            this.$axios.post(
-                '/infoshare/insertbook',
+            axios.post(
+                'http://39.105.232.155:8081/infoshare/insertbook',
                 formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             }).then(

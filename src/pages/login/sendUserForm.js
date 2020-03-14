@@ -2,14 +2,20 @@
 import cookie from 'react-cookies'
 //发送请求
 const sendLoginForm = (that) => {
+    let ifAdmin = false;
+    const {username, password} = {...that.state}
+    if(username === 'admin')ifAdmin = true;
     let user = that.$qs.stringify({
-        password: that.state.password,
-        username: that.state.username
+        password,
+        username
     })
     that.$axios.post(`/login?${user}`)
         .then((res) => {
             console.log(res);
             if (res.code === 200) {
+                if(ifAdmin){
+                    window.sessionStorage.setItem('ifAdmin','1')
+                }
                 const expires = new Date()
                 expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14)
                 cookie.save(

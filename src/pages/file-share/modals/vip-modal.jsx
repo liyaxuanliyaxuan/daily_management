@@ -1,5 +1,5 @@
  import React, { Component } from 'react';
-
+import axios from 'axios'
 import { Modal } from 'antd'
 
 import './modal.scss'
@@ -60,7 +60,7 @@ class VipModal extends Component {
         
         //表单检验、发送数据、处理回调
         if(vipName&&vipTime&&vipId&&vipPassword){
-                this.$axios.post('/infoshare/insertvip', {
+               axios.post('http://39.105.232.155:8081/infoshare/insertvip', {
 
             vnam: vipName,
             vaccount: vipId,

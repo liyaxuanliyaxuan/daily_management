@@ -51,7 +51,7 @@ class Login extends Component {
         let {username, password, ifLogin} = {...this.state}
       if(ifLogin){
           return(
-              <Redirect to='/file-share'></Redirect>
+              <Redirect to='/home'></Redirect>
           )
       }else{
           return(

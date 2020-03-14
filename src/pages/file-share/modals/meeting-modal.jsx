@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Modal } from 'antd'
-
+import axios from 'axios'
 import './modal.scss'
 
 import {
@@ -69,8 +69,8 @@ class UpLoadMeetingModal extends Component {
                 confirmLoading: true,
                 okText: `上传中`
             })
-            this.$axios.post(
-                '/infoshare/insertdoc',
+           axios.post(
+                'http://39.105.232.155:8081/infoshare/insertdoc',
                 formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             }).then(

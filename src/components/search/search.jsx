@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './search.scss'
 import Meeting from '../../pages/file-share/meeting';
+import axios from 'axios'
 class Search extends Component {
     constructor(props) {
         super(props);
@@ -75,7 +76,7 @@ class Search extends Component {
         const _this = this
         let path = this.state.path
         if (path.includes('/file-share')) {
-            _this.$axios.get(`/infoshare/findbook?bname=${file}`)
+           axios.get(`http://39.105.232.155:8081/infoshare/findbook?bname=${file}`)
             .then((res)=>{
 
                 console.log(res);
@@ -93,7 +94,7 @@ class Search extends Component {
             })
             
         } else if (path.includes('/meeting')) {
-            _this.$axios.get(`/infoshare/finddoc?fname=${meeting}`)
+           axios.get(`http://39.105.232.155:8081/infoshare/finddoc?fname=${meeting}`)
             .then((res)=>{
 
                 console.log(res);
@@ -111,7 +112,7 @@ class Search extends Component {
             })
             
         } else if (path.includes('/vip-source')) {
-            _this.$axios.get(`/infoshare/findvip?vnam=${vip}`)
+            axios.get(`http://39.105.232.155:8081/infoshare/findvip?vnam=${vip}`)
             .then((res)=>{
 
                 console.log(res);

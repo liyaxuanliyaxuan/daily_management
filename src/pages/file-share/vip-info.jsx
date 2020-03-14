@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 class VipInfo extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class VipInfo extends Component {
             })
         }else{
             const _this = this
-            this.$axios.get(`/infoshare/findvip?vnam=${this.state.vipName}`
+            axios.get(`http://39.105.232.155:8081/infoshare/findvip?vnam=${this.state.vipName}`
             )
             .then((res)=>{
     

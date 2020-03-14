@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../components/header/header'
 
-
+import axios from 'axios';
 import { Switch, Route, Link } from 'react-router-dom'
 
 import './display.scss'
@@ -167,7 +167,7 @@ class Navs extends Component {
     }
     componentDidMount(){
         const _this = this
-        this.$axios.get('/show/ing')
+        axios.get('http://39.105.232.155:8081/show/ing')
         .then((res)=>{
         
             _this.setState({
@@ -178,7 +178,7 @@ class Navs extends Component {
         }).catch((err)=>{
             console.log(err);
         })
-        this.$axios.get('/show/end')
+        axios.get('http://39.105.232.155:8081/show/end')
         .then((res)=>{
             _this.setState({
                 endPrj: res.data

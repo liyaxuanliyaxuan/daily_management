@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Modal } from 'antd'
 
@@ -42,7 +42,7 @@ class FileList extends Component {
         }
         pathToUrl.forEach((url,key) =>{
             if(path.includes(key)){
-                _this.$axios.get(url)
+                axios.get ('http://39.105.232.155:8081'+ url)
                 .then(
                     res => {
 
