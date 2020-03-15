@@ -109,9 +109,7 @@ class AddModal extends Component {
                             okText: `确定`
                         })
                         _this.props.handleOk.call(_this);
-                    } else {
-                        message.error('似乎出现了一些错误')
-                    }
+                    } 
 
 
                 }

@@ -30,7 +30,7 @@ const sendLoginForm = (that) => {
                         httpOnly: false
                     }
                 )
-                window.location.assign('/file-share')
+                window.location.assign('/home')
     
             } else if (res.code === 1001) {
                 alert(res.message)

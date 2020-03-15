@@ -42,10 +42,14 @@ class Login extends Component {
         //表单验证
 
         //发送请求
-        const that = this
-        
+        const that = this  
         sendLoginForm(that)
 
+    }
+    handleEnterBtn(e){
+        if(e.keyCode === 13){
+            this.handleSubmit()
+        }
     }
     render() { 
         let {username, password, ifLogin} = {...this.state}
@@ -69,6 +73,7 @@ class Login extends Component {
                           <i className='usr-icon'></i>
                           <input 
                           onChange={this.handleChange.bind(this, 'username')}
+                          onKeyDown={this.handleEnterBtn.bind(this)}
                           value={username}
                            name='username' 
                            type="text" 
@@ -79,6 +84,7 @@ class Login extends Component {
                           <i className='pass-icon'></i>
                           <input 
                           onChange={this.handleChange.bind(this, 'password')}
+                          onKeyDown={this.handleEnterBtn.bind(this)}
                           value={password}
                           name='password' 
                           type="password"
@@ -87,6 +93,7 @@ class Login extends Component {
                           </span>
                       <button 
                       onClick={this.handleSubmit.bind(this)}
+                      
                       className='login-button'
                         type='button'>
                             登录                          

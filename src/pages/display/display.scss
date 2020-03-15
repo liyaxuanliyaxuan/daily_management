@@ -73,6 +73,10 @@ div.display-page {
                 }
 
                 ul.studying-prj-list {
+                    display: flex;
+    flex-direction: column;
+    align-items: center;
+
                     font-size: 12px;
 
                     li.studying-prj-list-item,li.studying-prj-list-item--active {
@@ -87,6 +91,7 @@ div.display-page {
                         overflow: hidden;
                         white-space: nowrap;
                         text-overflow: ellipsis;
+                        width: 90%;
 
                         a {
 
@@ -145,6 +150,9 @@ div.display-page {
                 }
 
                 ul.end-prj-list {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                     li.end-prj-list-item, li.end-prj-list-item--active {
                         padding-left: 8px;
                         padding-right: 8px;
@@ -157,6 +165,7 @@ div.display-page {
                         overflow: hidden;
                         white-space: nowrap;
                         text-overflow: ellipsis;
+                        width: 90%;
 
                         a {
                             max-width: 100px;

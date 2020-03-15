@@ -139,9 +139,9 @@ class FileList extends Component {
                                     <img width='180' height='144' src={item.ipath} alt="" />
                                 </div>
                                 <div className='file-list-detail'>
-                                    <p className='bk-name'><span>书名：</span>{'《' + item.bname + '》'}</p>
+                                    <p className='bk-name'><span>书名</span>{'《' + item.bname + '》'}</p>
                                     <p className='bk-introduction'>
-                                        <span className='bk-intrduction-label'>简介：</span>
+                                        <span className='bk-intrduction-label'>简介</span>
                                         <span className='bk-intrduction-txt'>
                                             {item.introduction}
                                         </span>

@@ -14,11 +14,11 @@ class ResultInfoText extends Component {
             currentPrj: {},
             defaultPrj: {}
         }//通过项目名称获取项目的相关信息
-        this.deFaultName = '日常管理系统'
+        
     }
     componentDidMount(){
         const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
-        console.log(allPrj);
+        //console.log(allPrj);
         this.setState({
             defaultPrj:allPrj[0]
         })
@@ -47,7 +47,7 @@ class ResultInfoText extends Component {
 
     render() {
         const {currentPrj, defaultPrj} = {...this.state}
-        const renderPrj = currentPrj.name === defaultPrj.name?currentPrj:defaultPrj
+        const renderPrj = Object.keys(currentPrj).length == 0?defaultPrj:currentPrj
         return (
            
             <section className='info-txt'>
@@ -55,7 +55,6 @@ class ResultInfoText extends Component {
                 <p>开始时间：{renderPrj.beginTime}</p>
                 <p>截止日期：{renderPrj.closeTime}</p>
                 <p>负责人： {renderPrj.pRealname}</p>
-              
             </section>
         );
     }
@@ -101,12 +100,13 @@ class RewardsInfoText extends Component {
 
     render() { 
         const {currentPrj, defaultPrj} = {...this.state}
-        const renderPrj = currentPrj.name === defaultPrj.name?currentPrj:defaultPrj;
+        const renderPrj = Object.keys(currentPrj).length == 0?defaultPrj:currentPrj
+        
         return (
            
             <section className='info-txt'>
          {
-             renderPrj.pname
+             renderPrj.introduction
          }
             </section>
         );
@@ -277,6 +277,10 @@ class Navs extends Component {
 
 
 class Display extends Component {
+    static defaultProps = {
+        introduc:`互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+        增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`
+    }
     constructor(props) {
         super(props);
         this.path = this.props.location.pathname
@@ -291,8 +295,7 @@ class Display extends Component {
                     <div className='display-top-contnet'>
                         <h1 className='display-top-title'>NMID简介</h1>
                         <p className='display-top-txt'>
-                            {`互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
-                            增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`}
+                            {this.props.introduc}
                         </p>
                     </div>
                     <div className='diaplay-top-right-pic'>
