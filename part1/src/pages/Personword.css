@@ -46,7 +46,9 @@ button { border: none; cursor: pointer;}
     height: 44px;
     border: 1px solid #2996fe;
     border-radius: 50%;
-    background-image: url(../img/homepage_bg.png) ;
+    background-color: #fff !important;
+    background-position: center center !important; 
+    background-size:100% 100% !important;
     overflow: hidden;
 }
 #personword_header p{
@@ -192,4 +194,92 @@ button { border: none; cursor: pointer;}
     font-size: 12px;
     border: none;
     color: #9e9e9e;
+}
+#changeword {
+    display: none;
+    height: 580px;
+    width: 1020px;
+    position: absolute;
+    left: 50%;
+    margin-left: -510px;
+    background-color: #fff;
+    background: rgba(255, 255, 255, 0.4);
+}
+.changeword_body {
+    width: 370px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -200px;
+    margin-left: -165px;
+    background-color: #e8e8e9;
+    border-radius: 10px;
+}
+.changeword_right {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    width: 350px;
+    height: 350px;
+    background-color: #fff;
+}
+.changeword_right_head {
+    width: 100%;
+    height: 36px;
+    margin-top: 4px;
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    line-height: 36px;
+    border-bottom: 1px solid #000;
+}
+.changeword_right ul{
+    width: 100%;
+    height: 290px;
+    overflow-y: auto;
+    padding-top: 20px;
+}
+.changeword_right ul li {
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+.changeword_right ul li p {
+    line-height: 20px;
+    display: block;
+    width: 40%;
+    font-size: 14px;
+    margin-left: 40px;
+}
+.changeword_right ul li input {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    height: 19px;    
+    width: 200px;
+    font-size: 12px;
+}
+.changeword_right_input5{
+    height: 70px;
+    width: 250px;
+    margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.changeword_right button {
+    width: 60px;
+    height: 25px;
+    border-radius: 8px;
+    margin-top: 80px;
+    margin-left: 145px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    z-index: 100;
+}
+.changeword_body img {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    cursor: pointer;
 }

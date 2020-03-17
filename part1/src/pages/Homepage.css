@@ -276,7 +276,9 @@ button { border: none;}
     height: 140px;
     top: 4px;
     left: 4px;
-    background-image: url(../img/homepage_bg.png);
+    background-color: #fff !important;
+    background-position: center center !important; 
+    background-size:100% 100% !important;
 }
 .Homeword_progress_div1, .Homeword_progress_div2{
     position: absolute;

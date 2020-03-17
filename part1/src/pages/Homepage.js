@@ -13,11 +13,21 @@ import homeword_logo2 from '../img/homeword_logo2.png'
 import homeword_logo3 from '../img/homeword_logo3.png'
 import addword_close from '../img/addword_close.png'
 
-
+///////////////////////////////////////////////////////////////////////////
+////↓↓↓用户名(username),不是真实名字(realname),字符型
+var Data = "admin"//admin是默认值，你直接删了就ok
+/*
+    说明：
+        1.我的每一个页面都会有一个这样的变量，这个变量会在后面交互以及生命周期函数里面用到，所以
+        请优先给这个变量赋值。
+        2.因为你是用的你的header，所以请将我页面中render函数里面id=xxxxx_header(第一个div)的那一个div以及
+        里面的所有东西删掉，这是我的header。然后把你的header拿过来用，包括它的样式和交互，我的交
+        互不用改，不会报错
+*/ 
+///////////////////////////////////////////////////////////////////////////
 
 
 var a = 0;
-var username = "admin";
 
 class Homepage extends Component {
     constructor(props) {
@@ -48,11 +58,18 @@ class Homepage extends Component {
             pname: "",
             //////////////
             porgressImg: [
-                '../img/homeword_left.png', '../img/homeword_left.png', '../img/homeword_left.png', '../img/homeword_left.png', '../img/homeword_left.png', '../img/homeword_left.png'
+                //'../img/homeword_left.png', '../img/homeword_left.png', '../img/homeword_left.png', '../img/homeword_left.png', '../img/homeword_left.png', '../img/homeword_left.png'
             ],
             porgress: [
-                0, 0.2, 0.3, 0.5, 0.8, 1
-            ]
+                //0, 0.2, 0.3, 0.5, 0.8, 1
+            ],
+            porgressname: [
+
+            ],
+            url: "",
+            pid:[
+
+            ],
         }
     }
     render() {
@@ -61,7 +78,7 @@ class Homepage extends Component {
                 <div id="Homepage_bg">
                     <div id="Homepage_header">
                         <a className="Homepage_header_a1 Homepage_header_a">个人主页</a>
-                        <a className="Homepage_header_a" href="/pages/Pubilcblog">博客</a>
+                        <Link to="/pages/Pubilcblog"><a className="Homepage_header_a" >博客</a></Link>
                         <a className="Homepage_header_a">资料共享</a>
                         <a className="Homepage_header_a">成果展示</a>
                         <div className="Homepage_header_loge"
@@ -86,7 +103,7 @@ class Homepage extends Component {
                     <a className="Homepage_change" onClick={this.changepswOut.bind(this)}>修改密码</a>
                     <a href="/pages/Summary"><div className="Homepage_zhongjie"><div><p>总结<br />与展望</p></div></div></a>
                     <a href="/pages/Personblog"><div className="Homepage_bolg"><div><p>个人<br />博客</p></div></div></a>
-                    <a><div className="Homepage_wendang" onClick={this.homewordShow.bind(this)}><div><p>个人<br />文档</p></div></div></a>
+                    <a><div className="Homepage_wendang" onClick={this.homewordShow.bind(this)}><div><p>个人<br />项目</p></div></div></a>
                 </div>
                 <div id="Homeword_bg" >
                     <div id="Homeword_back" onClick={this.homewordBack.bind(this)} ></div>
@@ -100,7 +117,7 @@ class Homepage extends Component {
                                         let b = this.state.porgress[index]
                                         if (b >= 0 && b <= 0.3) {
                                             return (
-                                                <a key={index} href={"/pages/Personword?id=" + index} >
+                                                <Link to={{pathname:"/pages/Personword", state:this.state.pid[index]}} key={index} title={this.state.porgressname[index]}>
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
@@ -120,12 +137,12 @@ class Homepage extends Component {
                                                             }}
                                                         />
                                                     </div>
-                                                </a>
+                                                </Link>
                                             )
 
                                         } else if (b > 0.3 && b <= 0.6) {
                                             return (
-                                                <a key={index} href={"/pages/Personword?id=" + index} >
+                                                <Link to={{pathname:"/pages/Personword", state:this.state.pid[index]}} key={index}  title={this.state.porgressname[index] }>
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
@@ -145,15 +162,15 @@ class Homepage extends Component {
                                                             }}
                                                         />
                                                     </div>
-                                                </a>
+                                                </Link>
                                             )
                                         } else {
                                             return (
-                                                <a key={index} href={"/pages/Personword?id=" + index} >
+                                                <Link to={{pathname:"/pages/Personword", state:this.state.pid[index]}} key={index} title={this.state.porgressname[index]}>
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
-                                                                background: 'url(' + This.state.porgressImg[index] + ')'
+                                                                background: 'url(' + this.state.porgressImg[index] + ')'
                                                             }}
                                                         ></div>
                                                         <div className="Homeword_progress_div1"></div>
@@ -169,7 +186,7 @@ class Homepage extends Component {
                                                             }}
                                                         />
                                                     </div>
-                                                </a>
+                                                </Link>
                                             )
                                         }
                                         // return (
@@ -272,11 +289,11 @@ class Homepage extends Component {
                                 </li>
                                 <li>
                                     <p>立项时间：</p>
-                                    <input type="text" className="addword_right_input4" value={this.state.beginTime} onChange={(e) => { this.setState({ beginTime: e.target.value }) }} />
+                                    <input type="text" className="addword_right_input4" value={this.state.beginTime} onChange={(e) => { this.setState({ beginTime: e.target.value }) }} placeholder="如2000-01-01" />
                                 </li>
                                 <li>
                                     <p>结题时间：</p>
-                                    <input type="text" className="addword_right_input5" value={this.state.closeTime} onChange={(e) => { this.setState({ closeTime: e.target.value }) }} />
+                                    <input type="text" className="addword_right_input5" value={this.state.closeTime} onChange={(e) => { this.setState({ closeTime: e.target.value }) }} placeholder="如2000-01-01" />
                                 </li>
                                 <li>
                                     <p>项目简介：</p>
@@ -367,7 +384,7 @@ class Homepage extends Component {
 
     componentDidMount() {
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=admin")
+        axios.get("/user/getUserInfoByUnam?username=" + Data)
             .then(function (response) {
                 This.setState({
                     realname: response.data.data.realname,
@@ -416,51 +433,104 @@ class Homepage extends Component {
     }
 
     homewordShow() {
+        //////打开个人文档轮播图，然后获取用户所有的个人文档
         document.querySelector("#Homeword_bg").style.display = "block"
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=admin")
+        axios.get("/user/getUserProjects?username=" + This.state.realname)////////////////真实姓名
             .then(function (response) {
-                This.setState({
-                    realname: response.data.data.realname,
-                    username: response.data.data.unam,
-                    userimg: response.data.data.upath,
-                    tel: response.data.data.phone,
-                    qq: response.data.data.qq,
-                    weibo: response.data.data.weibo,
-                    e_mail: response.data.data.mail,
-                })
+                console.log(response.data.data)
+                if (response.data.data.length == 0) {
+                    This.setState({
+                        /////////////获取计划与总结
+                        porgressImg: [],
+                        porgress: []
+                        
+                    })
+                } else {
+                    var myporgressImg = new Array()
+                    var myporgress = new Array()
+                    var myporgressname = new Array()
+                    var mypid = new Array()
+                    for (var i = 0; i < response.data.data.length; i++) {
+                        myporgressImg[i] = response.data.data[i].image
+                        myporgress[i] = 0.2//response.data.data[i].porgress 
+                        myporgressname[i] = response.data.data[i].pname
+                        mypid[i] = response.data.data[i].pid
+                    }
+                    This.setState({
+                        porgress: myporgress,
+                        porgressImg: myporgressImg,
+                        porgressname: myporgressname,
+                        pid: mypid
+                    })
+                }
+
             })
             .catch(function (error) {
                 console.log(error)
             })
     }
 
-    addwordFile() {
+    async addwordFile() {
         let This = this
-        let url = ""
         let pid = ""
         let fid = ""
+        let url = ""
+        let ture = 0
         ////////////////先上传图片
         let config = {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'multipart/form-data;charset=UTF-8'  //'application/x-www-form-urlencoded' 
             }
         }
-        axios.post("/user/uploadImages", {
-            array: [document.querySelector(".addword_right_input6").value]
-        }, config)
+        let img = document.querySelector(".addword_right_input6").files[0]
+        let FormDataimg = new FormData()
+        FormDataimg.append("image", img)
+        await axios.post("/user/uploadImages", FormDataimg)
             .then(function (response) {
-                /////////////////得到返回的url和id
-                url = ""//////////////////////////////////////////////////
-                pid = ""/////////////////////////////////////////////////
+                /////////////////得到返回的url
+                This.setState({
+                    url: response.data.data[0] 
+                })
+                url = response.data.data[0]
+                console.log("上传图片成功" + response.data)
                 console.log(response.data)
+                
             })
             .catch(function (error) {
                 console.log(error)
+                alert("上传图片出错")
+                ture = 1
             })
-    /*        
+
+        //console.log(url)
+        //////////////上传项目文件
+        let file = document.querySelector(".addword_right_input6").files[0]
+        let FormDatafile = new FormData()
+        FormDatafile.append("file", file)
+        try {
+            FormDatafile.append("doctype", document.querySelector(".addwordfile").previousElementSibling.innerHTML)
+        } catch{
+            alert("请正确填写信息")
+            return
+        }
+        FormDatafile.append("username", Data)
+        await axios.post("/user/uploadFiles", FormDatafile, config)
+            .then(function (response) {
+                //////////////获取文件id
+                fid = response.data.data[0] ////////////////////////////////////////
+                console.log("上传文件成功" + response.data)
+                //console.log(fid)
+            })
+            .catch(function (error) {
+                console.log(error)
+                alert("上传文件出错")
+                ture = 1
+            })
+
+
         //////////////上传项目信息
-        axios.post("/user/updateProject", {
+        await axios.post("/user/saveProject", {
             "beginTime": this.state.beginTime,
             "closeTime": this.state.closeTime,
             "image": url,
@@ -469,40 +539,41 @@ class Homepage extends Component {
                 this.state.members
             ],
             "pRealname": this.state.pRealname,
-            "pid": pid,          /////////////////////////////////////////////
             "pname": this.state.pname
-        }, config)
+        })
             .then(function (response) {
-                console.log(response.data)
+                pid = response.data.data.pid
+                console.log("上传项目信息成功" + response.data)
             })
             .catch(function (error) {
                 console.log(error)
-            })
-        //////////////上传项目文件
-        axios.post("/user/uploadFiles", {
-            doctypew: document.querySelector(".addwordfile").previousElementSibling.innerHTML
-        }, config)
-            .then(function (response) {
-                //////////////获取文件id
-                fid = "" ////////////////////////////////////////
-                console.log(response.data)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-        //////////////文件与项目关联
-        axios.post("user/updateProjectDoc", {
-                "fid": fid,
-                "pid": pid        
-        }, config)
-            .then(function (response) {
-                console.log(response.data)
-            })
-            .catch(function (error) {
-                console.log(error)
+                alert("上传项目信息出错,请按格式正确填写信息")
+                ture = 1
             })
 
-            */
+        console.log("pid:" + pid)
+        console.log("fid:" + fid)
+        if (ture == 0) {
+            //////////////文件与项目关联
+            await axios.post("user/updateProjectDoc", {
+                "fid": fid,
+                "pid": pid
+            })
+                .then(function (response) {
+                    if (response.data.code == 200) {
+                        alert("上传成功")
+                        document.querySelector("#addword").style.display = "none"
+                    }
+                    console.log(response.data)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    alert("未知错误")
+                })
+        } else {
+            ture = 0
+        }
+
     }
 
 }

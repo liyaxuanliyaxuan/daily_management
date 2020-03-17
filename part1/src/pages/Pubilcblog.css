@@ -85,7 +85,6 @@ button { border: none; cursor: pointer;}
     margin-bottom: 5px;
 }
 #pubilcblog_left .pubilcblog_left_btn1 {
-    background-color: #1d91ff;
     margin-top: 14px;
 }
 #pubilcblog_right {
@@ -120,7 +119,9 @@ button { border: none; cursor: pointer;}
     top: 28px;
     border: 1px solid #1d91ff;
     border-radius: 50%;
-    background: url(../img/homepage_bg.png) no-repeat;
+    background-color: #fff !important;
+    background-position: center center !important; 
+    background-size:100% 100% !important;
 }
 .pubilcblog_blog_name {
     position: absolute;
@@ -149,6 +150,9 @@ button { border: none; cursor: pointer;}
     height: 91px;
     margin-top: 4px;
     margin-left: 4px;
+    background-color: #fff !important;
+    background-position: center center !important; 
+    background-size:100% 100% !important;
 }
 .pubilcblog_blog_link {
     position: absolute;
@@ -226,7 +230,9 @@ button { border: none; cursor: pointer;}
     width: 46px;
     border-radius: 50%;
     border: 1px solid #389eff;
-    background: url(../img/homeword_add.png) no-repeat;
+    background-color: #fff;
+    background-position: center center;
+    background-size:100% 100%;
 }
 .secondnum {
     position: absolute;
@@ -250,7 +256,9 @@ button { border: none; cursor: pointer;}
     width: 39px;
     border-radius: 50%;
     border: 1px solid #389eff;
-    background: url(../img/homeword_add.png) no-repeat;
+    background-color: #fff;
+    background-position: center center;
+    background-size:100% 100%;
 }
 .thirdnum {
     position: absolute;
@@ -274,7 +282,9 @@ button { border: none; cursor: pointer;}
     width: 32px;
     border-radius: 50%;
     border: 1px solid #389eff;
-    background: url(../img/homeword_add.png) no-repeat;
+    background-color: #fff;
+    background-position: center center;
+    background-size:100% 100%;
 }
 #pubilcblog_idea {
     position: absolute;
@@ -313,12 +323,15 @@ button { border: none; cursor: pointer;}
     height: 50px;
     cursor: pointer;
 }
-#pubilcblog_idea ul li img {
+#pubilcblog_idea ul li div {
     width: 60px;
     height: 43px;
     position: absolute;
     top: 3px;
     left: 20px;
+    background-color: #fff !important;
+    background-position: center center !important; 
+    background-size:100% 100% !important;
 }
 #pubilcblog_idea ul li p {
     font-size: 8px;

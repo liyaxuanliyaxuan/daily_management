@@ -194,7 +194,9 @@ button { border: none; cursor: pointer;}
     width: 44px;
     height: 44px;
     border: 1px solid #319bff;
-    background: url(../img/personmessage_logo2.png) no-repeat;
+    background-color: #fff !important;
+    background-position: center center !important;
+    background-size:100% 100% !important;
     border-radius: 50%;
 }
 .mychat .pubilcidea_chat_name {
@@ -227,7 +229,10 @@ button { border: none; cursor: pointer;}
     width: 44px;
     height: 44px;
     border: 1px solid #319bff;
-    background: url(../img/personmessage_logo2.png) no-repeat;
+    background: url(../img/userimg.jpg) no-repeat;
+    background-color: #fff;
+    background-position: center center;
+    background-size:100% 100%;
     border-radius: 50%;
 }
 .otherchat .pubilcidea_chat_name {

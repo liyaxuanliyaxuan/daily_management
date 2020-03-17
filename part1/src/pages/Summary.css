@@ -177,6 +177,19 @@ button { border: none; cursor: pointer;}
     text-align: center;
     color: #fff;
 }
+.summary_submit_btn3 {
+    position: absolute;
+    border: 2px solid #1d91ff;
+    border-radius: 6px;
+    bottom: 60px;
+    right: 178px;
+    width: 73px;
+    height: 26px;
+    background-color: #1d91ff;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
 .pensonsummary::-webkit-input-placeholder, .workplan::-webkit-input-placeholder{
     position: relative;
     color: #b6b6b6;
