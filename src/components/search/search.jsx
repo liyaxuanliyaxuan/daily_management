@@ -76,7 +76,7 @@ class Search extends Component {
         const _this = this
         let path = this.state.path
         if (path.includes('/file-share')) {
-           axios.get(`http://39.105.232.155:8081/infoshare/findbook?bname=${file}`)
+           this.$axios.get(`/infoshare/findbook?bname=${file}`)
             .then((res)=>{
 
                 console.log(res);
@@ -94,7 +94,7 @@ class Search extends Component {
             })
             
         } else if (path.includes('/meeting')) {
-           axios.get(`http://39.105.232.155:8081/infoshare/finddoc?fname=${meeting}`)
+           this.$axios.get(`/infoshare/finddoc?fname=${meeting}`)
             .then((res)=>{
 
                 console.log(res);
@@ -112,7 +112,7 @@ class Search extends Component {
             })
             
         } else if (path.includes('/vip-source')) {
-            axios.get(`http://39.105.232.155:8081/infoshare/findvip?vnam=${vip}`)
+            this.$axios.get(`/infoshare/findvip?vnam=${vip}`)
             .then((res)=>{
 
                 console.log(res);

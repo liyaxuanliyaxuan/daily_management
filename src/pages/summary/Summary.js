@@ -9,20 +9,39 @@ import mysummary_logo5 from '../../img/mysummary_logo5.png'
 
 import Header from '../../components/header/header'
 
-var nowid = "" //用于记录当前id
+///////////////////////////////////////////////////////////////////////////
+////↓↓↓用户名(username),不是真实名字(realname),字符型
+var Data = "admin"//admin是默认值，你直接删了就ok
+/*
+    说明：
+        1.我的每一个页面都会有一个这样的变量，这个变量会在后面交互以及生命周期函数里面用到，所以
+        请优先给这个变量赋值。
+        2.因为你是用的你的header，所以请将我页面中render函数里面id=xxxxx_header(第一个div)的那一个div以及
+        里面的所有东西删掉，这是我的header。然后把你的header拿过来用，包括它的样式和交互，我的交
+        互不用改，不会报错
+    特别说明：
+        下面那个变量你不要管
+*/
+///////////////////////////////////////////////////////////////////////////
+
+
+
+var nowid = "" //一个全局变,用于记录当前id,这个你不管
 
 class Summary extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sign: 0, //////////////////用于触发cmd
-            //////////
+            sign: "1", //////////////////用于触发cmd
             dataid: [
                 //"1", "2", "3", "4", "5", "6", "7", "8"
             ],
 
             data: [
                 //'2019.12.10', '2019.12.10', '2019.12.10', '2019.12.10', '2019.12.10', '2019.12.10', '2019.12.10', '2019.12.10'
+            ],
+            mysummarylogo: [
+                mysummary_logo1, mysummary_logo2, mysummary_logo3, mysummary_logo4, mysummary_logo5
             ],
             //////////////////////////////
             username: "",
@@ -47,7 +66,7 @@ class Summary extends Component {
                                 this.state.data.map((item, index) => {
                                     return (
                                         <div className={"summary_day"} key={index} onClick={this.getPlan.bind(this, this.state.dataid[index])}>
-                                            <img className="summary_day_img" src={mysummary_logo1} />
+                                            <img className="summary_day_img" src={this.state.mysummarylogo[(index % 5)]} />
                                             <p className="summary_data">{this.state.data[index]}</p>
                                         </div>
                                     )
@@ -64,6 +83,7 @@ class Summary extends Component {
                         <textarea className="workplan" placeholder="      工作计划   ......"></textarea>
                         <button className="summary_submit_btn1" onClick={this.changeWork.bind(this)}>更改</button>
                         <button className="summary_submit_btn2" onClick={this.submitWork.bind(this)}>提交</button>
+                        <button className="summary_submit_btn3" onClick={this.deleteWork.bind(this)}>删除</button>
                     </div>
                 </div>
             </div>
@@ -78,7 +98,7 @@ class Summary extends Component {
 
     componentDidMount() {
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=admin")
+        axios.get("/user/getUserInfoByUnam?username=" + Data)
             .then(function (response) {
                 This.setState({
                     //////////////获取基本信息
@@ -96,20 +116,29 @@ class Summary extends Component {
                 console.log(error)
             })
 
-        axios.get("/user/getUserPaSs?username=admin")
+        axios.get("/user/getUserPaSs?username=" + Data)
             .then(function (response) {
-                console.log(response.data.data)
-                if(response.data.data.length == 0){
+                //console.log(response.data.data)
+                if (response.data.data.length == 0) {
                     This.setState({
                         /////////////获取计划与总结
                         dataid: [],
                         data: []
                     })
-                }else{
+                } else {
+                    var myData = new Array()
+                    var myDataid = new Array()
+                    for (var i = 0; i < response.data.data.length; i++) {
+                        myData[i] = response.data.data[i].writeTime.substring(0, 10)
+                        myDataid[i] = response.data.data[i].id
+                    }
+                    myData.reverse()
+                    myDataid.reverse()
+                    //console.log(response.data.data[0])
                     This.setState({
                         /////////////获取计划与总结
-                        dataid: response.data.data.id,//////////////////////////////////////////////
-                        data: response.data.data.updateTime
+                        data: myData,//////////////////////////////////////////////
+                        dataid: myDataid
                     })
                 }
             })
@@ -119,58 +148,97 @@ class Summary extends Component {
 
     }
 
+
+
+    changeWork() {
+        /////////更改计划和总结
+        let This = this
+        let sign = this.state.sign
+        sign++
+        if (nowid != "") {
+            axios.post("/user/updatePlanAndSummary", {
+                "id": nowid,
+                "summary": document.querySelector(".pensonsummary").value,
+                "plan": document.querySelector(".workplan").value,
+                "unam": this.state.username,
+            })
+                .then(function (response) {
+                    This.setState({
+                        sign: sign
+                    })
+                    console.log(response.data.data)
+                    console.log("修改成功")
+                    document.querySelector(".pensonsummary").value = ""
+                    document.querySelector(".workplan").value = ""
+                    alert("修改成功")
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    alert(error)
+                })
+        }
+
+    }
+
     submitWork() {
         let This = this
         this.state.sign++
         axios.post("/user/updatePlanAndSummary", {
-            "plan": document.querySelector(".pensonsummary").value,
-            "summary": document.querySelector(".workplan").value,
+            "summary": document.querySelector(".pensonsummary").value,
+            "plan": document.querySelector(".workplan").value,
             "unam": this.state.username,
         })
             .then(function (response) {
                 console.log(response.data.data)
                 console.log("提交成功")
-                This.setState({
-                    /////////////
-                })
+                alert('提交成功')
+                document.querySelector(".pensonsummary").value = ""
+                document.querySelector(".workplan").value = ""
+                This.setState({})
             })
             .catch(function (error) {
                 console.log(error)
+                alert(error)
             })
     }
 
-    changeWork() {
-        /////////更改计划和总结
+    deleteWork() {
         let This = this
-        this.state.sign++
-        if(nowid != ""){
-            axios.post("/user/updatePlanAndSummary", {
-                "id": nowid,
-                "plan": document.querySelector(".pensonsummary").value,
-                "summary": document.querySelector(".workplan").value,
-                "unam": this.state.username,
-            })
+        let sign = this.state.sign
+        let i = 0
+        sign++
+        if (nowid != "") {
+            axios.get("/user/" + nowid + "/deleteDetailPaS?username=" + This.state.username)
                 .then(function (response) {
-                    console.log(response.data.data)
-                    console.log("修改成功")
+                    let mydata = This.state.data
+                    let mydataid = This.state.dataid
+                    while (This.state.dataid[i] != nowid && i < This.state.dataid.length && i < 100) {
+                        i++
+                    }
+                    mydata.splice(i,1)
+                    mydataid.splice(i,1)
                     This.setState({
-                        /////////////
+                        sign: sign,
+                        data: mydata,
+                        dataid: mydataid
                     })
+                    //console.log(response.data)
+                    alert("删除成功")
+                    console.log("修改成功")
                 })
                 .catch(function (error) {
                     console.log(error)
                 })
         }
-        
     }
 
     getPlan(index) {
         /////////获取某一计划和总结的内容
         console.log(index)
         nowid = index;
-        axios.get("/user/" + this.state.dataid[index - 1] + "/getDetailPaS?username=admin")
+        axios.get("/user/" + index + "/getDetailPaS?username=" + Data)
             .then(function (response) {
-                console.log(response.data.data)
+                //console.log(response.data.data)
                 document.querySelector(".pensonsummary").value = response.data.data.summary//////////////////////////
                 document.querySelector(".workplan").value = response.data.data.plan////////////////////////
             })

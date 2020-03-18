@@ -3,10 +3,10 @@ import './Personmessage.css'
 import axios from 'axios';
 import personmessage_logo1 from '../../img/personmessage_logo1.png'
 import personmessage_logo2 from '../../img/personmessage_logo2.png'
-import { major } from 'semver';
+
 
 import Header from '../../components/header/header'
-
+var Data = "admin"
 class Personmessage extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +26,8 @@ class Personmessage extends Component {
             skill: "",
             title: "",
             platform: "",
-            realname: ""
+            realname: "",
+            weibo: ""
         }
     }
     render() {
@@ -74,6 +75,8 @@ class Personmessage extends Component {
                         <input className="personmessage_change_body_input1_a" type="radio" name="sex" onChange={this.personmessageChange1.bind(this)} value="男" />   男
                         <br />
                         <input className="personmessage_change_body_input1_b" type="radio" name="sex" onChange={this.personmessageChange1.bind(this)} value="女" />   女
+                        <p className="personmessage_change_body_p12">真实姓名：</p>
+                        <input className="personmessage_change_body_input12" type="text" value={this.state.realname} onChange={this.personmessageChange12.bind(this)} />
                         <p className="personmessage_change_body_p2">学院：</p>
                         <input className="personmessage_change_body_input2" type="text" value={this.state.school} onChange={this.personmessageChange2.bind(this)} />
                         <p className="personmessage_change_body_p3">专业：</p>
@@ -88,6 +91,8 @@ class Personmessage extends Component {
                         <input className="personmessage_change_body_input7" type="text" value={this.state.e_mail} onChange={this.personmessageChange7.bind(this)} />
                         <p className="personmessage_change_body_p8">QQ：</p>
                         <input className="personmessage_change_body_input8" type="text" value={this.state.qq} onChange={this.personmessageChange8.bind(this)} />
+                        <p className="personmessage_change_body_p13">微博：</p>
+                        <input className="personmessage_change_body_input13" type="text" value={this.state.weibo} onChange={this.personmessageChange13.bind(this)} />
                         <p className="personmessage_change_body_p9">项目经历：</p>
                         <textarea className="personmessage_change_body_input9" type="text" value={this.state.prjHistory} onChange={this.personmessageChange9.bind(this)} />
                         <p className="personmessage_change_body_p10">相关能力：</p>
@@ -166,13 +171,22 @@ class Personmessage extends Component {
             title: e.target.value
         })
     }
-
+    personmessageChange12(e) {
+        this.setState({
+            realname: e.target.value
+        })
+    }
+    personmessageChange13(e) {
+        this.setState({
+            weibo: e.target.value
+        })
+    }
 
     //////////////////////////////////////交互
 
     componentDidMount() {
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=admin")
+        axios.get("/user/getUserInfoByUnam?username=" + Data)
             .then(function (response) {
                 This.setState({
                     realname: response.data.data.realname,
@@ -184,11 +198,11 @@ class Personmessage extends Component {
                     e_mail: response.data.data.mail,
                     sex: response.data.data.sex,
                     school: response.data.data.school,
-                    jointime: response.data.data.jointime,
+                    jointime: response.data.data.jointime.substring(0, 10),
                     major: response.data.data.major,
-                    birthday: response.data.data.birthday,
+                    birthday: response.data.data.birthday.substring(0, 10),
                     prjHistory: response.data.data.prjHistory,
-                    skill: response.data.data.skill,
+                    skill: response.data.data.skills,
                     title: response.data.data.title,
                 })
             })
@@ -199,6 +213,7 @@ class Personmessage extends Component {
 
     personmessageChange() {
         let This = this
+        //console.log(this.state.sex)
         axios.post("/user/updateUser", {
             "birthday": this.state.birthday,
             "jointime": this.state.jointime,

@@ -45,7 +45,7 @@ class MeetingList extends Component {
         }
         pathToUrl.forEach((url,key)=>{
             if(path.includes(key)){
-                axios.get( 'http://39.105.232.155:8081'+url)
+                this.$axios.get(url)
                 .then((res)=>{
         
                    this.setState({
@@ -106,14 +106,15 @@ class MeetingList extends Component {
                             onClick={()=>{
                                
                                 message.success(`为您下载：${item.fname}~`);
-                                window.location.href = item.fpath
+                                window.open(item.fpath)
+                                
                                 console.log(item);
                                                            
                             }}
                             key={item.fid+`${index}`} 
                             className='meeting-list-item'>
                                 <div className='file-list-item-img'>
-                                    <a className='file-list-item-img-a' href={item.fpath}>
+                                    <a className='file-list-item-img-a' href={item.fpath} download>
                                     <img width='180' height='144' src={item.ftype==='会议纪要'?require('../../static/会议纪要 .png'):null} alt=""/>
                                     </a>
                                     </div>

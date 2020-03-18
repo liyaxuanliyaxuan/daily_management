@@ -24,6 +24,7 @@ class UpLoadMeetingModal extends Component {
             meetingTime:'',
             meetingtype:'项目汇报',
             confirmLoading: false,
+            okText:'确定上传',
             fileList:[]
 
         }
@@ -56,7 +57,10 @@ class UpLoadMeetingModal extends Component {
         const { fileList, meetingName, meetingtype, meetingTime} = {...this.state}
         this.props.handleOk.call(this)//关闭选择框
         //表单检验、发送数据、处理回调
-        const file = fileList[fileList.length-1].originFileObj;
+        if(fileList[fileList.length-1]){
+           var file = fileList[fileList.length-1].originFileObj; 
+        }
+        
       
         const formData = new FormData();
         const _this = this;
@@ -69,8 +73,8 @@ class UpLoadMeetingModal extends Component {
                 confirmLoading: true,
                 okText: `上传中`
             })
-           axios.post(
-                'http://39.105.232.155:8081/infoshare/insertdoc',
+          this.$axios.post(
+                '/infoshare/insertdoc',
                 formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             }).then(
@@ -89,7 +93,11 @@ class UpLoadMeetingModal extends Component {
                 message.success(`上传成功`);
                 window.history.go(0) })
                 .catch((err) => {
+                    
                     message.error('似乎出现了一些错误')
+                    _this.setState({
+                        okText:'确定上传'
+                    })
                     console.log(err);
                 })
             
@@ -128,14 +136,14 @@ class UpLoadMeetingModal extends Component {
         )
       
      
-        const { meetingName, confirmLoading, fileList} = {...this.state}
+        const { meetingName, confirmLoading, fileList, okText} = {...this.state}
         const {  handleCancel, visible } = { ...this.props }
         
         return (
 
             <Modal
                 title="上传会议"
-                okText={'确定上传'}
+                okText={okText}
                 cancelText={'取消'}
                 destroyOnClose={true}
                 confirmLoading={confirmLoading}
@@ -144,7 +152,8 @@ class UpLoadMeetingModal extends Component {
                 onCancel={()=>{
                    handleCancel()
                    this.setState({
-                       fileList:[]
+                       fileList:[],
+                       okText:'确定上传'
                    })
                 }
                     }

@@ -167,7 +167,7 @@ class Navs extends Component {
     }
     componentDidMount(){
         const _this = this
-        axios.get('http://39.105.232.155:8081/show/ing')
+        this.$axios.get('/show/ing')
         .then((res)=>{
         
             _this.setState({
@@ -178,7 +178,7 @@ class Navs extends Component {
         }).catch((err)=>{
             console.log(err);
         })
-        axios.get('http://39.105.232.155:8081/show/end')
+        this.$axios.get('/show/end')
         .then((res)=>{
             _this.setState({
                 endPrj: res.data

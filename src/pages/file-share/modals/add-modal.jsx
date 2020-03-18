@@ -59,6 +59,7 @@ class AddModal extends Component {
                 bookIntroduction: '',
                 bookName: '',
                 bookType: '服务器',
+                okText:'确定上传',
                 confirmLoading: false,
             })
         }
@@ -96,8 +97,8 @@ class AddModal extends Component {
                 confirmLoading: true,
                 okText: `上传中`
             })
-            axios.post(
-                'http://39.105.232.155:8081/infoshare/insertbook',
+            this.$axios.post(
+                '/infoshare/insertbook',
                 formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             }).then(
@@ -118,6 +119,9 @@ class AddModal extends Component {
                 message.success(`上传成功`);
                 window.history.go(0) })
                 .catch((err) => {
+                    _this.setState({
+                        okText:'确定上传'
+                    })
                     message.error('似乎出现了一些错误')
                     console.log(err);
                 })
@@ -163,14 +167,14 @@ class AddModal extends Component {
             </div>
         );
 
-        const { okText, confirmLoading, bookIntroduction, bookName, fileList, previewVisible, previewImage } = { ...this.state }
+        const { okText, confirmLoading, bookIntroduction, bookName, fileList, previewVisible, previewImage} = { ...this.state }
         const { handleCancel, visible } = { ...this.props }
         return (
             <Modal
 
                 centered={true}
                 destroyOnClose={true}
-                title={'书籍上传'}
+                title={okText}
                 okText={okText}
                 cancelText={'取消'}
                 confirmLoading={confirmLoading}
@@ -180,7 +184,8 @@ class AddModal extends Component {
                 onCancel={() => {
                     handleCancel()
                     this.setState({
-                        fileList: []
+                        fileList: [],
+                        okText:'确定上传'
                     })
                 }}
             >

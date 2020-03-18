@@ -19,7 +19,7 @@ class VipInfo extends Component {
             })
         }else{
             const _this = this
-            axios.get(`http://39.105.232.155:8081/infoshare/findvip?vnam=${this.state.vipName}`
+            this.$axios.get(`/infoshare/findvip?vnam=${this.state.vipName}`
             )
             .then((res)=>{
     

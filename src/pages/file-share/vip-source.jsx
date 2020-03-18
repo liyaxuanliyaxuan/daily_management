@@ -25,7 +25,7 @@ class VipList extends Component {
     }
     componentDidMount(){
         const _this = this
-        axios.get('http://39.105.232.155:8081/infoshare/allviptype')
+        this.$axios.get('/infoshare/allviptype')
         .then((res)=>{
 
             _this.setState({

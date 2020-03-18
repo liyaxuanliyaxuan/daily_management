@@ -140,7 +140,9 @@ button { border: none; cursor: pointer;}
     top: 28px;
     border: 1px solid #1d91ff;
     border-radius: 50%;
-    background: url(../../img/homepage_bg.png) no-repeat;
+    background-color: #fff !important;
+    background-position: center center !important; 
+    background-size:100% 100% !important;
 }
 .personblog_blog_name {
     position: absolute;
@@ -169,6 +171,9 @@ button { border: none; cursor: pointer;}
     height: 91px;
     margin-top: 4px;
     margin-left: 4px;
+    background-color: #fff !important;
+    background-position: center center !important; 
+    background-size:100% 100% !important;
 }
 .personblog_blog_link {
     position: absolute;

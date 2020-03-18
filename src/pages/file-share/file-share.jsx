@@ -42,7 +42,7 @@ class FileList extends Component {
         }
         pathToUrl.forEach((url,key) =>{
             if(path.includes(key)){
-                axios.get ('http://39.105.232.155:8081'+ url)
+               this.$axios.get (url)
                 .then(
                     res => {
 
