@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Pubilcidea.css'
 import pubilcidea_submit from '../../img/pubilcidea_submit.png'
-
+import cookie from 'react-cookies'
 import Header from '../../components/header/header'
 import axios from 'axios';
 import idea_logo from '../../img/idea_logo.png'
@@ -44,6 +44,7 @@ class Pubilcidea extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userNameData:'',
             sign: "1",
             ideaword: [
                 '啦啦啦啦啦啦啦啦啦啦', '啦啦啦啦啦啦啦1啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦', '啦啦啦啦啦啦啦', '啦啦啦啦啦啦啦'
@@ -166,11 +167,15 @@ class Pubilcidea extends Component {
     }
 
     componentDidMount() {
+        const userNameData = cookie.load('ifLogin')
+        this.setState({
+            userNameData
+        });
         let a = document.querySelector(".pubilcidea_chat_hidden")
         a.scrollTop = a.scrollHeight
         let This = this
 
-        axios.get("/user/getUserInfoByUnam?username=" + Data)
+        this.$axios.get("/user/getUserInfoByUnam?username=" + Data)
         .then(function (response) {
             This.setState({      
                 userimg: response.data.data.upath,
@@ -182,7 +187,7 @@ class Pubilcidea extends Component {
 
 
 
-        axios.get("/brainchats/bybrainid?brainid=" + This.state.now)
+        this.$axios.get("/brainchats/bybrainid?brainid=" + This.state.now)
             .then(function (response) {
                 //////////获取某一idea下的聊天信息
                 console.log(response.data)
@@ -216,7 +221,7 @@ class Pubilcidea extends Component {
                 console.log(error)
             })
 
-        axios.get("/brainstorms").then(function (response) {
+        this.$axios.get("/brainstorms").then(function (response) {
             //////获取当前idea的内容
             let i = 0
             //console.log("data"+Data)
@@ -232,7 +237,7 @@ class Pubilcidea extends Component {
             console.log(error)
         })
 
-        axios.get("/brainstorms")
+        this.$axios.get("/brainstorms")
             ////////////////获取所有头脑风暴
             .then(function (response) {
                 //console.log(response.data.data)
@@ -299,7 +304,7 @@ class Pubilcidea extends Component {
         })
         //console.log(Data)
         //console.log(value)
-        axios.post("/brainchat/publish", FormDatafile).then(function (response) {
+        this.$axios.post("/brainchat/publish", FormDatafile).then(function (response) {
             //console.log(response.data)
             document.querySelector(".pubilcidea_input").value = ""
         }).catch(function (error) {
@@ -313,7 +318,7 @@ class Pubilcidea extends Component {
         let This = this
         index++
         Data = index
-        await axios.get("/brainchats/bybrainid?brainid=" + index)
+        await this.$axios.get("/brainchats/bybrainid?brainid=" + index)
         .then(function (response) {
             //////////获取某一idea下的聊天信息
             console.log(response.data)
@@ -347,7 +352,7 @@ class Pubilcidea extends Component {
             console.log(error)
         })
 
-        await axios.get("/brainstorms").then(function (response) {
+        await this.$axios.get("/brainstorms").then(function (response) {
             //////获取当前idea的内容
             let i = 0
             //console.log("data"+Data)

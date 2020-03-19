@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Pubilcblog.css'
 import axios from 'axios';
+import cookie from 'react-cookies';
+
 import pubilcblog_zhan1 from '../../img/personblog_zhan1.png'
 import pubilcblog_zhan2 from '../../img/personblog_zhan2.png'
 import pubilcblog_collect1 from '../../img/personblog_collect1.png'
@@ -215,7 +217,11 @@ class Pubilcblog extends Component {
 
     componentDidMount() {
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=" + Data)
+        const userNameData = cookie.load('ifLogin')
+        this.setState({
+            userNameData
+        });
+        this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
                 This.setState({
                     realname: response.data.data.realname,
@@ -231,7 +237,7 @@ class Pubilcblog extends Component {
                 console.log(error)
             })
 
-        axios.get("/blogs?name=" + Data)
+        this.$axios.get("/blogs?name=" + userNameData)
             .then(function (response) {
                 console.log(response.data)
                 if (response.data.data.length == 0) {
@@ -291,7 +297,7 @@ class Pubilcblog extends Component {
                 console.log(error)
             })
 
-        axios.get("/brainstorms")
+        this.$axios.get("/brainstorms")
             ////////////////获取所有头脑风暴
             .then(function (response) {
                 //console.log(response.data.data)
@@ -323,8 +329,8 @@ class Pubilcblog extends Component {
             })
 
         let FormDatablog = new FormData()
-        FormDatablog.append("name", Data)
-        axios.post("/blogs/rankinglist", FormDatablog)
+        FormDatablog.append("name", this.state.Data)
+        this.$axios.post("/blogs/rankinglist", FormDatablog)
             /////////////////获取排行榜信息
             .then(function (response) {
                 console.log(response.data)
@@ -354,7 +360,7 @@ class Pubilcblog extends Component {
         document.querySelector(".pubilcblog_left_btn4").style.backgroundColor = "#fff"
         document.querySelector(".pubilcblog_left_btn5").style.backgroundColor = "#fff"
         e.target.style.backgroundColor = "#1d91ff"
-        await axios.get("/blogs?name=" + Data)
+        await this.$axios.get("/blogs?name=" + This.state.userNameData)
             .then(function (response) {
                 if (response.data.data.length == 0) {
                     // This.setState({
@@ -410,7 +416,7 @@ class Pubilcblog extends Component {
         let FormDatafile = new FormData()
         FormDatafile.append("title", document.querySelector(".addnewidea_body_message").value)
         FormDatafile.append("name", Data)
-        axios.post("/brainstorm/publish", FormDatafile).then(function (response) {
+        this.$axios.post("/brainstorm/publish", FormDatafile).then(function (response) {
             console.log(response.data)
             alert("发布成功")
             document.querySelector("#addnewidea").style.display = "none"
@@ -428,7 +434,7 @@ class Pubilcblog extends Component {
             /////////点赞
             e.target.src = pubilcblog_zhan2
             FormDatafile.append("model", "-1")
-            await axios.post("/blog/like", FormDatafile).then(function (response) {
+            await this.$axios.post("/blog/like", FormDatafile).then(function (response) {
                 console.log(response.data)
             }).catch(function (error) {
                 console.log(error)
@@ -437,7 +443,7 @@ class Pubilcblog extends Component {
             /////////取消点赞
             e.target.src = pubilcblog_zhan1
             FormDatafile.append("model", "1")
-            await axios.post("/blog/like", FormDatafile).then(function (response) {
+            await this.$axios.post("/blog/like", FormDatafile).then(function (response) {
                 console.log(response.data)
             }).catch(function (error) {
                 console.log(error)
@@ -455,7 +461,7 @@ class Pubilcblog extends Component {
         if (e.target.src == pubilcblog_collect1) {
             /////////收藏博客
             e.target.src = pubilcblog_collect2
-            await axios.post("/blog/collection", FormDatafile).then(function (response) {
+            await this.$axios.post("/blog/collection", FormDatafile).then(function (response) {
                 console.log(response.data)
             }).catch(function (error) {
                 console.log(error)
@@ -463,7 +469,7 @@ class Pubilcblog extends Component {
         } else {
             ////////取消收藏博客
             e.target.src = pubilcblog_collect1
-            await axios.post("/blog/collection/cancel", FormDatafile).then(function (response) {
+            await this.$axios.post("/blog/collection/cancel", FormDatafile).then(function (response) {
                 console.log(response.data)
             }).catch(function (error) {
                 console.log(error)

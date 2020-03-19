@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Personmessage.css'
 import axios from 'axios';
+import cookie from 'react-cookies'
 import personmessage_logo1 from '../../img/personmessage_logo1.png'
 import personmessage_logo2 from '../../img/personmessage_logo2.png'
 
@@ -11,6 +12,7 @@ class Personmessage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userNameData:'',
             username: "",
             userimg: "",
             tel: "",
@@ -186,7 +188,11 @@ class Personmessage extends Component {
 
     componentDidMount() {
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=" + Data)
+        const userNameData = cookie.load('ifLogin')
+        this.setState({
+            userNameData
+        });
+        this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
                 This.setState({
                     realname: response.data.data.realname,
@@ -214,7 +220,7 @@ class Personmessage extends Component {
     personmessageChange() {
         let This = this
         //console.log(this.state.sex)
-        axios.post("/user/updateUser", {
+        this.$axios.post("/user/updateUser", {
             "birthday": this.state.birthday,
             "jointime": this.state.jointime,
             "mail": this.state.e_mail,

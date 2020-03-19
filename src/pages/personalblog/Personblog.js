@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Personblog.css'
 import axios from 'axios';
+import cookie from 'react-cookies'
+
 import personblog_zhan1 from '../../img/personblog_zhan1.png'
 import personblog_zhan2 from '../../img/personblog_zhan2.png'
 import personblog_collect1 from '../../img/personblog_collect1.png'
@@ -26,6 +28,7 @@ class Personbolg extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userNameData:'',
             comment: [
 
             ],
@@ -145,7 +148,11 @@ class Personbolg extends Component {
 
     componentDidMount() {
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=" + Data)
+        const userNameData = cookie.load('ifLogin')
+        this.setState({
+            userNameData
+        });
+        this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
                 //console.log(response.data)
                 This.setState({
@@ -162,7 +169,7 @@ class Personbolg extends Component {
                 console.log(error)
             })
 
-        axios.get("/blogs/by/userid?name=" + Data)
+        this.$axios.get("/blogs/by/userid?name=" + this.state.userNameData)
             ///////////////////////获取用户相关博客
             .then(function (response) {
                 console.log(response.data)
@@ -243,7 +250,7 @@ class Personbolg extends Component {
         FormDatafile.append("type", type)
         FormDatafile.append("comment", document.querySelector(".submitblog_message").value)
         //console.log(FormDatafile)
-        axios.post("/blog/publish", FormDatafile, config)
+        this.$axios.post("/blog/publish", FormDatafile, config)
             // {
             //     file: file,
             //     userId: "1",
@@ -285,7 +292,7 @@ class Personbolg extends Component {
             /////////点赞
             e.target.src = personblog_zhan2
             FormDatafile.append("model", "-1")
-            await axios.post("/blog/like", FormDatafile).then(function (response) {
+            await this.$axios.post("/blog/like", FormDatafile).then(function (response) {
                 console.log(response.data)
             }).catch(function (error) {
                 console.log(error)
@@ -294,7 +301,7 @@ class Personbolg extends Component {
             /////////取消点赞
             e.target.src = personblog_zhan1
             FormDatafile.append("model", "1")
-            await axios.post("/blog/like", FormDatafile).then(function (response) {
+            await this.$axios.post("/blog/like", FormDatafile).then(function (response) {
                 console.log(response.data)
             }).catch(function (error) {
                 console.log(error)
@@ -311,7 +318,7 @@ class Personbolg extends Component {
         if (e.target.src == personblog_collect1) {
             /////////收藏博客
             e.target.src = personblog_collect2
-            await axios.post("/blog/collection", FormDatafile).then(function (response) {
+            await this.$axios.post("/blog/collection", FormDatafile).then(function (response) {
                 console.log(response.data)
             }).catch(function (error) {
                 console.log(error)
@@ -319,7 +326,7 @@ class Personbolg extends Component {
         } else {
             ////////取消收藏博客
             e.target.src = personblog_collect1
-            await axios.post("/blog/collection/cancel", FormDatafile).then(function (response) {
+            await this.$axios.post("/blog/collection/cancel", FormDatafile).then(function (response) {
                 console.log(response.data)
             }).catch(function (error) {
                 console.log(error)
@@ -336,7 +343,7 @@ class Personbolg extends Component {
             //////////////////////////获取所有博客
             e.target.style.backgroundColor = '#fff'
             isLike = false
-            axios.get("/blogs/by/userid?name=" + This.state.username)
+            this.$axios.get("/blogs/by/userid?name=" + This.state.username)
                 ///////////////////////获取所有博客
                 .then(function (response) {
                     console.log(response.data)
@@ -403,7 +410,7 @@ class Personbolg extends Component {
             e.target.style.backgroundColor = '#5fb1ff'
             isLike = true
             console.log("获取收藏")
-            axios.post("/blog/user/collection", FormDatafile)
+            this.$axios.post("/blog/user/collection", FormDatafile)
                 .then(function (response) {
                     console.log(response.data)
                     if (response.data.data.length == 0) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Summary.css'
 import axios from 'axios';
+import cookie from 'react-cookies';
 import mysummary_logo1 from '../../img/mysummary_logo1.png'
 import mysummary_logo2 from '../../img/mysummary_logo2.png'
 import mysummary_logo3 from '../../img/mysummary_logo3.png'
@@ -98,7 +99,11 @@ class Summary extends Component {
 
     componentDidMount() {
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=" + Data)
+        const userNameData = cookie.load('ifLogin')
+        this.setState({
+            userNameData
+        });
+        this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
                 This.setState({
                     //////////////获取基本信息
@@ -116,7 +121,7 @@ class Summary extends Component {
                 console.log(error)
             })
 
-        axios.get("/user/getUserPaSs?username=" + Data)
+        this.$axios.get("/user/getUserPaSs?username=" + userNameData)
             .then(function (response) {
                 //console.log(response.data.data)
                 if (response.data.data.length == 0) {
@@ -156,7 +161,7 @@ class Summary extends Component {
         let sign = this.state.sign
         sign++
         if (nowid != "") {
-            axios.post("/user/updatePlanAndSummary", {
+            this.$axios.post("/user/updatePlanAndSummary", {
                 "id": nowid,
                 "summary": document.querySelector(".pensonsummary").value,
                 "plan": document.querySelector(".workplan").value,
@@ -183,7 +188,7 @@ class Summary extends Component {
     submitWork() {
         let This = this
         this.state.sign++
-        axios.post("/user/updatePlanAndSummary", {
+        this.$axios.post("/user/updatePlanAndSummary", {
             "summary": document.querySelector(".pensonsummary").value,
             "plan": document.querySelector(".workplan").value,
             "unam": this.state.username,
@@ -208,7 +213,7 @@ class Summary extends Component {
         let i = 0
         sign++
         if (nowid != "") {
-            axios.get("/user/" + nowid + "/deleteDetailPaS?username=" + This.state.username)
+            this.$axios.get("/user/" + nowid + "/deleteDetailPaS?username=" + This.state.username)
                 .then(function (response) {
                     let mydata = This.state.data
                     let mydataid = This.state.dataid
@@ -236,7 +241,8 @@ class Summary extends Component {
         /////////获取某一计划和总结的内容
         console.log(index)
         nowid = index;
-        axios.get("/user/" + index + "/getDetailPaS?username=" + Data)
+        const _this = this
+        this.$axios.get("/user/" + index + "/getDetailPaS?username=" + _this.state.userNameData)
             .then(function (response) {
                 //console.log(response.data.data)
                 document.querySelector(".pensonsummary").value = response.data.data.summary//////////////////////////

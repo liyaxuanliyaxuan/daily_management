@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import cookie from 'react-cookies'
+
 import './Personword.css'
 import personword_img1 from '../../img/personword_img1.png'
 import Header from '../../components/header/header'
@@ -43,6 +46,7 @@ class Personword extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userNameData:'',
             username: "",
             userimg: "",
             tel: "",
@@ -159,7 +163,11 @@ class Personword extends Component {
 
     componentDidMount() {
         let This = this
-        axios.get("/user/getUserInfoByUnam?username=" + User)
+        const userNameData = cookie.load('ifLogin')
+        this.setState({
+            userNameData
+        });
+        this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             ///////////////////////获取用户信息
             .then(function (response) {
                 console.log(response.data.data)
@@ -177,7 +185,7 @@ class Personword extends Component {
                 console.log(error)
             })
 
-        axios.get("/user/getUserProjects/" + Data)
+        this.$axios.get("/user/getUserProjects/" + Data)
             /////////////////////////获取某一项目的具体信息
             .then(function (response) {
                 let mybeginTime = response.data.data.beginTime
@@ -213,7 +221,7 @@ class Personword extends Component {
         /////////////////////////修改项目信息
         let This = this
         console.log("aaa")
-        axios.post("/user/updateProject", {
+        this.$axios.post("/user/updateProject", {
             beginTime: This.state.beginTime,
             closeTime: This.state.closeTime,
             introduction: This.state.introduction,
@@ -242,7 +250,7 @@ class Personword extends Component {
         // }else{
 
         // }
-        axios.get("/user/getProjectDocs?pid=" + Data + "&doctype=" + type)
+        this.$axios.get("/user/getProjectDocs?pid=" + Data + "&doctype=" + type)
             .then(function(response){
                 console.log(response.data)
             }).catch(function(error){

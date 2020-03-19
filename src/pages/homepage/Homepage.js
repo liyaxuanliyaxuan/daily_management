@@ -15,14 +15,10 @@ import Header from '../../components/header/header'
 var a = 0;
 ///////////////////////////////////////////////////////////////////////////
 ////↓↓↓用户名(username),不是真实名字(realname),字符型
-var Data = "admin"//admin是默认值，你直接删了就ok
+
 /*
     说明：
-        1.我的每一个页面都会有一个这样的变量，这个变量会在后面交互以及生命周期函数里面用到，所以
-        请优先给这个变量赋值。
-        2.因为你是用的你的header，所以请将我页面中render函数里面id=xxxxx_header(第一个div)的那一个div以及
-        里面的所有东西删掉，这是我的header。然后把你的header拿过来用，包括它的样式和交互，我的交
-        互不用改，不会报错
+        用于请求数据的Data在state中存储为userNameData
 */ 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -30,6 +26,7 @@ class Homepage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userNameData:'',
             xiaoren: ["homeword_logo1", "homeword_logo2", "homeword_logo3"],
             width: [],
             backgroundColor: ["#ffd100", "#f0842d", "#f36868"],
@@ -381,11 +378,13 @@ class Homepage extends Component {
 
     componentDidMount() {
         let ifAdmin = (this.state.ifLogin && sessionStorage.getItem('ifAdmin'))?true:false
+        const userNameData = cookie.load('ifLogin')
         this.setState({
-            ifAdmin
+            ifAdmin,
+            userNameData
         });
         let This = this
-        this.$axios.get( axios.get("/user/getUserInfoByUnam?username=" + Data)
+        this.$axios.get( axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
                 This.setState({
                     realname: response.data.realname,
@@ -414,7 +413,7 @@ class Homepage extends Component {
         } else if (This.state.newpsw1 == "" || This.state.newpsw2 == "" || This.state.oldpsw == "") {
             alert("密码不能为空")
         } else {
-            axios.post("user/updatePassword", {
+            this.$axios.post("user/updatePassword", {
                 newpw: This.state.newpsw1,
                 oldpw: This.state.oldpsw1
             }).then(function (response) {
@@ -436,7 +435,7 @@ class Homepage extends Component {
     homewordShow() {
         document.querySelector("#Homeword_bg").style.display = "block"
         let This = this
-        axios.get("/user/getUserProjects?username=" + This.state.realname)////////////////真实姓名
+        this.$axios.get("/user/getUserProjects?username=" + This.state.realname)////////////////真实姓名
             .then(function (response) {
                 console.log(response.data.data)
                 if (response.data.data.length == 0) {
@@ -485,7 +484,7 @@ class Homepage extends Component {
         let img = document.querySelector(".addword_right_input6").files[0]
         let FormDataimg = new FormData()
         FormDataimg.append("image", img)
-        await axios.post("/user/uploadImages", FormDataimg)
+        await this.$axios.post("/user/uploadImages", FormDataimg)
             .then(function (response) {
                 /////////////////得到返回的url
                 This.setState({
@@ -513,8 +512,8 @@ class Homepage extends Component {
             alert("请正确填写信息")
             return
         }
-        FormDatafile.append("username", Data)
-        await axios.post("/user/uploadFiles", FormDatafile, config)
+        FormDatafile.append("username", this.state.userNameDataData)
+        await this.$axios.post("/user/uploadFiles", FormDatafile, config)
             .then(function (response) {
                 //////////////获取文件id
                 fid = response.data.data[0] ////////////////////////////////////////
@@ -529,7 +528,7 @@ class Homepage extends Component {
 
 
         //////////////上传项目信息
-        await axios.post("/user/saveProject", {
+        await this.$axios.post("/user/saveProject", {
             "beginTime": this.state.beginTime,
             "closeTime": this.state.closeTime,
             "image": url,
@@ -554,7 +553,7 @@ class Homepage extends Component {
         console.log("fid:" + fid)
         if (ture == 0) {
             //////////////文件与项目关联
-            await axios.post("user/updateProjectDoc", {
+            await this.$axios.post("user/updateProjectDoc", {
                 "fid": fid,
                 "pid": pid
             })
