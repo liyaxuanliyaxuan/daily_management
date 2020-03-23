@@ -107,13 +107,13 @@ class Summary extends Component {
             .then(function (response) {
                 This.setState({
                     //////////////获取基本信息
-                    realname: response.data.data.realname,
-                    username: response.data.data.unam,
-                    userimg: response.data.data.upath,
-                    tel: response.data.data.phone,
-                    qq: response.data.data.qq,
-                    weibo: response.data.data.weibo,
-                    e_mail: response.data.data.mail
+                    realname: response.data.realname,
+                    username: response.data.unam,
+                    userimg: response.data.upath,
+                    tel: response.data.phone,
+                    qq: response.data.qq,
+                    weibo: response.data.weibo,
+                    e_mail: response.data.mail
 
                 })
             })
@@ -124,7 +124,7 @@ class Summary extends Component {
         this.$axios.get("/user/getUserPaSs?username=" + userNameData)
             .then(function (response) {
                 //console.log(response.data.data)
-                if (response.data.data.length == 0) {
+                if (response.data.length == 0) {
                     This.setState({
                         /////////////获取计划与总结
                         dataid: [],
@@ -133,9 +133,9 @@ class Summary extends Component {
                 } else {
                     var myData = new Array()
                     var myDataid = new Array()
-                    for (var i = 0; i < response.data.data.length; i++) {
-                        myData[i] = response.data.data[i].writeTime.substring(0, 10)
-                        myDataid[i] = response.data.data[i].id
+                    for (var i = 0; i < response.data.length; i++) {
+                        myData[i] = response.data[i].writeTime.substring(0, 10)
+                        myDataid[i] = response.data[i].id
                     }
                     myData.reverse()
                     myDataid.reverse()
@@ -171,7 +171,7 @@ class Summary extends Component {
                     This.setState({
                         sign: sign
                     })
-                    console.log(response.data.data)
+                    console.log(response.data)
                     console.log("修改成功")
                     document.querySelector(".pensonsummary").value = ""
                     document.querySelector(".workplan").value = ""
@@ -194,7 +194,7 @@ class Summary extends Component {
             "unam": this.state.username,
         })
             .then(function (response) {
-                console.log(response.data.data)
+                console.log(response.data)
                 console.log("提交成功")
                 alert('提交成功')
                 document.querySelector(".pensonsummary").value = ""
@@ -245,8 +245,8 @@ class Summary extends Component {
         this.$axios.get("/user/" + index + "/getDetailPaS?username=" + _this.state.userNameData)
             .then(function (response) {
                 //console.log(response.data.data)
-                document.querySelector(".pensonsummary").value = response.data.data.summary//////////////////////////
-                document.querySelector(".workplan").value = response.data.data.plan////////////////////////
+                document.querySelector(".pensonsummary").value = response.data.summary//////////////////////////
+                document.querySelector(".workplan").value = response.data.plan////////////////////////
             })
             .catch(function (error) {
                 console.log(error)

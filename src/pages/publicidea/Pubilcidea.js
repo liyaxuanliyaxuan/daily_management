@@ -12,7 +12,7 @@ import userimg from '../../img/userimg.jpg'
 var User = "admin"//admin是默认值，你直接删了就ok
 /*
     说明：
-        1.这个页面有两个从其他页面传来的参数，但是你只用给这一个(User)赋值，下面那一个参数(Data)你不用管
+        1.这个页面有两个从其他页面传来的参数，但是你只用给这一个()赋值，下面那一个参数(Data)你不用管
         2.我的每一个页面都会有一个这样的变量，这个变量会在后面交互以及生命周期函数里面用到，所以
         请优先给这个变量赋值。
         3.因为你是用的你的header，所以请将我页面中render函数里面id=xxxxx_header(第一个div)的那一个div以及
@@ -160,7 +160,7 @@ class Pubilcidea extends Component {
         //console.log(Data)
         ///////////////////////////////////
         this.setState({
-            username: User,
+            username: '',
             now: Data
         })
 
@@ -169,7 +169,9 @@ class Pubilcidea extends Component {
     componentDidMount() {
         const userNameData = cookie.load('ifLogin')
         this.setState({
-            userNameData
+            userNameData,
+            username:userNameData,
+
         });
         let a = document.querySelector(".pubilcidea_chat_hidden")
         a.scrollTop = a.scrollHeight
@@ -191,7 +193,7 @@ class Pubilcidea extends Component {
             .then(function (response) {
                 //////////获取某一idea下的聊天信息
                 console.log(response.data)
-                if (response.data.data.length == 0) {
+                if (response.data.length == 0) {
                     This.setState({
 
                     })
@@ -201,12 +203,12 @@ class Pubilcidea extends Component {
                     var mythisid = new Array()
                     var mythisname = new Array()
                     var mythisimg = new Array()
-                    for (var i = 0; i < response.data.data.length; i++) {
-                        mythiscomment[i] = response.data.data[i].brainChat.comment
-                        mythisfrom[i] = response.data.data[i].brainChat.from
-                        mythisid[i] = response.data.data[i].brainChat.cid
-                        mythisname[i] = response.data.data[i].userinfo[0]
-                        mythisimg[i] = response.data.data[i].userinfo[1]
+                    for (var i = 0; i < response.data.length; i++) {
+                        mythiscomment[i] = response.data[i].brainChat.comment
+                        mythisfrom[i] = response.data[i].brainChat.from
+                        mythisid[i] = response.data[i].brainChat.cid
+                        mythisname[i] = response.data[i].userinfo[0]
+                        mythisimg[i] = response.data[i].userinfo[1]
                     }
                     This.setState({
                         thiscomment: mythiscomment,
@@ -226,12 +228,12 @@ class Pubilcidea extends Component {
             let i = 0
             //console.log("data"+Data)
             //console.log(response.data.data)
-            while (response.data.data[i].tid != Data && i < 1000) {
+            while (response.data[i].tid != Data && i < 1000) {
                 //console.log(response.data.data[i].tid)
                 i++
             }
             This.setState({
-                nowtitle: response.data.data[i].title
+                nowtitle: response.data[i].title
             })
         }).catch(function (error) {
             console.log(error)
@@ -241,7 +243,7 @@ class Pubilcidea extends Component {
             ////////////////获取所有头脑风暴
             .then(function (response) {
                 //console.log(response.data.data)
-                if (response.data.data.length == 0) {
+                if (response.data.length == 0) {
                     This.setState({
 
                     })
@@ -249,9 +251,9 @@ class Pubilcidea extends Component {
                     var mytid = new Array()
                     var mytitle = new Array()
                     var myideaimg = new Array()
-                    for (var i = 0; i < response.data.data.length; i++) {
-                        mytid[i] = response.data.data[i].tid
-                        mytitle[i] = response.data.data[i].title
+                    for (var i = 0; i < response.data.length; i++) {
+                        mytid[i] = response.data[i].tid
+                        mytitle[i] = response.data[i].title
                         myideaimg[i] = idea_logo
 
                     }
@@ -289,7 +291,7 @@ class Pubilcidea extends Component {
         let FormDatafile = new FormData()
         FormDatafile.append("brainid", Data)
         FormDatafile.append("comment", value)
-        FormDatafile.append("name", User)
+        FormDatafile.append("name", this.state.userNameData)
         sign++
         mythiscomment.push(value)
         mythisfrom.push(This.state.username)
@@ -332,12 +334,12 @@ class Pubilcidea extends Component {
                 var mythisid = new Array()
                 var mythisname = new Array()
                 var mythisimg = new Array()
-                for (var i = 0; i < response.data.data.length; i++) {
-                    mythiscomment[i] = response.data.data[i].brainChat.comment
-                    mythisfrom[i] = response.data.data[i].brainChat.from
-                    mythisid[i] = response.data.data[i].brainChat.cid
-                    mythisname[i] = response.data.data[i].userinfo[0]
-                    mythisimg[i] = response.data.data[i].userinfo[1]
+                for (var i = 0; i < response.data.length; i++) {
+                    mythiscomment[i] = response.data[i].brainChat.comment
+                    mythisfrom[i] = response.data[i].brainChat.from
+                    mythisid[i] = response.data[i].brainChat.cid
+                    mythisname[i] = response.data[i].userinfo[0]
+                    mythisimg[i] = response.data[i].userinfo[1]
                 }
                 This.setState({
                     thiscomment: mythiscomment,
@@ -357,12 +359,12 @@ class Pubilcidea extends Component {
             let i = 0
             //console.log("data"+Data)
             //console.log(response.data.data)
-            while (response.data.data[i].tid != index && i < 1000) {
+            while (response.data[i].tid != index && i < 1000) {
                 //console.log(response.data.data[i].tid)
                 i++
             }
             This.setState({
-                nowtitle: response.data.data[i].title
+                nowtitle: response.data[i].title
             })
         }).catch(function (error) {
             console.log(error)

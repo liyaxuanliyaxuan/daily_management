@@ -156,13 +156,13 @@ class Personbolg extends Component {
             .then(function (response) {
                 //console.log(response.data)
                 This.setState({
-                    realname: response.data.data.realname,
-                    username: response.data.data.unam,
-                    userimg: response.data.data.upath,
-                    tel: response.data.data.phone,
-                    qq: response.data.data.qq,
-                    weibo: response.data.data.weibo,
-                    e_mail: response.data.data.mail,
+                    realname: response.data.realname,
+                    username: response.data.unam,
+                    userimg: response.data.upath,
+                    tel: response.data.phone,
+                    qq: response.data.qq,
+                    weibo: response.data.weibo,
+                    e_mail: response.data.mail,
                 })
             })
             .catch(function (error) {
@@ -173,7 +173,7 @@ class Personbolg extends Component {
             ///////////////////////获取用户相关博客
             .then(function (response) {
                 console.log(response.data)
-                if (response.data.data.length == 0) {
+                if (response.data.length == 0) {
                     This.setState({
                         bid: [],
                         comment: [],
@@ -191,17 +191,17 @@ class Personbolg extends Component {
                     var myislike = new Array()
                     var mybloguser = new Array()
                     var mybloguserimg = new Array()
-                    for (var i = 0; i < response.data.data.length; i++) {
-                        mybid[i] = response.data.data[i].blog.bid
-                        mycomment[i] = response.data.data[i].blog.comment
-                        myfilepath[i] = response.data.data[i].blog.filepath
-                        mytype[i] = response.data.data[i].blog.type
+                    for (var i = 0; i < response.data.length; i++) {
+                        mybid[i] = response.data[i].blog.bid
+                        mycomment[i] = response.data[i].blog.comment
+                        myfilepath[i] = response.data[i].blog.filepath
+                        mytype[i] = response.data[i].blog.type
                         myauthor[i] = This.state.username
-                        mylikenum[i] = response.data.data[i].blog.likenum
-                        myiscollection[i] = response.data.data[i].iscollection
-                        myislike[i] = response.data.data[i].islike
-                        mybloguser[i] = response.data.data[i].userinfo[0]
-                        mybloguserimg[i] = response.data.data[i].userinfo[1]
+                        mylikenum[i] = response.data[i].blog.likenum
+                        myiscollection[i] = response.data[i].iscollection
+                        myislike[i] = response.data[i].islike
+                        mybloguser[i] = response.data[i].userinfo[0]
+                        mybloguserimg[i] = response.data[i].userinfo[1]
                     }
                     myauthor.reverse()
                     mybid.reverse()
@@ -347,7 +347,7 @@ class Personbolg extends Component {
                 ///////////////////////获取所有博客
                 .then(function (response) {
                     console.log(response.data)
-                    if (response.data.data.length == 0) {
+                    if (response.data.length == 0) {
                         This.setState({
                             bid: [],
                             comment: [],
@@ -365,17 +365,17 @@ class Personbolg extends Component {
                         var myislike = new Array()
                         var mybloguser = new Array()
                         var mybloguserimg = new Array()
-                        for (var i = 0; i < response.data.data.length; i++) {
-                            mybid[i] = response.data.data[i].blog.bid
-                            mycomment[i] = response.data.data[i].blog.comment
-                            myfilepath[i] = response.data.data[i].blog.filepath
-                            mytype[i] = response.data.data[i].blog.type
+                        for (var i = 0; i < response.data.length; i++) {
+                            mybid[i] = response.data[i].blog.bid
+                            mycomment[i] = response.data[i].blog.comment
+                            myfilepath[i] = response.data[i].blog.filepath
+                            mytype[i] = response.data[i].blog.type
                             myauthor[i] = "lin"//this.state.username
-                            mylikenum[i] = response.data.data[i].blog.likenum
-                            myiscollection[i] = response.data.data[i].iscollection
-                            myislike[i] = response.data.data[i].islike
-                            mybloguser[i] = response.data.data[i].userinfo[0]
-                            mybloguserimg[i] = response.data.data[i].userinfo[1]
+                            mylikenum[i] = response.data[i].blog.likenum
+                            myiscollection[i] = response.data[i].iscollection
+                            myislike[i] = response.data[i].islike
+                            mybloguser[i] = response.data[i].userinfo[0]
+                            mybloguserimg[i] = response.data[i].userinfo[1]
                         }
                         myauthor.reverse()
                         mybid.reverse()
@@ -413,7 +413,7 @@ class Personbolg extends Component {
             this.$axios.post("/blog/user/collection", FormDatafile)
                 .then(function (response) {
                     console.log(response.data)
-                    if (response.data.data.length == 0) {
+                    if (response.data.length == 0) {
                         This.setState({
                             bid: [],
                             comment: [],
@@ -431,17 +431,17 @@ class Personbolg extends Component {
                         var myislike = new Array()
                         var mybloguser = new Array()
                         var mybloguserimg = new Array()
-                        for (var i = 0; i < response.data.data.length; i++) {
-                            mybid[i] = response.data.data[i].blog.bid
-                            mycomment[i] = response.data.data[i].blog.comment
-                            myfilepath[i] = response.data.data[i].blog.filepath
-                            mytype[i] = response.data.data[i].blog.type
+                        for (var i = 0; i < response.data.length; i++) {
+                            mybid[i] = response.data[i].blog.bid
+                            mycomment[i] = response.data[i].blog.comment
+                            myfilepath[i] = response.data[i].blog.filepath
+                            mytype[i] = response.data[i].blog.type
                             myauthor[i] = "lin"//this.state.username
-                            mylikenum[i] = response.data.data[i].blog.likenum
-                            myiscollection[i] = response.data.data[i].iscollection
-                            myislike[i] = response.data.data[i].islike
-                            mybloguser[i] = response.data.data[i].userinfo[0]
-                            mybloguserimg[i] = response.data.data[i].userinfo[1]
+                            mylikenum[i] = response.data[i].blog.likenum
+                            myiscollection[i] = response.data[i].iscollection
+                            myislike[i] = response.data[i].islike
+                            mybloguser[i] = response.data[i].userinfo[0]
+                            mybloguserimg[i] = response.data[i].userinfo[1]
                         }
                         myauthor.reverse()
                         mybid.reverse()

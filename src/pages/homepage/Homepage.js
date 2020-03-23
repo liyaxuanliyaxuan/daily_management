@@ -418,7 +418,7 @@ class Homepage extends Component {
                 oldpw: This.state.oldpsw1
             }).then(function (response) {
                 console.log(response.data)
-                if (response.data.code == 200) {
+                if (response.code == 200) {
                     alert("修改成功")
                     document.querySelector("#changepsw").style.display = "none"
                 } else {
@@ -437,8 +437,8 @@ class Homepage extends Component {
         let This = this
         this.$axios.get("/user/getUserProjects?username=" + This.state.realname)////////////////真实姓名
             .then(function (response) {
-                console.log(response.data.data)
-                if (response.data.data.length == 0) {
+                console.log(response.data)
+                if (response.data.length == 0) {
                     This.setState({
                         /////////////获取计划与总结
                         porgressImg: [],
@@ -450,11 +450,11 @@ class Homepage extends Component {
                     var myporgress = new Array()
                     var myporgressname = new Array()
                     var mypid = new Array()
-                    for (var i = 0; i < response.data.data.length; i++) {
-                        myporgressImg[i] = response.data.data[i].image
-                        myporgress[i] = 0.2//response.data.data[i].porgress 
-                        myporgressname[i] = response.data.data[i].pname
-                        mypid[i] = response.data.data[i].pid
+                    for (var i = 0; i < response.data.length; i++) {
+                        myporgressImg[i] = response.data[i].image
+                        myporgress[i] = 0.2//response.data[i].porgress 
+                        myporgressname[i] = response.data[i].pname
+                        mypid[i] = response.data[i].pid
                     }
                     This.setState({
                         porgress: myporgress,
@@ -488,9 +488,9 @@ class Homepage extends Component {
             .then(function (response) {
                 /////////////////得到返回的url
                 This.setState({
-                    url: response.data.data[0] 
+                    url: response.data[0] 
                 })
-                url = response.data.data[0]
+                url = response.data[0]
                 console.log("上传图片成功" + response.data)
                 console.log(response.data)
                 
@@ -516,7 +516,7 @@ class Homepage extends Component {
         await this.$axios.post("/user/uploadFiles", FormDatafile, config)
             .then(function (response) {
                 //////////////获取文件id
-                fid = response.data.data[0] ////////////////////////////////////////
+                fid = response.data[0] ////////////////////////////////////////
                 console.log("上传文件成功" + response.data)
                 //console.log(fid)
             })
@@ -540,7 +540,7 @@ class Homepage extends Component {
             "pname": this.state.pname
         })
             .then(function (response) {
-                pid = response.data.data.pid
+                pid = response.data.pid
                 console.log("上传项目信息成功" + response.data)
             })
             .catch(function (error) {
@@ -558,7 +558,7 @@ class Homepage extends Component {
                 "pid": pid
             })
                 .then(function (response) {
-                    if (response.data.code == 200) {
+                    if (response.code == 200) {
                         alert("上传成功")
                         document.querySelector("#addword").style.display = "none"
                     }

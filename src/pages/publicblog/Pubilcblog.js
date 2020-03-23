@@ -224,13 +224,13 @@ class Pubilcblog extends Component {
         this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
                 This.setState({
-                    realname: response.data.data.realname,
-                    username: response.data.data.unam,
-                    userimg: response.data.data.upath,
-                    tel: response.data.data.phone,
-                    qq: response.data.data.qq,
-                    weibo: response.data.data.weibo,
-                    e_mail: response.data.data.mail,
+                    realname: response.data.realname,
+                    username: response.data.unam,
+                    userimg: response.data.upath,
+                    tel: response.data.phone,
+                    qq: response.data.qq,
+                    weibo: response.data.weibo,
+                    e_mail: response.data.mail,
                 })
             })
             .catch(function (error) {
@@ -240,7 +240,7 @@ class Pubilcblog extends Component {
         this.$axios.get("/blogs?name=" + userNameData)
             .then(function (response) {
                 console.log(response.data)
-                if (response.data.data.length == 0) {
+                if (response.data.length == 0) {
                     // This.setState({
 
                     // })
@@ -256,17 +256,17 @@ class Pubilcblog extends Component {
                     var myislike = new Array()
                     var mybloguser = new Array()
                     var mybloguserimg = new Array()
-                    for (var i = 0; i < response.data.data.length; i++) {
-                        mybid[i] = response.data.data[i].blog.bid
-                        mycomment[i] = response.data.data[i].blog.comment
-                        myfilepath[i] = response.data.data[i].blog.filepath
-                        mytype[i] = response.data.data[i].blog.type
-                        myauthor[i] = ""//"admin"//Data
-                        mylikenum[i] = response.data.data[i].blog.likenum
-                        myiscollection[i] = response.data.data[i].iscollection
-                        myislike[i] = response.data.data[i].islike
-                        mybloguser[i] = response.data.data[i].userinfo[0]
-                        mybloguserimg[i] = response.data.data[i].userinfo[1]
+                    for (var i = 0; i < response.data.length; i++) {
+                        mybid[i] = response.data[i].blog.bid
+                        mycomment[i] = response.data[i].blog.comment
+                        myfilepath[i] = response.data[i].blog.filepath
+                        mytype[i] = response.data[i].blog.type
+                        myauthor[i] = ""//"admin"//
+                        mylikenum[i] = response.data[i].blog.likenum
+                        myiscollection[i] = response.data[i].iscollection
+                        myislike[i] = response.data[i].islike
+                        mybloguser[i] = response.data[i].userinfo[0]
+                        mybloguserimg[i] = response.data[i].userinfo[1]
                     }
                     myauthor.reverse()
                     mybid.reverse()
@@ -309,9 +309,9 @@ class Pubilcblog extends Component {
                     var mytid = new Array()
                     var mytitle = new Array()
                     var myideaimg = new Array()
-                    for (let i = 0; i < response.data.data.length; i++) {
-                        mytid[i] = response.data.data[i].tid
-                        mytitle[i] = response.data.data[i].title
+                    for (let i = 0; i < response.data.length; i++) {
+                        mytid[i] = response.data[i].tid
+                        mytitle[i] = response.data[i].title
                         myideaimg[i] = idea_logo
                     }
                     myideaimg.reverse()
@@ -329,16 +329,16 @@ class Pubilcblog extends Component {
             })
 
         let FormDatablog = new FormData()
-        FormDatablog.append("name", this.state.Data)
+        FormDatablog.append("name", this.state.userNameData)
         this.$axios.post("/blogs/rankinglist", FormDatablog)
             /////////////////获取排行榜信息
             .then(function (response) {
                 console.log(response.data)
                 var mylistname = new Array()
                 var mylistimg = new Array()
-                for (let i = 0; i < response.data.data.length; i++) {
-                    mylistname[i] = response.data.data[i].userinfo[0]
-                    mylistimg[i] = response.data.data[i].userinfo[1]
+                for (let i = 0; i < response.data.length; i++) {
+                    mylistname[i] = response.data[i].userinfo[0]
+                    mylistimg[i] = response.data[i].userinfo[1]
                 }
                 This.setState({
                     listimg: mylistimg,
@@ -376,16 +376,16 @@ class Pubilcblog extends Component {
                     var mylikenum = new Array()
                     var mybloguser = new Array()
                     var mybloguserimg = new Array()
-                    for (var i = 0, j = 0; j < response.data.data.length;) {
-                        if (response.data.data[j].blog.type == nowplatform) {
-                            mybid[i] = response.data.data[j].blog.bid
-                            mycomment[i] = response.data.data[j].blog.comment
-                            myfilepath[i] = response.data.data[j].blog.filepath
-                            mytype[i] = response.data.data[j].blog.type
-                            myauthor[i] = ""//"admin"//Data
-                            mylikenum[i] = response.data.data[j].blog.likenum
-                            mybloguser[i] = response.data.data[j].userinfo[0]
-                            mybloguserimg[i] = response.data.data[j].userinfo[1]
+                    for (var i = 0, j = 0; j < response.data.length;) {
+                        if (response.data[j].blog.type == nowplatform) {
+                            mybid[i] = response.data[j].blog.bid
+                            mycomment[i] = response.data[j].blog.comment
+                            myfilepath[i] = response.data[j].blog.filepath
+                            mytype[i] = response.data[j].blog.type
+                            myauthor[i] = ""//"admin"//
+                            mylikenum[i] = response.data[j].blog.likenum
+                            mybloguser[i] = response.data[j].userinfo[0]
+                            mybloguserimg[i] = response.data[j].userinfo[1]
                             i++
                             j++
                         } else {
@@ -415,7 +415,7 @@ class Pubilcblog extends Component {
         let This = this
         let FormDatafile = new FormData()
         FormDatafile.append("title", document.querySelector(".addnewidea_body_message").value)
-        FormDatafile.append("name", Data)
+        FormDatafile.append("name", this.state.userNameData)
         this.$axios.post("/brainstorm/publish", FormDatafile).then(function (response) {
             console.log(response.data)
             alert("发布成功")
@@ -455,8 +455,8 @@ class Pubilcblog extends Component {
         let This = this
         let FormDatafile = new FormData()
         FormDatafile.append("blogId", This.state.bid[index])
-        FormDatafile.append("name", Data)
-        console.log(Data)
+        FormDatafile.append("name", this.state.userNameData)
+      
         console.log(This.state.bid[index])
         if (e.target.src == pubilcblog_collect1) {
             /////////收藏博客

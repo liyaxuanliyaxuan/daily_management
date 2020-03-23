@@ -195,21 +195,21 @@ class Personmessage extends Component {
         this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
                 This.setState({
-                    realname: response.data.data.realname,
-                    username: response.data.data.unam,
-                    userimg: response.data.data.upath,
-                    tel: response.data.data.phone,
-                    qq: response.data.data.qq,
-                    weibo: response.data.data.weibo,
-                    e_mail: response.data.data.mail,
-                    sex: response.data.data.sex,
-                    school: response.data.data.school,
-                    jointime: response.data.data.jointime.substring(0, 10),
-                    major: response.data.data.major,
-                    birthday: response.data.data.birthday.substring(0, 10),
-                    prjHistory: response.data.data.prjHistory,
-                    skill: response.data.data.skills,
-                    title: response.data.data.title,
+                    realname: response.data.realname,
+                    username: response.data.unam,
+                    userimg: response.data.upath,
+                    tel: response.data.phone,
+                    qq: response.data.qq,
+                    weibo: response.data.weibo,
+                    e_mail: response.data.mail,
+                    sex: response.data.sex,
+                    school: response.data.school,
+                    jointime: response.data.jointime.substring(0, 10),
+                    major: response.data.major,
+                    birthday: response.data.birthday.substring(0, 10),
+                    prjHistory: response.data.prjHistory,
+                    skill: response.data.skills,
+                    title: response.data.title,
                 })
             })
             .catch(function (error) {
@@ -240,11 +240,11 @@ class Personmessage extends Component {
         })
             .then(function (response) {
                 console.log(response.data)
-                if(response.data.code == 200){
+                if(response.code == 200){
                     alert("修改成功")
                     document.querySelector("#personmessage_change").style.display = "none"
                 }else{
-                    alert(response.data.code)
+                    alert(response.code)
                 }
                 
             })

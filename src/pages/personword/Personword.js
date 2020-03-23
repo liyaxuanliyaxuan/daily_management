@@ -170,15 +170,15 @@ class Personword extends Component {
         this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             ///////////////////////获取用户信息
             .then(function (response) {
-                console.log(response.data.data)
+                console.log(response.data)
                 This.setState({
-                    realname: response.data.data.realname,
-                    username: response.data.data.unam,
-                    userimg: response.data.data.upath,
-                    tel: response.data.data.phone,
-                    qq: response.data.data.qq,
-                    weibo: response.data.data.weibo,
-                    e_mail: response.data.data.mail,
+                    realname: response.data.realname,
+                    username: response.data.unam,
+                    userimg: response.data.upath,
+                    tel: response.data.phone,
+                    qq: response.data.qq,
+                    weibo: response.data.weibo,
+                    e_mail: response.data.mail,
                 })
             })
             .catch(function (error) {
@@ -188,8 +188,8 @@ class Personword extends Component {
         this.$axios.get("/user/getUserProjects/" + Data)
             /////////////////////////获取某一项目的具体信息
             .then(function (response) {
-                let mybeginTime = response.data.data.beginTime
-                let mycloseTime = response.data.data.closeTime
+                let mybeginTime = response.data.beginTime
+                let mycloseTime = response.data.closeTime
                 if (mybeginTime == null) {
                     mybeginTime = ""
                 } else {
@@ -204,12 +204,12 @@ class Personword extends Component {
                 This.setState({
                     beginTime: mybeginTime,
                     closeTime: mycloseTime,
-                    image: response.data.data.image,
-                    introduction: response.data.data.introduction,
-                    members: response.data.data.members,
-                    pRealname: response.data.data.pRealname,
-                    pid: response.data.data.pid,
-                    pname: response.data.data.pname,
+                    image: response.data.image,
+                    introduction: response.data.introduction,
+                    members: response.data.members,
+                    pRealname: response.data.pRealname,
+                    pid: response.data.pid,
+                    pname: response.data.pname,
                 })
             })
             .catch(function (error) {
