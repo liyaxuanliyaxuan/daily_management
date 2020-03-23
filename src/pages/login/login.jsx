@@ -44,6 +44,7 @@ class Login extends Component {
         //发送请求
         const that = this  
         sendLoginForm(that)
+        //window.location.assign('/#/home')
 
     }
     handleEnterBtn(e){

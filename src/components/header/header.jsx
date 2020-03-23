@@ -107,7 +107,7 @@ class Header extends Component {
                         <button
                             onClick={this.handleLogState.bind(this)}
                             className='exit-button'>
-                            <Link to={ifLogin ? '/display' : '/'}>
+                            <Link to={ifLogin ? '/' : '/'}>
                                 {ifLogin ? `退出` : `点击登录`}
                             </Link>
                         </button>

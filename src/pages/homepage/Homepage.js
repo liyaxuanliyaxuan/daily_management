@@ -92,10 +92,10 @@ class Homepage extends Component {
                     <p className="qq">QQ：{this.state.qq}</p>
                     <p className="weibo">微博：{this.state.weibo}</p>
                     <p className="e_mail">邮箱：{this.state.e_mail}</p>
-                    <a className="Homepage_more" href="/pages/Personmessage" >更多信息</a>
+                    <a className="Homepage_more" href="/#/pages/Personmessage" >更多信息</a>
                     <a className="Homepage_change" onClick={this.changepswOut.bind(this)}>修改密码</a>
-                    <a href="/pages/Summary"><div className={ifAdmin?"Homepage_zhongjie Homepage_zhongjie-vip":"Homepage_zhongjie"}><div><p>{renderNavTitle.sum}</p></div></div></a>
-                    <a href="/pages/Personblog"><div className={ifAdmin?'Homepage_bolg-vip Homepage_bolg':'Homepage_bolg'}><div><p>{renderNavTitle.blog}</p></div></div></a>
+                    <a href="/#/pages/Summary"><div className={ifAdmin?"Homepage_zhongjie Homepage_zhongjie-vip":"Homepage_zhongjie"}><div><p>{renderNavTitle.sum}</p></div></div></a>
+                    <a href="/#/pages/Personblog"><div className={ifAdmin?'Homepage_bolg-vip Homepage_bolg':'Homepage_bolg'}><div><p>{renderNavTitle.blog}</p></div></div></a>
                     <a><div className={ifAdmin?'Homepage_wendang-vip Homepage_wendang':'Homepage_wendang'} onClick={this.homewordShow.bind(this)}><div><p>{renderNavTitle.prj}</p></div></div></a>
                 </div>
                 <div id="Homeword_bg" >
@@ -158,7 +158,7 @@ class Homepage extends Component {
                                             )
                                         } else {
                                             return (
-                                                <a key={index} href={"/pages/Personword?id=" + index} >
+                                                <a key={index} href={"/#/pages/Personword?id=" + index} >
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{

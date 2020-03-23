@@ -301,7 +301,7 @@ class Pubilcblog extends Component {
             ////////////////获取所有头脑风暴
             .then(function (response) {
                 //console.log(response.data.data)
-                if (response.data.data.length == 0) {
+                if (response.data.length == 0) {
                     This.setState({
 
                     })

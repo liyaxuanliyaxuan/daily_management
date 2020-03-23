@@ -81,10 +81,10 @@ class Search extends Component {
 
                 console.log(res);
                 localStorage.setItem('fileSearch',JSON.stringify(res.data))
-                // window.location.assign('/meeting/search')
+                // window.location.assign('/#/meeting/search')
                 if(res.code == 200){
 
-                    window.location.assign(`/file-share/search/${file}`)
+                    window.location.assign(`/#/file-share/search/${file}`)
                 }else{
                     return null
                 }
@@ -99,10 +99,10 @@ class Search extends Component {
 
                 console.log(res);
                 localStorage.setItem('meetSearch',JSON.stringify(res.data))
-                // window.location.assign('/file-share/search')
+                // window.location.assign('/#/file-share/search')
                 if(res.code == 200){
 
-                    window.location.assign(`/meeting/search/${meeting}`)
+                    window.location.assign(`/#/meeting/search/${meeting}`)
                 }else{
                     return null
                 }
@@ -119,7 +119,7 @@ class Search extends Component {
                 localStorage.setItem('vipSearch',JSON.stringify(res.data))
                 if(res.code == 200){
 
-                    window.location.assign(`/vip-source/search/${vip}`)
+                    window.location.assign(`/#/vip-source/search/${vip}`)
                 }else{
                     return null
                 }

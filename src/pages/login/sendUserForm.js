@@ -42,7 +42,7 @@ const sendLoginForm = (that) => {
                         httpOnly: false
                     }
                 )
-                window.location.assign('/home')
+                window.location.assign('/#/home')
     
             } else if (res.code === 1001) {
                 alert(res.message)

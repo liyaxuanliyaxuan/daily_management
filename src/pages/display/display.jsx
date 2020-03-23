@@ -17,7 +17,11 @@ class ResultInfoText extends Component {
         
     }
     componentDidMount(){
-        const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+        let allPrj
+        if(localStorage.getItem('ing')){
+         allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]   
+        }
+        
         //console.log(allPrj);
         this.setState({
             defaultPrj:allPrj[0]
@@ -70,8 +74,12 @@ class RewardsInfoText extends Component {
       
     }
     componentDidMount(){
-        const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
-        console.log(allPrj);
+        let allPrj;
+        if(localStorage.getItem('ing')){
+            allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+            console.log(allPrj);
+        }
+     
         const prjName = this.props.match.params.prjName
         this.setState({
             defaultPrj:allPrj[0]
