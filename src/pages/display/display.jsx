@@ -17,6 +17,7 @@ class ResultInfoText extends Component {
         
     }
     componentDidMount(){
+        
         let allPrj
         if(localStorage.getItem('ing')){
          allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]   

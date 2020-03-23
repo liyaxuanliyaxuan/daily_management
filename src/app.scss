@@ -8,7 +8,9 @@ canvas,div,span,section,header,article,nav,footer,ul,li,button{
 body{
     font-size: 16px;
     
-    background-color:#f4f4f4;
+    // background-color:#f4f4f4;
+    
+    background: linear-gradient(to right,#ffffff , #f4f4f4 ,#ffffff );
     font-family: Arial, Helvetica, sans-serif;
 }
 ul,li{

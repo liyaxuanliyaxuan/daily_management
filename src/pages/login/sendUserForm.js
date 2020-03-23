@@ -28,6 +28,7 @@ const sendLoginForm = (that) => {
                 if(ifAdmin){
                     window.sessionStorage.setItem('ifAdmin','1')
                 }
+                localStorage.setItem('token',res)//TODO
                 const expires = new Date()
                 expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14)
                 cookie.save(
@@ -37,7 +38,8 @@ const sendLoginForm = (that) => {
                         path: '/',
                         expires,
                         maxAge: 1000,
-                        domain: 'localhost',
+                        domain: 'nmid.manage.itrover.cn',
+                       //domain:'localhost',
                         secure: false,
                         httpOnly: false
                     }

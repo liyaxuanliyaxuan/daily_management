@@ -1,4 +1,5 @@
  const paintCanvas = (_this) => {
+    // document.getElementsByTagName('body')[0].style.background = '#fff'
     const canvas = _this.canvas.current;
     if (canvas && canvas.getContext) {
         let ctx = canvas.getContext("2d");

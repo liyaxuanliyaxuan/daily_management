@@ -30,6 +30,9 @@ class Login extends Component {
 
   
     }
+    componentWillUnmount(){
+        
+    }
     handleChange(name,e){
         let newState = {}
         newState[name] = e.target.value

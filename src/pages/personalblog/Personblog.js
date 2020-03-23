@@ -82,7 +82,8 @@ class Personbolg extends Component {
                                 backgroundImage: 'url(' + this.state.userimg + ')'
                             }}
                         ></div>
-<div className="personblog_upload" onClick={() => { document.querySelector("#submitblog").style.display = 'block' }}>我要上传</div>                        <div className="personblog_collect" onClick={this.myCollect.bind(this)}>我的收藏</div>
+<div className="personblog_upload" onClick={() => { document.querySelector("#submitblog").style.display = 'block' }}>我要上传</div>                    
+    <div className="personblog_collect" onClick={this.myCollect.bind(this)}>我的收藏</div>
                     </div>
                     <div className="personblog_right_container">
                         <div id="personblog_right">
@@ -230,6 +231,7 @@ class Personbolg extends Component {
             .catch(function (error) {
                 console.log(error)
             })
+            //document.querySelector('.personblog_collect').click();
 
 
     }

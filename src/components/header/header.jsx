@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 import { Link, useLocation, Redirect } from 'react-router-dom'
 
@@ -28,8 +29,8 @@ class Header extends Component {
         this.state = {
             path: this.props.path,
             ifAdmin: false,
-            ifLogin: ''//username
-
+            ifLogin: '',//username
+            imgUrl:''
         }
 
     }
@@ -37,7 +38,14 @@ class Header extends Component {
         this.state.ifLogin = cookie.load('ifLogin')
     }
     componentDidMount(){
+        const _this = this
        let ifAdmin = (this.state.ifLogin && sessionStorage.getItem('ifAdmin'))?true:false
+       let username = cookie.load('ifLogin')
+       this.$axios.get(`/user/getUserInfoByUnam?username=${username}`).then(res=>{
+           _this.setState({
+               imgUrl:res.data.upath
+           })
+       })
         this.setState({
             ifAdmin
         })
@@ -46,14 +54,16 @@ class Header extends Component {
     handleLogState() {
         if (this.state.ifLogin) {
             cookie.remove('ifLogin', { path: '/' })
+            
         } else {
 
 
         }
+        window.location.assign('/#/')
     }
 
     render() {
-        const { path, ifLogin, ifAdmin } = { ...this.state }
+        const { path, ifLogin, ifAdmin, imgUrl } = { ...this.state }
         const { fileNav } = { ...this.props }
         const mainNav = [
             {
@@ -80,10 +90,11 @@ class Header extends Component {
             return className;
         }
         return (
+           
             <div className="header">
                 <div className='header-content'>
                     <a className='logo' href=' '>
-                        <img width='120' height='36' src={require('../../static/head-nmid-logo.png')} alt="" /></a>
+                        <img width='120' height='36' src={ifLogin?imgUrl:require('../../static/head-nmid-logo.png')} alt="" /></a>
 
                     {
                         mainNav.map((navItem, index) => {
@@ -107,9 +118,9 @@ class Header extends Component {
                         <button
                             onClick={this.handleLogState.bind(this)}
                             className='exit-button'>
-                            <Link to={ifLogin ? '/' : '/'}>
+                            <a src=''>
                                 {ifLogin ? `退出` : `点击登录`}
-                            </Link>
+                            </a>
                         </button>
                     </span>
                 </div>
