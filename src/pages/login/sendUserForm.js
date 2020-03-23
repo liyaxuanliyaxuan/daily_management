@@ -5,11 +5,23 @@ const sendLoginForm = (that) => {
     let ifAdmin = false;
     const {username, password} = {...that.state}
     if(username === 'admin')ifAdmin = true;
-    let user = that.$qs.stringify({
-        password,
-        username
-    })
-    that.$axios.post(`/login?${user}`)
+    // let user = that.$qs.stringify({
+    //     password,
+    //     username
+    // })
+    const userData = JSON.stringify(
+        {
+            username,
+            password
+        }
+    )
+    // userData.append('username',username)
+    // userData.append('password',password)
+    that.$axios.post(`/login`,userData,
+    {
+        //transformRequest:data=>{return JSON.stringify(data)},
+       
+        headers: {'Content-Type': 'application/json'}})
         .then((res) => {
             console.log(res);
             if (res.code === 200) {
