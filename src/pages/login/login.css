@@ -93,7 +93,7 @@ canvas{
 }
 .pass-icon{
     display: inline-block;
-    background: url('./imgs//password-icon.png')no-repeat;
+    background: url('./imgs/password-icon.png')no-repeat;
     width:24px;
     height: 24px;
 

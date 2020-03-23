@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 
 import cookie from 'react-cookies'
 
-import './login.scss'
+import './login.css'
 import sendLoginForm from './sendUserForm'
 import paintCanvas from './paintCanvas'
 
