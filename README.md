@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
-###'npm install/cnpm install'
+###`npm install/cnpm install`
 安装相关依赖
 
 ### `npm run re-start`
@@ -21,6 +21,6 @@ You will also see any lint errors in the console.
 
 
 ### `npm run re-test`
-###在3000端口运行，若要在其他端口运行，请修改axios.js中的baseURL
+###`在3000端口运行，若要在其他端口运行，请修改axios.js中的baseURL`
 
 
