@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom'
 
 import { message} from 'antd'
-import axios from 'axios'
+
 import Header from '../../components/header/header'
 
 import Search from '../../components/search/search'

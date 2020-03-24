@@ -139,9 +139,6 @@ class AddModal extends Component {
 
     beforeUpload(file) {
 
-        // this.setState(state => ({
-        //     fileList: [...state.fileList, file],
-        // }))
 
         return false
         // return isJpgOrPng && isLt2M;

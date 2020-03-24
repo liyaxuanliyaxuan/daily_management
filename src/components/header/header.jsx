@@ -41,7 +41,7 @@ class Header extends Component {
         const _this = this
        let ifAdmin = (this.state.ifLogin && sessionStorage.getItem('ifAdmin'))?true:false
        let username = cookie.load('ifLogin')
-       this.$axios.get(`/user/getUserInfoByUnam?username=${username}`).then(res=>{
+       this.$axios.get(`/user/getUserInfoByUnam?username=admin`).then(res=>{
            _this.setState({
                imgUrl:res.data.upath
            })
@@ -54,7 +54,7 @@ class Header extends Component {
     handleLogState() {
         if (this.state.ifLogin) {
             cookie.remove('ifLogin', { path: '/' })
-            
+            localStorage.removeItem('token');
         } else {
 
 
@@ -94,7 +94,7 @@ class Header extends Component {
             <div className="header">
                 <div className='header-content'>
                     <a className='logo' href=' '>
-                        <img width='120' height='36' src={ifLogin?imgUrl:require('../../static/head-nmid-logo.png')} alt="" /></a>
+                        <img width='120' height='36' src={require('../../static/head-nmid-logo.png')} alt="" /></a>
 
                     {
                         mainNav.map((navItem, index) => {
@@ -111,7 +111,7 @@ class Header extends Component {
                     </span>
                     <span className='main-nav main-nav-login'>
                         <span className='usr-portrait'>
-                            <img className='usr-portrait-img' src={require('../../static/usr-por.png')} alt="" />
+                            <img className='usr-portrait-img' src={ifLogin?imgUrl:require('../../static/usr-por.png')} alt="" />
                             <img className={ifAdmin? 'usr-vip-icon':'usr-vip-icon-none'} src={require('../../static/vip.png')} alt=""/>
                             </span>
                         <span className='usr-name'>{ifLogin ? ifLogin : `游客`}</span>

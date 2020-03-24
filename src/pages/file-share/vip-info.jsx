@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+
 
 class VipInfo extends Component {
     constructor(props) {
@@ -8,14 +8,19 @@ class VipInfo extends Component {
         this.state = { 
            
             vipName:this.props.match.params.vipName,
-            VipInfoList:[]
+            vipInfoList:[]
          }
+         
     }
-    getRenderVipList = (path) =>{
+  
+    componentDidMount(){
+    const path = this.props.location.pathname
+    const getRenderVipList = ((path) =>{
 
         if(path.includes('search')){
             this.setState({
-                vipInfoList:JSON.parse(localStorage.getItem('vipSearch'))
+                vipInfoList:JSON.parse(localStorage.getItem('vipSearch')),
+                vipName:JSON.parse(localStorage.getItem('vipSearch'))[0].vnam
             })
         }else{
             const _this = this
@@ -33,25 +38,23 @@ class VipInfo extends Component {
         }
 
 
-    }
-    componentDidMount(){
-    const path = this.props.location.pathname
-     this.getRenderVipList(path)
+    })(path);
+   
 
     }
     render() { 
-        const { VipInfoList, vipName } = {...this.state}
+        const { vipInfoList, vipName } = {...this.state}
         return (<main className='vip-info'>
             <div className='vip-title'>
                 <i></i>
                 <div className='vip-img'>
                    {vipName}
                 </div>
-                <p className='vip-url'>网址：<a href=""></a></p>
+                <p className='vip-url'>网址<a href=""></a></p>
             </div>
             <div className='vip-info-list'>
                 {
-                    VipInfoList.map((item, index) =>{
+                    vipInfoList.map((item, index) =>{
                         return(
                             <div key={item.vid} className='vip-info-list-item'>
                                 <p className='vip-num'>账号：{item.vaccount}</p>

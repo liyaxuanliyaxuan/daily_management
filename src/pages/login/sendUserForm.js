@@ -4,7 +4,7 @@ import cookie from 'react-cookies'
 const sendLoginForm = (that) => {
     let ifAdmin = false;
     const {username, password} = {...that.state}
-    if(username === 'admin')ifAdmin = true;
+    if(username === 'admin') ifAdmin = true;
     // let user = that.$qs.stringify({
     //     password,
     //     username
@@ -26,9 +26,9 @@ const sendLoginForm = (that) => {
             console.log(res);
             if (res.code === 200) {
                 if(ifAdmin){
-                    window.sessionStorage.setItem('ifAdmin','1')
+                    window.sessionStorage.setItem('ifAdmin','1');
                 }
-                localStorage.setItem('token',res)//TODO
+                localStorage.setItem('token',res.data)//TODO
                 const expires = new Date()
                 expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14)
                 cookie.save(
@@ -46,14 +46,12 @@ const sendLoginForm = (that) => {
                 )
                 window.location.assign('/#/home')
     
-            } else if (res.code === 1001) {
-                alert(res.message)
             } else {
-                return
+               alert(res.message) 
             }
     
         }).catch((err) => {
             console.log(err);
         })
 }
-export default sendLoginForm
+export default sendLoginForm;

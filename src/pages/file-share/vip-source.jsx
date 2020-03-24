@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
-import { Modal } from 'antd'
-import axios from 'axios'
+
 import VipInfo from './vip-info'
 
 import Header from '../../components/header/header'
@@ -21,7 +20,8 @@ class VipList extends Component {
             vipModalVisible: false,
             vipList:[]
         }
-       
+       this.nameMap = [undefined,'xunlei','aiqiyi','tengxun','baiduwangpan',
+    'csdn','baiduwenku','xuntu','qiantuwang','others']
     }
     componentDidMount(){
         const _this = this
@@ -71,9 +71,9 @@ class VipList extends Component {
                     vipList.map((item, index) => {
                         return (
                             <div key={item.vtid + index} className='vip-list-item'>
-                                <Link to={'/vip-source/vip-info/' + item.vtname}>
+                                <Link to={'/vip-source/vip-info/' + this.nameMap[item.vtid]}>
                                     <div className='vip-list-img'>
-                                        <img className='vip-list-img-get' src={item.vtpath} alt="" />
+                                        <img className='vip-list-img-get' src={item.vtpath} alt={item.vtname} />
                                     </div>
                                 </Link>
                                 <p className='vip-list-name'>
@@ -112,8 +112,7 @@ class VipSource extends Component {
             </Route>
             <Switch>
                 <Route exact path='/vip-source' component={VipList}></Route>
-                <Route path='/vip-source/vip-info/:vipName' component={VipInfo}>
-                </Route>
+                <Route path='/vip-source/vip-info/:vipName' component={VipInfo}></Route>
                 <Route path='/vip-source/search/:vipName' component={VipInfo}></Route>
             </Switch>
 
