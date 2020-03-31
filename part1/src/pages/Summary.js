@@ -92,7 +92,7 @@ class Summary extends Component {
                         <p className="summary_submit_p1">在线提交</p>
                         <textarea className="pensonsummary" placeholder="      个人总结   ......"></textarea>
                         <textarea className="workplan" placeholder="      工作计划   ......"></textarea>
-                        <button className="summary_submit_btn1" onClick={this.changeWork.bind(this)}>更改</button>
+                        {/* <button className="summary_submit_btn1" onClick={this.changeWork.bind(this)}>更改</button> */}
                         <button className="summary_submit_btn2" onClick={this.submitWork.bind(this)}>提交</button>
                         <button className="summary_submit_btn3" onClick={this.deleteWork.bind(this)}>删除</button>
                     </div>
@@ -161,8 +161,37 @@ class Summary extends Component {
 
 
 
-    changeWork() {
-        /////////更改计划和总结
+    // changeWork() {
+    //     /////////更改计划和总结
+    //     let This = this
+    //     let sign = this.state.sign
+    //     sign++
+    //     if (nowid != "") {
+    //         axios.post("/user/updatePlanAndSummary", {
+    //             "id": nowid,
+    //             "summary": document.querySelector(".pensonsummary").value,
+    //             "plan": document.querySelector(".workplan").value,
+    //             "unam": this.state.username,
+    //         })
+    //             .then(function (response) {
+    //                 This.setState({
+    //                     sign: sign
+    //                 })
+    //                 console.log(response.data.data)
+    //                 console.log("修改成功")
+    //                 document.querySelector(".pensonsummary").value = ""
+    //                 document.querySelector(".workplan").value = ""
+    //                 alert("修改成功")
+    //             })
+    //             .catch(function (error) {
+    //                 console.log(error)
+    //                 alert(error)
+    //             })
+    //     }
+
+    // }
+
+    submitWork() {
         let This = this
         let sign = this.state.sign
         sign++
@@ -187,30 +216,25 @@ class Summary extends Component {
                     console.log(error)
                     alert(error)
                 })
+        } else {
+            axios.post("/user/updatePlanAndSummary", {
+                "summary": document.querySelector(".pensonsummary").value,
+                "plan": document.querySelector(".workplan").value,
+                "unam": this.state.username,
+            })
+                .then(function (response) {
+                    console.log(response.data.data)
+                    console.log("提交成功")
+                    alert('提交成功')
+                    document.querySelector(".pensonsummary").value = ""
+                    document.querySelector(".workplan").value = ""
+                    This.setState({})
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    alert(error)
+                })
         }
-
-    }
-
-    submitWork() {
-        let This = this
-        this.state.sign++
-        axios.post("/user/updatePlanAndSummary", {
-            "summary": document.querySelector(".pensonsummary").value,
-            "plan": document.querySelector(".workplan").value,
-            "unam": this.state.username,
-        })
-            .then(function (response) {
-                console.log(response.data.data)
-                console.log("提交成功")
-                alert('提交成功')
-                document.querySelector(".pensonsummary").value = ""
-                document.querySelector(".workplan").value = ""
-                This.setState({})
-            })
-            .catch(function (error) {
-                console.log(error)
-                alert(error)
-            })
     }
 
     deleteWork() {
@@ -226,8 +250,8 @@ class Summary extends Component {
                     while (This.state.dataid[i] != nowid && i < This.state.dataid.length && i < 100) {
                         i++
                     }
-                    mydata.splice(i,1)
-                    mydataid.splice(i,1)
+                    mydata.splice(i, 1)
+                    mydataid.splice(i, 1)
                     This.setState({
                         sign: sign,
                         data: mydata,

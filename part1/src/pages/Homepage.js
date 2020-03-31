@@ -522,6 +522,7 @@ class Homepage extends Component {
                 console.log("上传文件成功" + response.data)
                 //console.log(fid)
             })
+            
             .catch(function (error) {
                 console.log(error)
                 alert("上传文件出错")

@@ -6,6 +6,7 @@ img { border: none; }
 a { text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: none}
 button { border: none; cursor: pointer;}
+::-webkit-scrollbar {display:none}
 
 #pubilcblog_bg {
     height: 705px;
