@@ -88,9 +88,6 @@ button { border: none; cursor: pointer;}
     background-color: #1d91ff;
     margin-top: 13px;
 }
-#personword_left .personword_button7 {
-    border: 1px solid #a9e3dd;
-}
 #personword_right {
     position: absolute;
     top: 60px;
@@ -213,8 +210,9 @@ button { border: none; cursor: pointer;}
     top: 50%;
     margin-top: -200px;
     margin-left: -165px;
-    background-color: #e8e8e9;
+    background-color: #fff;
     border-radius: 10px;
+    border: 1px solid #c2c2c2;
 }
 .changeword_right {
     position: absolute;
@@ -232,7 +230,7 @@ button { border: none; cursor: pointer;}
     font-size: 18px;
     text-align: center;
     line-height: 36px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #c2c2c2;
 }
 .changeword_right ul{
     width: 100%;
@@ -275,7 +273,8 @@ button { border: none; cursor: pointer;}
     margin-left: 145px;
     margin-bottom: 20px;
     cursor: pointer;
-    z-index: 100;
+    background-color: #2996fe;
+    color: #fff;
 }
 .changeword_body img {
     position: absolute;

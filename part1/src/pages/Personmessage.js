@@ -129,7 +129,6 @@ class Personmessage extends Component {
                         <textarea className="personmessage_change_body_input11" type="text" value={this.state.title} onChange={this.personmessageChange11.bind(this)} />
                         <button className="personmessage_change_body_btn1" onClick={this.personmessagechangeBack.bind(this)}>返回</button>
                         <button className="personmessage_change_body_btn2" onClick={this.personmessageChange.bind(this)}>确定</button>
-
                     </div>
                 </div>
             </div>

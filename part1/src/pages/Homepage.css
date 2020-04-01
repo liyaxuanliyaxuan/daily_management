@@ -1,4 +1,4 @@
-/*css*/
+w/*css*/
 
 * { padding: 0; margin: 0; font-family: Adobe 黑体 Std; }
 li { list-style: none; }
@@ -244,7 +244,7 @@ button { border: none;}
     left: 62px;
     width: 892px;
     height: 100%;
-     overflow: hidden;  
+    overflow: hidden;  
 }
 .Homeword_warp{
     position: absolute;
@@ -312,8 +312,9 @@ button { border: none;}
     top: 50%;
     margin-top: -150px;
     margin-left: -150px;
-    background-color: #a2d1fc;
+    background-color: #ffff;
     border-radius: 10px;
+    border: 1px solid #e0e0e0;
 }
 .changepsw_body_p1 {
     position: absolute;
@@ -361,8 +362,10 @@ button { border: none;}
     line-height: 20px;
     left: 60px;
     top: 200px;
-    background-color: #1d91ff;
+    background-color: #ffffff;
     border-radius: 8px;
+    color: #c2c2c2;
+    border: 1px solid #c2c2c2;
 }
 .changepsw_body_btn1 {
     width: 70px;
@@ -373,6 +376,7 @@ button { border: none;}
     top: 200px;
     background-color: #1d91ff;
     border-radius: 8px;
+    color: #ffffff;
 }
 #addword {
     display: none;
@@ -392,16 +396,19 @@ button { border: none;}
     top: 50%;
     margin-top: -200px;
     margin-left: -350px;
-    background-color: #e8e8e9;
+    background-color: #ffff;
     border-radius: 10px;
+    border: 1px solid #c2c2c2;
 }
 .addword_left {
     position: relative;
     margin-top: 30px;
     margin-left: 20px;
     width: 300px;
-    height: 350px;
+    height: 356px;
     background-color: #fff;
+    border: 1px solid #c2c2c2;
+    overflow-x: hidden;
 }
 .addword_left_head {
     width: 100%;
@@ -447,8 +454,10 @@ button { border: none;}
     top: 30px;
     left: 335px;
     width: 350px;
-    height: 350px;
+    height: 356px;
     background-color: #fff;
+    border: 1px solid #c2c2c2;
+    overflow-x: hidden;
 }
 .addword_right_head {
     width: 100%;

@@ -136,10 +136,11 @@ button { border: none; cursor: pointer;}
 .pensonsummary, .workplan {
     width: 576px;
     height: 236px;
-    border: 2px solid #3ba0ff;
-    margin-left: 20px;
+    border: 1px solid #3ba0ff;
+    margin-left: 18px;
     margin-top: 9px;
     border-radius: 3px;
+    padding: 2px;
 }
 .summary_submit_p1 {
     display: block;
@@ -153,9 +154,9 @@ button { border: none; cursor: pointer;}
 }
 .summary_submit_btn3 {
     position: absolute;
-    border: 2px solid #1d91ff;
+    border: 1px solid #1d91ff;
     border-radius: 6px;
-    bottom: 60px;
+    bottom: 56px;
     right: 89px;
     width: 73px;
     height: 26px;
@@ -166,9 +167,9 @@ button { border: none; cursor: pointer;}
 }
 .summary_submit_btn2 {
     position: absolute;
-    border: 2px solid #1d91ff;
+    border: 1px solid #1d91ff;
     border-radius: 6px;
-    bottom: 60px;
+    bottom: 56px;
     right: 0px;
     width: 73px;
     height: 26px;

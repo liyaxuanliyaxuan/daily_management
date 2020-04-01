@@ -61,7 +61,7 @@ class Pubilcblog extends Component {
                 ""
             ],
             type: [
-                ""
+                "服务器"
             ],
             author: [
                 ""
@@ -148,7 +148,7 @@ class Pubilcblog extends Component {
                                             </div>
                                             <img className="pubilcblog_blog_logo2" src={this.state.islike[index] ? pubilcblog_zhan2 : pubilcblog_zhan1} onClick={this.dianZhan.bind(this, index)} />
                                             <img className="pubilcblog_blog_logo3" src={this.state.iscollection[index] ? pubilcblog_collect2 : pubilcblog_collect1} onClick={this.collect.bind(this, index)} />
-                                            <div className="pubilcblog_blog_logo4">{this.state.type[index]}</div>
+                                            <div className="pubilcblog_blog_logo4"><div><p>{this.state.type[index]}</p></div></div>
                                         </div>
                                     )
                                 })
