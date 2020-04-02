@@ -49,7 +49,10 @@ class Summary extends Component {
             ////////////////////////////
             mysummarylogo: [
                 mysummary_logo1, mysummary_logo2, mysummary_logo3, mysummary_logo4, mysummary_logo5
-            ]
+            ],
+            //////////////////////
+            summary: "啊啊啊啊啊啊啊啊",
+            plan: "啊啊啊啊啊啊啊啊"
         }
     }
     render() {
@@ -95,6 +98,22 @@ class Summary extends Component {
                         {/* <button className="summary_submit_btn1" onClick={this.changeWork.bind(this)}>更改</button> */}
                         <button className="summary_submit_btn2" onClick={this.submitWork.bind(this)}>提交</button>
                         <button className="summary_submit_btn3" onClick={this.deleteWork.bind(this)}>删除</button>
+                    </div>
+                    <div id="summary_message">
+                        <p className="summary_message_h1">个人总结</p>
+                        <p className="summary_message_p1">&nbsp;&nbsp;&nbsp;&nbsp;{}</p>
+                        <p className="summary_message_h2">工作计划</p>
+                        <p className="summary_message_p2">&nbsp;&nbsp;&nbsp;&nbsp;{}</p>
+                        <button className="summary_message_btn1" onClick={()=>{
+                            nowid = ""
+                            document.querySelector("#summary_message").style.display = "none"
+                            document.querySelector(".pensonsummary").value = ""//////////////////////////
+                            document.querySelector(".workplan").value = ""////////////////////////
+                        }}>新建</button> 
+                        <button className="summary_message_btn2" onClick={() => {
+                            document.querySelector("#summary_message").style.display = "none"
+                        }}>更改</button>
+                        <button className="summary_message_btn3" onClick={this.deleteWork.bind(this)}>删除</button>
                     </div>
                 </div>
             </div>
@@ -271,14 +290,23 @@ class Summary extends Component {
         /////////获取某一计划和总结的内容
         console.log(index)
         nowid = index;
+        // document.querySelector("#summary_message").style.display = "block"
+        // document.querySelector(".summary_message_p1").value = this.state.summary//////////////////////////
+        // document.querySelector(".summary_message_p2").value = this.state.plan////////////////////////
+        // document.querySelector(".pensonsummary").value = this.state.summary//////////////////////////
+        // document.querySelector(".workplan").value = this.state.plan////////////////////////
         axios.get("/user/" + index + "/getDetailPaS?username=" + Data)
             .then(function (response) {
                 //console.log(response.data.data)
+                document.querySelector("#summary_message").style.display = "block"
+                document.querySelector(".summary_message_p1").value = response.data.data.summary//////////////////////////
+                document.querySelector(".summary_message_p2").value = response.data.data.plan////////////////////////
                 document.querySelector(".pensonsummary").value = response.data.data.summary//////////////////////////
                 document.querySelector(".workplan").value = response.data.data.plan////////////////////////
             })
             .catch(function (error) {
                 console.log(error)
+                alert("服务器异常")
             })
 
     }

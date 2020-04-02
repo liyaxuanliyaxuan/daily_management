@@ -132,6 +132,7 @@ button { border: none; cursor: pointer;}
     top: 60px;
     left: 320px;
     background-color: #fff;
+    display: block;
 }
 .pensonsummary, .workplan {
     width: 576px;
@@ -196,4 +197,81 @@ button { border: none; cursor: pointer;}
     color: #b6b6b6;
     font-size: 12px;
     top: 14px;
+}
+#summary_message {
+    position: absolute;
+    width: 600px;
+    height: 635px;
+    top: 60px;
+    left: 320px;
+    background-color: #fff;
+    display: none;
+}
+.summary_message_btn3 {
+    position: absolute;
+    border: 1px solid #1d91ff;
+    border-radius: 6px;
+    bottom: 56px;
+    right: 89px;
+    width: 73px;
+    height: 26px;
+    background-color: #fff;
+    font-size: 14px;
+    text-align: center;
+    color: #1d91ff;
+}
+.summary_message_btn2 {
+    position: absolute;
+    border: 1px solid #1d91ff;
+    border-radius: 6px;
+    bottom: 56px;
+    right: 0px;
+    width: 73px;
+    height: 26px;
+    background-color: #1d91ff;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+.summary_message_btn1 {
+    position: absolute;
+    border: 1px solid #1d91ff;
+    border-radius: 6px;
+    bottom: 56px;
+    right: 180px;
+    width: 73px;
+    height: 26px;
+    background-color: #1d91ff;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+.summary_message_h1 {
+    display: block;
+    font-size: 18px;
+    color: #333333;
+    width: 151px;
+    height: 25px;
+    border-left: 8px solid #1d91ff;
+    margin-top: 16px;
+    padding-left: 5px;
+}
+.summary_message_h2 {
+    position: absolute;
+    top: 235px;
+    display: block;
+    font-size: 18px;
+    color: #333333;
+    width: 151px;
+    height: 25px;
+    border-left: 8px solid #1d91ff;
+    padding-left: 5px;
+}
+.summary_message_p1, .summary_message_p2 {
+    margin: 10px;
+    font-size: 14px;
+}
+.summary_message_p2 {
+    position: absolute;
+    top: 260px;
 }
