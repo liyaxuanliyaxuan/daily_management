@@ -41,8 +41,8 @@ class Header extends Component {
         const _this = this
        let ifAdmin = (this.state.ifLogin && sessionStorage.getItem('ifAdmin'))?true:false
        let username = cookie.load('ifLogin')
-       this.$axios.get(`/user/getUserInfoByUnam?username=admin`).then(res=>{
-           _this.setState({
+       this.$axios.get(`/user/getUserInfoByUnam?username=${username}`).then(res=>{
+           _this.setState({ 
                imgUrl:res.data.upath
            })
        })

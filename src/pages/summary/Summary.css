@@ -13,7 +13,7 @@ button { border: none; cursor: pointer;}
     position: absolute;
     left: 50%;
     margin-left: -510px;
-    background-image: url(../../img/summary_bg.png) ;
+   
 }
 #summary_header{
     position: absolute;
@@ -132,14 +132,16 @@ button { border: none; cursor: pointer;}
     top: 60px;
     left: 320px;
     background-color: #fff;
+    display: block;
 }
 .pensonsummary, .workplan {
     width: 576px;
     height: 236px;
-    border: 2px solid #3ba0ff;
-    margin-left: 20px;
+    border: 1px solid #3ba0ff;
+    margin-left: 18px;
     margin-top: 9px;
     border-radius: 3px;
+    padding: 2px;
 }
 .summary_submit_p1 {
     display: block;
@@ -151,24 +153,11 @@ button { border: none; cursor: pointer;}
     margin-top: 16px;
     padding-left: 5px;
 }
-.summary_submit_btn1 {
-    position: absolute;
-    border: 2px solid #1d91ff;
-    border-radius: 6px;
-    bottom: 60px;
-    right: 89px;
-    width: 73px;
-    height: 26px;
-    background-color: #fff;
-    font-size: 14px;
-    text-align: center;
-    color: #1d91ff;
-}
 .summary_submit_btn2 {
     position: absolute;
-    border: 2px solid #1d91ff;
+    border: 1px solid #1d91ff;
     border-radius: 6px;
-    bottom: 60px;
+    bottom: 56px;
     right: 0px;
     width: 73px;
     height: 26px;
@@ -197,9 +186,9 @@ button { border: none; cursor: pointer;}
 }
 .summary_submit_btn3 {
     position: absolute;
-    border: 2px solid #1d91ff;
+    border: 1px solid #1d91ff;
     border-radius: 6px;
-    bottom: 60px;
+    bottom: 56px;
     right: 178px;
     width: 73px;
     height: 26px;
@@ -207,4 +196,81 @@ button { border: none; cursor: pointer;}
     font-size: 14px;
     text-align: center;
     color: #fff;
+}
+#summary_message {
+    position: absolute;
+    width: 600px;
+    height: 635px;
+    top: 60px;
+    left: 320px;
+    background-color: #fff;
+    display: none;
+}
+.summary_message_btn3 {
+    position: absolute;
+    border: 1px solid #1d91ff;
+    border-radius: 6px;
+    bottom: 56px;
+    right: 89px;
+    width: 73px;
+    height: 26px;
+    background-color: #fff;
+    font-size: 14px;
+    text-align: center;
+    color: #1d91ff;
+}
+.summary_message_btn2 {
+    position: absolute;
+    border: 1px solid #1d91ff;
+    border-radius: 6px;
+    bottom: 56px;
+    right: 0px;
+    width: 73px;
+    height: 26px;
+    background-color: #1d91ff;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+.summary_message_btn1 {
+    position: absolute;
+    border: 1px solid #1d91ff;
+    border-radius: 6px;
+    bottom: 56px;
+    right: 180px;
+    width: 73px;
+    height: 26px;
+    background-color: #1d91ff;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+.summary_message_h1 {
+    display: block;
+    font-size: 18px;
+    color: #333333;
+    width: 151px;
+    height: 25px;
+    border-left: 8px solid #1d91ff;
+    margin-top: 16px;
+    padding-left: 5px;
+}
+.summary_message_h2 {
+    position: absolute;
+    top: 235px;
+    display: block;
+    font-size: 18px;
+    color: #333333;
+    width: 151px;
+    height: 25px;
+    border-left: 8px solid #1d91ff;
+    padding-left: 5px;
+}
+.summary_message_p1, .summary_message_p2 {
+    margin: 10px;
+    font-size: 14px;
+}
+.summary_message_p2 {
+    position: absolute;
+    top: 260px;
 }

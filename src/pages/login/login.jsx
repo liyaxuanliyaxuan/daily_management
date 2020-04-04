@@ -27,11 +27,18 @@ class Login extends Component {
   
         const that = this
         paintCanvas(that)
+        window.history.pushState(null, null, document.URL);
+        window.addEventListener('popstate',function () {
+            window.history.pushState(null, null, document.URL);
+        })
 
   
     }
     componentWillUnmount(){
-        
+        window.history.go(-1);
+        window.removeEventListener('popstate',function () {
+            window.history.pushState(null, null, document.URL);
+        })
     }
     handleChange(name,e){
         let newState = {}
@@ -66,13 +73,13 @@ class Login extends Component {
             <div className='login-page'>
         
             <img className='login-illus' src={require('./imgs/login-inluustration.png')} alt=""/>
-            <canvas width='588' height='714' ref={this.canvas}>
+            <canvas width='900' height='714' ref={this.canvas}>
             </canvas>
             
           <div className='content'>
               <div className='usr-content'>
                   <span className='login-icon'><img src={require('./imgs/login-logo.png')} alt=""/></span>
-                  <form className='usr-login-form' type='' action="http://localhost:3003" method='POST'>
+                  <form className='usr-login-form' type=''  method='POST'>
                       <span>
                           <i className='usr-icon'></i>
                           <input 

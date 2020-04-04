@@ -146,7 +146,7 @@ class Pubilcidea extends Component {
                                 }
                             </ul>
                         </div>
-                        <input className="pubilcidea_input" placeholder="请自由发表言乱" type="word" />
+                        <input className="pubilcidea_input" placeholder="请自由发表言论" type="word" />
                         <img className="pubilcidea_submit" src={pubilcidea_submit} onClick={this.submitChat.bind(this)} />
                     </div>
                 </div>

@@ -158,6 +158,7 @@ button { border: none; cursor: pointer;}
     height: 36px;
     border: 1px solid #4aa7ff;
     border-radius: 18px;
+    padding-left: 19px;
 }
 .pubilcidea_submit {
     position: absolute;
@@ -168,7 +169,6 @@ button { border: none; cursor: pointer;}
 .pubilcidea_input::-webkit-input-placeholder {
     color: #d6d6d6;
     font-size: 9px;
-    padding-left: 19px;
 }
 .pubilcidea_chat_hidden {
     position: absolute;

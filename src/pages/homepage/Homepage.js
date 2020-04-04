@@ -299,6 +299,9 @@ class Homepage extends Component {
                         </div>
                     </div>
                 </div>
+            <div className='bottom-bg'>
+
+            </div>
             </div>
         );
     }
@@ -377,6 +380,7 @@ class Homepage extends Component {
     }
 
     componentDidMount() {
+        
         let ifAdmin = (this.state.ifLogin && sessionStorage.getItem('ifAdmin'))?true:false
         const userNameData = cookie.load('ifLogin')
         this.setState({
@@ -400,6 +404,7 @@ class Homepage extends Component {
                 console.log(error)
             })
         )
+        
     }
 
 

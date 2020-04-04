@@ -12,7 +12,8 @@ class ResultInfoText extends Component {
         this.state = {
            
             currentPrj: {},
-            defaultPrj: {}
+            defaultPrj: {},
+            ifRender:true,
         }//通过项目名称获取项目的相关信息
         
     }
@@ -25,7 +26,10 @@ class ResultInfoText extends Component {
         
         //console.log(allPrj);
         this.setState({
-            defaultPrj:allPrj[0]
+           // defaultPrj:allPrj[0]
+           defaultPrj:`互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+           增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+           增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`
         })
         const prjName = this.props.match.params.prjName
         for(let prjItem of allPrj){
@@ -53,14 +57,25 @@ class ResultInfoText extends Component {
     render() {
         const {currentPrj, defaultPrj} = {...this.state}
         const renderPrj = Object.keys(currentPrj).length == 0?defaultPrj:currentPrj
+        let ifRender = (currentPrj.length == 0)
         return (
-           
+           ifRender?(
             <section className='info-txt'>
-                <p>项目名称：{renderPrj.pname}</p>
-                <p>开始时间：{renderPrj.beginTime}</p>
-                <p>截止日期：{renderPrj.closeTime}</p>
-                <p>负责人： {renderPrj.pRealname}</p>
-            </section>
+            <p>项目名称：{renderPrj.pname}</p>
+            <p>开始时间：{renderPrj.beginTime}</p>
+            <p>截止日期：{renderPrj.closeTime}</p>
+            <p>负责人： {renderPrj.pRealname}</p>
+        </section>
+          ):(
+            <section className='info-txt'>
+            {
+                `互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+                增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+                增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`
+            }
+        </section>
+           )
+         
         );
     }
 
@@ -70,7 +85,19 @@ class RewardsInfoText extends Component {
         super(props);
         this.state = {
             currentPrj:{},
-            defaultPrj:{}
+            defaultPrj:{},
+            defaultList:[
+                {pname:'微信展览助手',
+            pgame:`xx大赛一等奖`},
+            {pname:'微信展览助手',
+            pgame:`xx大赛一等奖`},
+            {pname:'微信展览助手',
+            pgame:`xx大赛一等奖`},
+            {pname:'微信展览助手',
+            pgame:`xx大赛一等奖`},
+            {pname:'微信展览助手',
+            pgame:`xx大赛一等奖`}
+            ]
         }//通过项目名称获取项目的相关信息
       
     }
@@ -113,11 +140,20 @@ class RewardsInfoText extends Component {
         
         return (
            
-            <section className='info-txt'>
-         {
-             renderPrj.introduction
-         }
-            </section>
+        //     <section className='info-txt'>
+        //  {
+        //      renderPrj.introduction
+        //  }
+        //     </section>
+        <section className='info-txt'>
+     {
+         this.state.defaultList.map((item)=>{
+             return(
+                 <p>{item.pname}<span className='space'></span>{item.pgame}</p>
+             )
+         })
+     }
+           </section>
         );
     }
 
@@ -288,6 +324,8 @@ class Navs extends Component {
 class Display extends Component {
     static defaultProps = {
         introduc:`互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+        增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+        增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
         增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`
     }
     constructor(props) {

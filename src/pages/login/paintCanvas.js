@@ -10,8 +10,8 @@
         ctx.shadowColor = "#b9ddef";
         ctx.strokeStyle = '#fff'
         ctx.beginPath();
-        ctx.moveTo(468, 0);
-        ctx.lineTo(572, 28);
+        ctx.moveTo(508, 0);
+        ctx.lineTo(712, 28);
         ctx.lineTo(0,28);
         ctx.lineTo(0, 0);
         ctx.fill();
@@ -21,19 +21,27 @@
    
         ctx.beginPath();
         
-        ctx.moveTo(572, 28);
-        ctx.lineTo(408, 714);
+        ctx.moveTo(712, 28);
+        ctx.lineTo(508, 714);
         ctx.lineTo(0, 714);
-        ctx.lineTo(0, 0);
+        ctx.lineTo(0, 28);
         ctx.fill();
    
 
         ctx.shadowColor = "#b9ddef";
         ctx.beginPath();
-        ctx.moveTo(468, 0);
-        ctx.lineTo(572, 28);
-        ctx.lineTo(408, 714);
+        ctx.moveTo(508, 0);
+        ctx.lineTo(712, 28);
+        ctx.lineTo(508, 714);
         ctx.stroke();
+
+        // ctx.fillStyle = '#fff'
+        // ctx.beginPath();
+        // ctx.moveTo(1300, 0);
+        // ctx.lineTo(1300, 30);
+        // ctx.lineTo(722, 30);
+        // ctx.lineTo(518, 0);
+        // ctx.fill();
 
 
     }

@@ -205,7 +205,8 @@ button { border: none; cursor: pointer;}
     top: 50%;
     margin-top: -150px;
     margin-left: -150px;
-    background-color: #eeeeee;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
     border-radius: 10px;
     overflow-y: auto;
 }
@@ -220,6 +221,7 @@ button { border: none; cursor: pointer;}
     height: 25px;
     margin-left: 50px;
     margin-top: 5px;
+    border: 1px solid #c2c2c2;
 }
 .personmessage_change_body .personmessage_change_body_input1_a, .personmessage_change_body .personmessage_change_body_input1_b {
    width: 15px;
@@ -232,15 +234,18 @@ button { border: none; cursor: pointer;}
     height: 70px;
     margin-left: 50px;
     margin-top: 5px;
+    border: 1px solid #c2c2c2;
 }
 .personmessage_change_body_btn1 {
     width: 70px;
     height: 30px;
-    background-color: #1d91ff;
+    background-color: #fff;
     margin-left: 80px;
     border-radius: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 1px solid #c2c2c2;
+    color: #c2c2c2;
 }
 .personmessage_change_body_btn2 {
     width: 70px;
@@ -250,4 +255,5 @@ button { border: none; cursor: pointer;}
     border-radius: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    color: #fff;
 }

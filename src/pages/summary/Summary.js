@@ -45,6 +45,8 @@ class Summary extends Component {
                 mysummary_logo1, mysummary_logo2, mysummary_logo3, mysummary_logo4, mysummary_logo5
             ],
             //////////////////////////////
+            summary: "啊啊啊啊啊啊啊啊",
+            plan: "啊啊啊啊啊啊啊啊",
             username: "",
             userimg: "",
             tel: "",
@@ -82,9 +84,25 @@ class Summary extends Component {
                         <p className="summary_submit_p1">在线提交</p>
                         <textarea className="pensonsummary" placeholder="      个人总结   ......"></textarea>
                         <textarea className="workplan" placeholder="      工作计划   ......"></textarea>
-                        <button className="summary_submit_btn1" onClick={this.changeWork.bind(this)}>更改</button>
+                         {/* <button className="summary_submit_btn1" onClick={this.changeWork.bind(this)}>更改</button> */}
                         <button className="summary_submit_btn2" onClick={this.submitWork.bind(this)}>提交</button>
                         <button className="summary_submit_btn3" onClick={this.deleteWork.bind(this)}>删除</button>
+                        <div id="summary_message">
+                        <p className="summary_message_h1">个人总结</p>
+                        <p className="summary_message_p1">&nbsp;&nbsp;&nbsp;&nbsp;{}</p>
+                        <p className="summary_message_h2">工作计划</p>
+                        <p className="summary_message_p2">&nbsp;&nbsp;&nbsp;&nbsp;{}</p>
+                        <button className="summary_message_btn1" onClick={()=>{
+                            nowid = ""
+                            document.querySelector("#summary_message").style.display = "none"
+                            document.querySelector(".pensonsummary").value = ""//////////////////////////
+                            document.querySelector(".workplan").value = ""////////////////////////
+                        }}>新建</button> 
+                        <button className="summary_message_btn2" onClick={() => {
+                            document.querySelector("#summary_message").style.display = "none"
+                        }}>更改</button>
+                        <button className="summary_message_btn3" onClick={this.deleteWork.bind(this)}>删除</button>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -187,24 +205,49 @@ class Summary extends Component {
 
     submitWork() {
         let This = this
-        this.state.sign++
-        this.$axios.post("/user/updatePlanAndSummary", {
-            "summary": document.querySelector(".pensonsummary").value,
-            "plan": document.querySelector(".workplan").value,
-            "unam": this.state.username,
-        })
-            .then(function (response) {
-                console.log(response.data)
-                console.log("提交成功")
-                alert('提交成功')
-                document.querySelector(".pensonsummary").value = ""
-                document.querySelector(".workplan").value = ""
-                This.setState({})
+        let sign = this.state.sign
+        sign++
+        if (nowid != "") {
+            axios.post("/user/updatePlanAndSummary", {
+                "id": nowid,
+                "summary": document.querySelector(".pensonsummary").value,
+                "plan": document.querySelector(".workplan").value,
+                "unam": this.state.username,
             })
-            .catch(function (error) {
-                console.log(error)
-                alert(error)
-            })
+                .then(function (response) {
+                    This.setState({
+                        sign: sign
+                    })
+                    console.log(response.data.data)
+                    console.log("修改成功")
+                    document.querySelector(".pensonsummary").value = ""
+                    document.querySelector(".workplan").value = ""
+                    alert("修改成功")
+                })
+                .catch(function (error) {    
+                     console.log(error)
+                    alert(error)
+                })
+            } else {
+                axios.post("/user/updatePlanAndSummary", {
+                    "summary": document.querySelector(".pensonsummary").value,
+                    "plan": document.querySelector(".workplan").value,
+                    "unam": this.state.username,
+                })
+                    .then(function (response) {
+                        console.log(response.data.data)
+                        console.log("提交成功")
+                        alert('提交成功')
+                        document.querySelector(".pensonsummary").value = ""
+                        document.querySelector(".workplan").value = ""
+                        This.setState({})
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                        alert(error)
+                    })
+            }
+        
     }
 
     deleteWork() {
@@ -245,11 +288,15 @@ class Summary extends Component {
         this.$axios.get("/user/" + index + "/getDetailPaS?username=" + _this.state.userNameData)
             .then(function (response) {
                 //console.log(response.data.data)
+                document.querySelector("#summary_message").style.display = "block"
+                document.querySelector(".summary_message_p1").value = response.data.data.summary//////////////////////////
+                document.querySelector(".summary_message_p2").value = response.data.data.plan////////////////////////
                 document.querySelector(".pensonsummary").value = response.data.summary//////////////////////////
                 document.querySelector(".workplan").value = response.data.plan////////////////////////
             })
             .catch(function (error) {
                 console.log(error)
+                alert("服务器异常")
             })
 
     }

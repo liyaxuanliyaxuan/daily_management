@@ -7,7 +7,7 @@ a { text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: none}
 button { border: none;}
 
-
+::-webkit-scrollbar {display:none}
 #Homepage_bg {
     height: 580px;
     width: 1020px;
@@ -345,7 +345,8 @@ button { border: none;}
     top: 50%;
     margin-top: -150px;
     margin-left: -150px;
-    background-color: #a2d1fc;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
     border-radius: 10px;
 }
 .changepsw_body_p1 {
@@ -394,8 +395,10 @@ button { border: none;}
     line-height: 20px;
     left: 60px;
     top: 200px;
-    background-color: #1d91ff;
+    background-color: #ffffff;
     border-radius: 8px;
+    color: #c2c2c2;
+    border: 1px solid #c2c2c2;
 }
 .changepsw_body_btn1 {
     width: 70px;
@@ -406,6 +409,7 @@ button { border: none;}
     top: 200px;
     background-color: #1d91ff;
     border-radius: 8px;
+    color: #ffffff;
 }
 #addword {
     display: none;
@@ -425,16 +429,20 @@ button { border: none;}
     top: 50%;
     margin-top: -200px;
     margin-left: -350px;
-    background-color: #e8e8e9;
+    background-color: #ffffff;
     border-radius: 10px;
+    border: 1px solid #c2c2c2;
 }
 .addword_left {
     position: relative;
     margin-top: 30px;
     margin-left: 20px;
     width: 300px;
-    height: 350px;
+    height: 356px;
     background-color: #fff;
+    border: 1px solid #c2c2c2;
+    overflow-x: hidden;
+ 
 }
 .addword_left_head {
     width: 100%;
@@ -479,7 +487,7 @@ button { border: none;}
     position: absolute;
     top: 30px;
     left: 335px;
-    width: 350px;
+    width: 35px;
     height: 350px;
     background-color: #fff;
 }
@@ -541,4 +549,11 @@ button { border: none;}
     top: 6px;
     right: 20px;
     cursor: pointer;
+}
+.bottom-bg{
+    width: 1300px;
+    height: 142px;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
 }

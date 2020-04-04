@@ -6,7 +6,7 @@ import {Component} from 'react'
 //Axios.defaults.baseURL = 'http://localhost:3000/api'
 Axios.defaults.baseURL = 'https://nmid.manage.itrover.cn/api'
 if(window.localStorage.getItem('token')){
-  Axios.defaults.headers.common['Authorization'] =  window.localStorage.getItem('token')
+  Axios.defaults.headers.common['token'] =  window.localStorage.getItem('token')
 }
 
 
@@ -24,3 +24,5 @@ Axios.interceptors.response.use(function (response) {
       return Promise.reject(error);
     }  
   });
+
+  export default Axios;

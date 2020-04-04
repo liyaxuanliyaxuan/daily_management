@@ -82,9 +82,9 @@ class Personmessage extends Component {
                         <p className="personmessage_change_body_p2">学院：</p>
                         <input className="personmessage_change_body_input2" type="text" value={this.state.school} onChange={this.personmessageChange2.bind(this)} />
                         <p className="personmessage_change_body_p3">专业：</p>
-                        <input className="personmessage_change_body_input3" type="text" value={this.state.major} onChange={this.personmessageChange3.bind(this)} placeholder="请输入生日入1999.9.9"/>
+                        <input className="personmessage_change_body_input3" type="text" value={this.state.major} onChange={this.personmessageChange3.bind(this)} />
                         <p className="personmessage_change_body_p4">生日：</p>
-                        <input className="personmessage_change_body_input4" type="text" value={this.state.birthday} onChange={this.personmessageChange4.bind(this)} />
+                        <input className="personmessage_change_body_input4" type="text" value={this.state.birthday} onChange={this.personmessageChange4.bind(this)} placeholder="请输入生日入1999.9.9"/>
                         <p className="personmessage_change_body_p5">加入时间：</p>
                         <input className="personmessage_change_body_input5" type="text" value={this.state.jointime} onChange={this.personmessageChange5.bind(this)} />
                         <p className="personmessage_change_body_p6">电话：</p>

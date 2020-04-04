@@ -1,5 +1,6 @@
 //表单验证
 import cookie from 'react-cookies'
+import Axios from '../../axios'
 //发送请求
 const sendLoginForm = (that) => {
     let ifAdmin = false;
@@ -44,6 +45,7 @@ const sendLoginForm = (that) => {
                         httpOnly: false
                     }
                 )
+                Axios.defaults.headers.common['token'] =  window.localStorage.getItem('token')
                 window.location.assign('/#/home')
     
             } else {

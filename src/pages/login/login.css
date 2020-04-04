@@ -2,8 +2,9 @@ img.login-illus{
 position: absolute;
     z-index: 1000;
     top: 5rem;
-    left:5.25rem;
+    left:12.25rem;
 }
+
 div.content{
     position: absolute;
     display: inline-block;
@@ -16,6 +17,7 @@ div.content{
     box-sizing: content-box;
     box-shadow: 4px 4px 8px 12px #dfecf4;
     z-index: 10;
+    background: #ffffff;
    
    
 }
@@ -97,4 +99,9 @@ canvas{
     width:24px;
     height: 24px;
 
+}
+.login-page{
+    width: 1300px;
+    height: 720px;
+    background: #ffffff;
 }
