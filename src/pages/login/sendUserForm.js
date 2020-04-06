@@ -3,9 +3,9 @@ import cookie from 'react-cookies'
 import Axios from '../../axios'
 //发送请求
 const sendLoginForm = (that) => {
-    let ifAdmin = false;
+    //let ifAdmin = false;
     const {username, password} = {...that.state}
-    if(username === 'admin') ifAdmin = true;
+    
     // let user = that.$qs.stringify({
     //     password,
     //     username
@@ -18,6 +18,7 @@ const sendLoginForm = (that) => {
     )
     // userData.append('username',username)
     // userData.append('password',password)
+   //let userName;
     that.$axios.post(`/login`,userData,
     {
         //transformRequest:data=>{return JSON.stringify(data)},
@@ -25,11 +26,15 @@ const sendLoginForm = (that) => {
         headers: {'Content-Type': 'application/json'}})
         .then((res) => {
             console.log(res);
-            if (res.code === 200) {
+            if (res.code === 200) { 
+                //userName = that.state.username
+                if(username === 'admin')  //根据名字判断是否是管理员身份
                 if(ifAdmin){
                     window.sessionStorage.setItem('ifAdmin','1');
                 }
                 localStorage.setItem('token',res.data)//TODO
+               
+            
                 const expires = new Date()
                 expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14)
                 cookie.save(
@@ -39,14 +44,14 @@ const sendLoginForm = (that) => {
                         path: '/',
                         expires,
                         maxAge: 1000,
-                        domain: 'nmid.manage.itrover.cn',
-                       //domain:'localhost',
+                       // domain: 'nmid.manage.itrover.cn',
+                       domain:'localhost',
                         secure: false,
                         httpOnly: false
                     }
                 )
                 Axios.defaults.headers.common['token'] =  window.localStorage.getItem('token')
-                window.location.assign('/#/home')
+                //window.location.assign('/#/home')
     
             } else {
                alert(res.message) 
@@ -55,5 +60,6 @@ const sendLoginForm = (that) => {
         }).catch((err) => {
             console.log(err);
         })
+    
 }
 export default sendLoginForm;

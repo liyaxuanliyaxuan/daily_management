@@ -217,7 +217,7 @@ class Pubilcblog extends Component {
 
     componentDidMount() {
         let This = this
-        const userNameData = cookie.load('ifLogin')
+        const userNameData = localStorage.getItem('userName')
         this.setState({
             userNameData
         });
@@ -362,7 +362,7 @@ class Pubilcblog extends Component {
         e.target.style.backgroundColor = "#1d91ff"
         await this.$axios.get("/blogs?name=" + This.state.userNameData)
             .then(function (response) {
-                if (response.data.data.length == 0) {
+                if (response.data.length == 0) {
                     // This.setState({
 
                     // })

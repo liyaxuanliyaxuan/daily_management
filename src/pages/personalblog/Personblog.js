@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Personblog.css'
 import axios from 'axios';
-import cookie from 'react-cookies'
 
 import personblog_zhan1 from '../../img/personblog_zhan1.png'
 import personblog_zhan2 from '../../img/personblog_zhan2.png'
@@ -149,7 +148,7 @@ class Personbolg extends Component {
 
     componentDidMount() {
         let This = this
-        const userNameData = cookie.load('ifLogin')
+        const userNameData = localStorage.getItem('userName')
         this.setState({
             userNameData
         });

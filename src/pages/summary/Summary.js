@@ -53,10 +53,13 @@ class Summary extends Component {
             qq: "",
             weibo: "",
             e_mail: "",
+            currentSum:'',
+            currentPlan:''
             ////////////////////////////
         }
     }
     render() {
+        const { currentPlan, currentSum} = {...this.state}
         return (
             <div>
                 <div id="summary_bg">
@@ -89,9 +92,9 @@ class Summary extends Component {
                         <button className="summary_submit_btn3" onClick={this.deleteWork.bind(this)}>删除</button>
                         <div id="summary_message">
                         <p className="summary_message_h1">个人总结</p>
-                        <p className="summary_message_p1">&nbsp;&nbsp;&nbsp;&nbsp;{}</p>
+                        <p className="summary_message_p1">&nbsp;&nbsp;&nbsp;&nbsp;{currentSum}</p>
                         <p className="summary_message_h2">工作计划</p>
-                        <p className="summary_message_p2">&nbsp;&nbsp;&nbsp;&nbsp;{}</p>
+                        <p className="summary_message_p2">&nbsp;&nbsp;&nbsp;&nbsp;{currentPlan}</p>
                         <button className="summary_message_btn1" onClick={()=>{
                             nowid = ""
                             document.querySelector("#summary_message").style.display = "none"
@@ -117,7 +120,7 @@ class Summary extends Component {
 
     componentDidMount() {
         let This = this
-        const userNameData = cookie.load('ifLogin')
+        const userNameData = localStorage.getItem('userName')
         this.setState({
             userNameData
         });
@@ -287,10 +290,13 @@ class Summary extends Component {
         const _this = this
         this.$axios.get("/user/" + index + "/getDetailPaS?username=" + _this.state.userNameData)
             .then(function (response) {
-                //console.log(response.data.data)
+                
                 document.querySelector("#summary_message").style.display = "block"
-                document.querySelector(".summary_message_p1").value = response.data.data.summary//////////////////////////
-                document.querySelector(".summary_message_p2").value = response.data.data.plan////////////////////////
+               // document.getElementsByClassName('summary_message_p1')[0].value = response.data.summary
+               _this.setState({
+                   currentPlan:response.data.plan,
+                   currentSum: response.data.summary
+               })
                 document.querySelector(".pensonsummary").value = response.data.summary//////////////////////////
                 document.querySelector(".workplan").value = response.data.plan////////////////////////
             })

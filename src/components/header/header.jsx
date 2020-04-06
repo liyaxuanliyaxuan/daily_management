@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
-import { Link, useLocation, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import cookie from 'react-cookies'
+import { connect } from 'react-redux'
 
 import './header.scss'
+
+import { checkAdmin, setUser, setImg } from '../../actions/logger'
 
 
 
@@ -22,49 +24,56 @@ const FileDrop = (props) => {
 }
 
 
-class Header extends Component {
+class Header_ extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             path: this.props.path,
-            ifAdmin: false,
-            ifLogin: '',//username
-            imgUrl:''
         }
 
     }
     componentWillMount() {
-        this.state.ifLogin = cookie.load('ifLogin')
+
     }
-    componentDidMount(){
-        const _this = this
-       let ifAdmin = (this.state.ifLogin && sessionStorage.getItem('ifAdmin'))?true:false
-       let username = cookie.load('ifLogin')
-       this.$axios.get(`/user/getUserInfoByUnam?username=${username}`).then(res=>{
-           _this.setState({ 
-               imgUrl:res.data.upath
-           })
-       })
-        this.setState({
-            ifAdmin
-        })
+    componentWillReceiveProps(nextProps) {
+
+
+    }
+    componentDidMount() {
+        const { ifAdmin, userName, userImg, setImg } = { ...this.props }
+    
+        //let username = localStorage.getItem('userName')
+        if (userImg) {
+
+        } else {
+            this.$axios.get(`/user/getUserInfoByUnam?username=${userName}`)
+            .then(res => {
+                setImg(res.data.upath)
+            })
+        }
+
+
 
     }
     handleLogState() {
-        if (this.state.ifLogin) {
-            cookie.remove('ifLogin', { path: '/' })
+        const { setUser, checkAdmin, userName } = { ...this.props }
+        if (userName) {
+            //已登录状态-》登出状态
+          
+
+            localStorage.removeItem('userName')
+            localStorage.removeItem('ifAdmin')
             localStorage.removeItem('token');
         } else {
 
-
         }
-        window.location.assign('/#/')
+        window.location.assign('')
     }
 
     render() {
-        const { path, ifLogin, ifAdmin, imgUrl } = { ...this.state }
-        const { fileNav } = { ...this.props }
+        const { path} = { ...this.state }
+        const { ifAdmin, userName, userImg } = { ...this.props }
         const mainNav = [
             {
                 title: '个人主页',
@@ -90,7 +99,7 @@ class Header extends Component {
             return className;
         }
         return (
-           
+
             <div className="header">
                 <div className='header-content'>
                     <a className='logo' href=' '>
@@ -111,15 +120,15 @@ class Header extends Component {
                     </span>
                     <span className='main-nav main-nav-login'>
                         <span className='usr-portrait'>
-                            <img className='usr-portrait-img' src={ifLogin?imgUrl:require('../../static/usr-por.png')} alt="" />
-                            <img className={ifAdmin? 'usr-vip-icon':'usr-vip-icon-none'} src={require('../../static/vip.png')} alt=""/>
-                            </span>
-                        <span className='usr-name'>{ifLogin ? ifLogin : `游客`}</span>
+                            <img className='usr-portrait-img' src={userName ? userImg : require('../../static/usr-por.png')} alt="" />
+                            <img className={ifAdmin ? 'usr-vip-icon' : 'usr-vip-icon-none'} src={require('../../static/vip.png')} alt="" />
+                        </span>
+                        <span className='usr-name'>{userName ? userName : `游客`}</span>
                         <button
                             onClick={this.handleLogState.bind(this)}
                             className='exit-button'>
                             <a src=''>
-                                {ifLogin ? `退出` : `点击登录`}
+                                {userName ? `退出` : `点击登录`}
                             </a>
                         </button>
                     </span>
@@ -130,5 +139,24 @@ class Header extends Component {
         );
     }
 }
+
+const Header = connect(({ logger }) => {
+    return {
+        ifAdmin: logger.ifAdmin,
+        userName: logger.userName,
+        userImg: logger.userImg
+    }
+
+}, (dispatch) => ({
+    checkAdmin(ifAdmin) {
+        dispatch(checkAdmin(ifAdmin))
+    },
+    setUser(name) {
+        dispatch(setUser(name))
+    },
+    setImg(url) {
+        dispatch(setImg(url))
+    }
+}))(Header_)
 
 export default Header;

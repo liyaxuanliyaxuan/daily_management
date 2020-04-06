@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../components/header/header'
 
-import axios from 'axios';
-import { Switch, Route, Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 import './display.scss'
 
@@ -12,28 +11,23 @@ class ResultInfoText extends Component {
         this.state = {
            
             currentPrj: {},
-            defaultPrj: {},
-            ifRender:true,
-        }//通过项目名称获取项目的相关信息
+            defaultPrj: `互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+            增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+            增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`,
+           
+        }//通过项目id获取项目的相关信息
         
     }
     componentDidMount(){
-        
-        let allPrj
+        const pid = this.props.match.params.pid;
+        let allPrj;
         if(localStorage.getItem('ing')){
          allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]   
         }
         
-        //console.log(allPrj);
-        this.setState({
-           // defaultPrj:allPrj[0]
-           defaultPrj:`互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
-           增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
-           增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`
-        })
-        const prjName = this.props.match.params.prjName
+        
         for(let prjItem of allPrj){
-            if(prjName === prjItem.pname){
+            if(pid == prjItem.pid){
                 this.setState({
                     currentPrj: prjItem
                 })
@@ -43,9 +37,9 @@ class ResultInfoText extends Component {
     }
     componentWillReceiveProps(nextProps){
         const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
-        const prjName = nextProps.match.params.prjName
+        const pid = nextProps.match.params.pid
         for(let prjItem of allPrj){
-            if(prjName === prjItem.pname){
+            if(pid == prjItem.pid){
                 this.setState({
                     currentPrj: prjItem
                 })
@@ -56,15 +50,14 @@ class ResultInfoText extends Component {
 
     render() {
         const {currentPrj, defaultPrj} = {...this.state}
-        const renderPrj = Object.keys(currentPrj).length == 0?defaultPrj:currentPrj
-        let ifRender = (currentPrj.length == 0)
+        const ifRender = this.props.match.params.pid
         return (
            ifRender?(
             <section className='info-txt'>
-            <p>项目名称：{renderPrj.pname}</p>
-            <p>开始时间：{renderPrj.beginTime}</p>
-            <p>截止日期：{renderPrj.closeTime}</p>
-            <p>负责人： {renderPrj.pRealname}</p>
+            <p>项目名称：{currentPrj.pname}</p>
+            <p>开始时间：{currentPrj.beginTime}</p>
+            <p>截止日期：{currentPrj.closeTime}</p>
+            <p>负责人： {currentPrj.pRealname}</p>
         </section>
           ):(
             <section className='info-txt'>
@@ -85,9 +78,8 @@ class RewardsInfoText extends Component {
         super(props);
         this.state = {
             currentPrj:{},
-            defaultPrj:{},
             defaultList:[
-                {pname:'微信展览助手',
+            {pname:'微信展览助手',
             pgame:`xx大赛一等奖`},
             {pname:'微信展览助手',
             pgame:`xx大赛一等奖`},
@@ -98,22 +90,19 @@ class RewardsInfoText extends Component {
             {pname:'微信展览助手',
             pgame:`xx大赛一等奖`}
             ]
-        }//通过项目名称获取项目的相关信息
+        }
       
     }
     componentDidMount(){
+        const pid = this.props.match.params.pid;
         let allPrj;
         if(localStorage.getItem('ing')){
             allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
-            console.log(allPrj);
         }
      
-        const prjName = this.props.match.params.prjName
-        this.setState({
-            defaultPrj:allPrj[0]
-        })
+ 
         for(let prjItem of allPrj){
-            if(prjName === prjItem.pname){
+            if(pid == prjItem.pid){
                 this.setState({
                     currentPrj: prjItem
                 })
@@ -123,38 +112,38 @@ class RewardsInfoText extends Component {
     }
     componentWillReceiveProps(nextProps){
         const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
-        const prjName = nextProps.match.params.prjName
+        const pid = nextProps.match.params.pid
         for(let prjItem of allPrj){
-            if(prjName === prjItem.pname){
+            if(pid == prjItem.pid){
                 this.setState({
                     currentPrj: prjItem
                 })
             }
-
         }
     }
 
     render() { 
-        const {currentPrj, defaultPrj} = {...this.state}
-        const renderPrj = Object.keys(currentPrj).length == 0?defaultPrj:currentPrj
-        
-        return (
-           
-        //     <section className='info-txt'>
-        //  {
-        //      renderPrj.introduction
-        //  }
-        //     </section>
-        <section className='info-txt'>
-     {
-         this.state.defaultList.map((item)=>{
-             return(
-                 <p>{item.pname}<span className='space'></span>{item.pgame}</p>
-             )
-         })
-     }
-           </section>
-        );
+        const {currentPrj} = {...this.state}
+        const ifRender = this.props.match.params.pid
+        return(
+            ifRender?(   
+                <section className='info-txt'>
+        {
+            currentPrj.introduction
+        }
+           </section>):(
+                <section className='info-txt'>
+                {
+                    this.state.defaultList.map((item,index)=>{
+                        return(
+                            <p key={item.index }>{item.pname}<span className='space'></span>{item.pgame}</p>
+                        )
+                    })
+                }
+                      </section>
+            )
+        )
+
     }
 
 }
@@ -175,7 +164,7 @@ class PrjDetail extends Component {
                         <h1>相关成果</h1>
                     </div>
 
-                    <Route path={['/display/:prjName','/display']}
+                    <Route path={['/display/:pid','/display']}
                      component={ResultInfoText}>
 
                     </Route>
@@ -187,7 +176,7 @@ class PrjDetail extends Component {
                         <h1>相关奖项</h1>
                     </div>
 
-                    <Route path={['/display/:prjName','/display']} 
+                    <Route path={['/display/:pid','/display']} 
                     component={RewardsInfoText}>
 
                     </Route>
@@ -202,7 +191,7 @@ class Navs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPrjName:'',
+            currentPrjId:'',
             ifSeeMoreIng: false,
             ifSeeMoreEnd: false,
             studyingPrj:[],
@@ -219,7 +208,7 @@ class Navs extends Component {
                 studyingPrj: res.data
             })
             localStorage.setItem('ing',JSON.stringify(res.data))
-            // console.log(JSON.parse(localStorage.getItem('ing')));
+           
         }).catch((err)=>{
             console.log(err);
         })
@@ -249,8 +238,8 @@ class Navs extends Component {
     render() {
     
         const { endPrj, studyingPrj, ifSeeMoreEnd, ifSeeMoreIng } = {...this.state}
-        const renderIngPrj = ifSeeMoreIng? studyingPrj:studyingPrj.slice(0,1)
-        const renderEndPrj = ifSeeMoreEnd? endPrj:endPrj.slice(0,1)  
+        const renderIngPrj = ifSeeMoreIng? studyingPrj:studyingPrj.slice(0,3)
+        const renderEndPrj = ifSeeMoreEnd? endPrj:endPrj.slice(0,3)  
         return (
             <div className='navs-left'>
                 <nav className='studying-prj'>
@@ -266,11 +255,11 @@ class Navs extends Component {
                                 return (
                                 <li onClick={()=>{this.setState({
 
-                                    currentPrjName: item.pname
+                                    currentPrjId: item.pid
                                 })}} 
-                                className={ this.state.currentPrjName===item.pname?'studying-prj-list-item--active':'studying-prj-list-item'}
+                                className={ this.state.currentPrjId===item.pid?'studying-prj-list-item--active':'studying-prj-list-item'}
                                  key={index}>
-                                        <Link className='studying-prj-list-item-name' to={'/display/' + item.pname}>{item.pname}</Link>
+                                        <Link className='studying-prj-list-item-name' to={'/display/' + item.pid}>{item.pname}</Link>
                                         <i className='see-info'>></i>
                                     </li>
                                 )
@@ -295,11 +284,11 @@ class Navs extends Component {
                                     <li key={index} 
                                     onClick={()=>{
                                         this.setState({
-                                            currentPrjName: item.pname
+                                            currentPrjId: item.pid
                                         })
                                     }}
-                                    className={this.state.currentPrjName===item.pname?'end-prj-list-item--active':'end-prj-list-item'}>
-                                        <Link className='end-prj-list-item-name' to={'/display/' + item.pname}>{item.pname}</Link>
+                                    className={this.state.currentPrjId===item.pid?'end-prj-list-item--active':'end-prj-list-item'}>
+                                        <Link className='end-prj-list-item-name' to={'/display/' + item.pid}>{item.pname}</Link>
                                         <i className='see-info'>></i>
                                     </li>
                                 )

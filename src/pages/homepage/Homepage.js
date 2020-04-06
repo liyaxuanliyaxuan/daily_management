@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Homepage.css'
 
-import cookie from 'react-cookies'
 import homeword_logo1 from '../../img/homeword_logo1.png'
 import homeword_logo2 from '../../img/homeword_logo2.png'
 import homeword_logo3 from '../../img/homeword_logo3.png'
@@ -13,8 +12,7 @@ import Header from '../../components/header/header'
 
 
 var a = 0;
-///////////////////////////////////////////////////////////////////////////
-////↓↓↓用户名(username),不是真实名字(realname),字符型
+
 
 /*
     说明：
@@ -69,8 +67,8 @@ class Homepage extends Component {
             pid:[
 
             ],
-            ifAdmin:false,
-            ifLogin: ''//username
+            ifAdmin: false,
+            ifLogin: localStorage.getItem('userName')
         }
     }
     render() {
@@ -319,35 +317,6 @@ class Homepage extends Component {
         }
     }
 
-    // progressStylechangeimg1(index, e) {
-    //     //e.style.backgroundImage = "url(" + require('../img/homepage_bg.png') + ")"
-    // }
-    // progressStylechangediv2(index, e) {
-    //     let b = this.state.porgress[index]
-    //     if (b >= 0 && b <= 0.3) {
-    //         e.style.backgroundColor = "#ffd100"
-    //         e.style.width = b * 180 + 'px'
-    //     } else if (b > 0.3 && b <= 0.6) {
-    //         e.style.backgroundColor = "#f0842d"
-    //         e.style.width = b * 180 + 'px'
-    //     } else {
-    //         e.style.backgroundColor = "#f36868"
-    //         e.style.width = b * 180 + 'px'
-    //     }
-    // }
-    // progressStylechangeimg2(index, e) {
-    //     let b = this.state.porgress[index]
-    //     if (b >= 0 && b <= 0.3) {
-    //         e.src = homeword_logo1
-    //         e.style.left = this.state.porgress[index] * 180 + 'px'
-    //     } else if (b > 0.3 && b <= 0.6) {
-    //         e.src = homeword_logo2
-    //         e.style.left = this.state.porgress[index] * 180 + 'px'
-    //     } else {
-    //         e.src = homeword_logo3
-    //         e.style.left = this.state.porgress[index] * 180 - 10 + 'px'
-    //     }
-    // }
 
     homewordBack() {
         document.querySelector("#Homeword_bg").style.display = "none"
@@ -376,13 +345,13 @@ class Homepage extends Component {
     }
     /////////////////////////////////////////交互
     componentWillMount(){
-        this.state.ifLogin = cookie.load('ifLogin')
+      
     }
 
     componentDidMount() {
         
-        let ifAdmin = (this.state.ifLogin && sessionStorage.getItem('ifAdmin'))?true:false
-        const userNameData = cookie.load('ifLogin')
+        let ifAdmin = (this.state.ifLogin && localStorage.getItem('ifAdmin'))?true:false
+        const userNameData = localStorage.getItem('userName')
         this.setState({
             ifAdmin,
             userNameData

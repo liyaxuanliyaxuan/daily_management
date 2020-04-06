@@ -17,6 +17,13 @@ Axios.interceptors.response.use(function (response) {
     return response.data;//只获取data数据
   }, function (error) {
     if(error.response){
+      if(error.response.status == 500){
+        if(error.response.message == 'token失效，请重新登录'){
+          alert(error.response.message)
+          window.location.assign('/#/')
+        
+        }
+      }
       switch (error.response.status){
         case 401:
           window.location.assign('/#/')

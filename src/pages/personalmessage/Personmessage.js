@@ -188,7 +188,7 @@ class Personmessage extends Component {
 
     componentDidMount() {
         let This = this
-        const userNameData = cookie.load('ifLogin')
+        const userNameData = localStorage.getItem('userName')
         this.setState({
             userNameData
         });

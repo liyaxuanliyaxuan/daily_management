@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Modal } from 'antd'
+
+import { connect } from 'react-redux'
+import { add } from '../../actions/counter'
 
 import Header from '../../components/header/header'
 import Search from '../../components/search/search'
@@ -162,7 +164,8 @@ class FileList extends Component {
 }
 
 
-class FileShare extends Component {
+
+class FileShare_ extends Component {
     constructor(props) {
         super(props);
 
@@ -181,7 +184,8 @@ class FileShare extends Component {
     }
     render() {
         const { path, fileNav } = { ...this.state }
-        
+        const { add , num } = {...this.props}
+     
         return (<div>
             <Header path={path}/>
             <Search path={path} />
@@ -203,4 +207,18 @@ class FileShare extends Component {
     }
 }
 
+
+
+const FileShare = connect(({counter})=>{
+    return{
+        num: counter.num
+    }
+
+},(dispatch)=>(
+    {
+        add (num){
+            dispatch(add(num))
+        }
+    }
+))(FileShare_)
 export default FileShare;

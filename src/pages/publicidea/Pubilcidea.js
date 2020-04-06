@@ -167,7 +167,7 @@ class Pubilcidea extends Component {
     }
 
     componentDidMount() {
-        const userNameData = cookie.load('ifLogin')
+        const userNameData = localStorage.getItem('userName')
         this.setState({
             userNameData,
             username:userNameData,
