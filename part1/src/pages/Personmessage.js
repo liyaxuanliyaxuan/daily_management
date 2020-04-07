@@ -127,6 +127,10 @@ class Personmessage extends Component {
                         <textarea className="personmessage_change_body_input10" type="text" value={this.state.skill} onChange={this.personmessageChange10.bind(this)} />
                         <p className="personmessage_change_body_p11">证书荣誉：</p>
                         <textarea className="personmessage_change_body_input11" type="text" value={this.state.title} onChange={this.personmessageChange11.bind(this)} />
+                        <p className="personmessage_change_body_p14">用户头像：</p>
+                        <input className="personmessage_change_body_input14" type="file" value={this.state.userimg} onChange={this.personmessageChange14.bind(this)} style={{
+                            paddingLeft: "4px"
+                        }}/>
                         <button className="personmessage_change_body_btn1" onClick={this.personmessagechangeBack.bind(this)}>返回</button>
                         <button className="personmessage_change_body_btn2" onClick={this.personmessageChange.bind(this)}>确定</button>
                     </div>
@@ -208,6 +212,11 @@ class Personmessage extends Component {
             weibo: e.target.value
         })
     }
+    personmessageChange14(e) {
+        this.setState({
+            userimg: e.target.value
+        })
+    }
 
     //////////////////////////////////////交互
 
@@ -257,7 +266,7 @@ class Personmessage extends Component {
             "title": this.state.title,
             "unam": this.state.username,
             "upath": this.state.userimg,
-            "weibo": this.state.weibo
+            "weibo": this.state.weibo,
         })
             .then(function (response) {
                 console.log(response.data)
