@@ -214,7 +214,7 @@ class Personmessage extends Component {
     }
     personmessageChange14(e) {
         this.setState({
-            userimg: e.target.value
+            userimg: e.target.files[0]
         })
     }
 
