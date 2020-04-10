@@ -285,11 +285,27 @@ button { border: none; cursor: pointer;}
 }
 .submitblog_body_right {
     position: absolute;
-    top: 41px;
+    top: 46px;
     right: 0px;
     width: 249px;
-    height: 259px;
+    height: 254px;
     overflow-x: hidden;
+}
+.submitblog_body_right input {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 227px;
+    border: 1px solid #c2c2c2;
+    padding-left: 2px;
+    height: 20px;
+}
+.submitblog_body_right textarea {
+    padding: 2px;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 227px;
+    height: 150px;
+    border: 1px solid #c2c2c2;
 }
 .submitblog_message{
     margin-left: 10px;
@@ -304,6 +320,6 @@ button { border: none; cursor: pointer;}
 }
 .submitblog_body_right p {
     font-size: 14px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 20px;
 }

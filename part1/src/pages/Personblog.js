@@ -141,6 +141,11 @@ class Personbolg extends Component {
                                 <input type="radio" name="platform" onChange={() => { this.setState({ submittype: "其他" }) }} />其他<br />
                             </div>
                             <div className="submitblog_body_right">
+                                <p>标题：</p>
+                                <input className="submitblog_title" />
+                                <p>链接：</p>
+                                <input className="submitblog_link" />
+                                <p>内容：</p>
                                 <textarea className="submitblog_message"></textarea>
                                 <p>选择图片 :</p>
                                 <input type="file" className="submitblog_img" />

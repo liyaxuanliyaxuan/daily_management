@@ -214,7 +214,7 @@ class Personmessage extends Component {
     }
     personmessageChange14(e) {
         this.setState({
-            userimg: e.target.files[0]
+            userimg: e.target.value
         })
     }
 
@@ -247,10 +247,27 @@ class Personmessage extends Component {
             })
     }
 
-    personmessageChange() {
+    async personmessageChange() {
+        //console.log(document.querySelector(".personmessage_change_body_input14").files[0])
         let This = this
-        //console.log(this.state.sex)
-        axios.post("/user/updateUser", {
+        let url = ""
+        let img = document.querySelector(".personmessage_change_body_input14").files[0]
+        let FormDataimg = new FormData()
+        FormDataimg.append("image", img)
+        await axios.post("/user/uploadImages", FormDataimg)
+            .then(function (response) {
+                /////////////////得到返回的url
+                This.setState({
+                    url: response.data.data[0] 
+                })
+                url = response.data.data[0]
+                console.log("上传图片成功" + response.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+                alert("上传图片出错")
+            })
+        await axios.post("/user/updateUser", {
             "birthday": this.state.birthday,
             "jointime": this.state.jointime,
             "mail": this.state.e_mail,
@@ -265,7 +282,7 @@ class Personmessage extends Component {
             "skills": this.state.skill,
             "title": this.state.title,
             "unam": this.state.username,
-            "upath": this.state.userimg,
+            "upath": url,//document.querySelector(".personmessage_change_body_input14").files[0],
             "weibo": this.state.weibo,
         })
             .then(function (response) {
