@@ -453,7 +453,7 @@ class Homepage extends Component {
                     var mypid = new Array()
                     for (var i = 0; i < response.data.data.length; i++) {
                         myporgressImg[i] = response.data.data[i].image
-                        myporgress[i] = 0.2//response.data.data[i].porgress 
+                        myporgress[i] = response.data.data[i].porgress 
                         myporgressname[i] = response.data.data[i].pname
                         mypid[i] = response.data.data[i].pid
                     }

@@ -143,6 +143,7 @@ button { border: none; cursor: pointer;}
     height: 100px;
     width: 420px;
     border: 1px solid #86c5ff;
+    overflow-y: auto;
 }
 .pubilcblog_blog_img {
     width: 146px;
@@ -158,7 +159,15 @@ button { border: none; cursor: pointer;}
     left: 160px;
     top: 6px;
     font-size: 12px;
-    color: #f36868;
+    color: #76c4f8;
+    text-decoration: underline;
+}
+.pubilcblog_blog_massage {
+    position: absolute;
+    left: 160px;
+    top: 30px;
+    font-size: 12px;
+    color: #b6b6b6;
 }
 .pubilcblog_blog_logo2 {
     position: absolute;

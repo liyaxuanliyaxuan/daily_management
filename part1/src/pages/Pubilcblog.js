@@ -54,6 +54,12 @@ class Pubilcblog extends Component {
             comment: [
                 ""
             ],
+            introduce: [
+                ""
+            ],
+            url: [
+                ""
+            ],
             bid: [
                 ""
             ],
@@ -137,14 +143,15 @@ class Pubilcblog extends Component {
                                                 }}
                                             ></div>
                                             <p className="pubilcblog_blog_name">{this.state.bloguser[index]}</p>
-                                            <p className="pubilcblog_blog_word">{this.state.comment[index]}</p>
+                                            <p className="pubilcblog_blog_word">{this.state.introduce[index]}</p>
                                             <div className="pubilcblog_blog_div">
                                                 <div className="pubilcblog_blog_img"
                                                     style={{
                                                         backgroundImage: 'url(' + this.state.filepath[index] + ')'
                                                     }}
                                                 ></div>
-                                                {/* <a className="pubilcblog_blog_link" href={this.state.links[index]}>{this.state.links[index]}</a> */}
+                                                <a className="pubilcblog_blog_link" href={this.state.url[index]}>{this.state.url[index]}</a>
+                                                <p className="pubilcblog_blog_massage">{this.state.comment[index]}</p>
                                             </div>
                                             <img className="pubilcblog_blog_logo2" src={this.state.islike[index] ? pubilcblog_zhan2 : pubilcblog_zhan1} onClick={this.dianZhan.bind(this, index)} />
                                             <img className="pubilcblog_blog_logo3" src={this.state.iscollection[index] ? pubilcblog_collect2 : pubilcblog_collect1} onClick={this.collect.bind(this, index)} />
@@ -254,7 +261,7 @@ class Pubilcblog extends Component {
                 console.log(error)
             })
 
-        axios.get("/blogs?name=" + Data)
+        axios.get("/blogs?name=" + Data)//////////////////////////////////////////////
             .then(function (response) {
                 console.log(response.data)
                 if (response.data.data.length == 0) {
@@ -262,7 +269,7 @@ class Pubilcblog extends Component {
 
                     // })
                 } else {
-                    //console.log(response.data.data)
+                    console.log(response.data.data)
                     var mybid = new Array()
                     var mycomment = new Array()
                     var myfilepath = new Array()
@@ -273,6 +280,8 @@ class Pubilcblog extends Component {
                     var myislike = new Array()
                     var mybloguser = new Array()
                     var mybloguserimg = new Array()
+                    var myurl = new Array()
+                    var myintroduce = new Array()
                     for (var i = 0; i < response.data.data.length; i++) {
                         mybid[i] = response.data.data[i].blog.bid
                         mycomment[i] = response.data.data[i].blog.comment
@@ -284,6 +293,8 @@ class Pubilcblog extends Component {
                         myislike[i] = response.data.data[i].islike
                         mybloguser[i] = response.data.data[i].userinfo[0]
                         mybloguserimg[i] = response.data.data[i].userinfo[1]
+                        myurl[i] = response.data.data[i].blog.url
+                        myintroduce[i] = response.data.data[i].blog.introduce
                     }
                     myauthor.reverse()
                     mybid.reverse()
@@ -295,6 +306,8 @@ class Pubilcblog extends Component {
                     myiscollection.reverse()
                     mybloguser.reverse()
                     mybloguserimg.reverse()
+                    myintroduce.reverse()
+                    myurl.reverse()
                     This.setState({
                         bid: mybid,
                         comment: mycomment,
@@ -305,7 +318,9 @@ class Pubilcblog extends Component {
                         iscollection: myiscollection,
                         islike: myislike,
                         bloguser: mybloguser,
-                        bloguserimg: mybloguserimg
+                        bloguserimg: mybloguserimg,
+                        url: myurl,
+                        introduce: myintroduce
                     })
                 }
 
@@ -377,7 +392,7 @@ class Pubilcblog extends Component {
         document.querySelector(".pubilcblog_left_btn4").style.backgroundColor = "#fff"
         document.querySelector(".pubilcblog_left_btn5").style.backgroundColor = "#fff"
         e.target.style.backgroundColor = "#1d91ff"
-        await axios.get("/blogs?name=" + Data)
+        await axios.get("/blogs?name=" + Data)//////////////////////Data
             .then(function (response) {
                 if (response.data.data.length == 0) {
                     // This.setState({
@@ -393,6 +408,8 @@ class Pubilcblog extends Component {
                     var mylikenum = new Array()
                     var mybloguser = new Array()
                     var mybloguserimg = new Array()
+                    var myurl = new Array()
+                    var myintroduce = new Array()
                     for (var i = 0, j = 0; j < response.data.data.length;) {
                         if (response.data.data[j].blog.type == nowplatform) {
                             mybid[i] = response.data.data[j].blog.bid
@@ -403,6 +420,8 @@ class Pubilcblog extends Component {
                             mylikenum[i] = response.data.data[j].blog.likenum
                             mybloguser[i] = response.data.data[j].userinfo[0]
                             mybloguserimg[i] = response.data.data[j].userinfo[1]
+                            myurl[i] = response.data.data[j].blog.url
+                            myintroduce[i] = response.data.data[j].blog.introduce
                             i++
                             j++
                         } else {
@@ -417,7 +436,9 @@ class Pubilcblog extends Component {
                         author: myauthor,
                         likenum: mylikenum,
                         bloguser: mybloguser,
-                        bloguserimg: mybloguserimg
+                        bloguserimg: mybloguserimg,
+                        url: myurl,
+                        introduce: myintroduce
                     })
                 }
 
