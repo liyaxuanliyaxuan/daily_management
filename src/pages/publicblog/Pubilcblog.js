@@ -45,6 +45,12 @@ class Pubilcblog extends Component {
             comment: [
                 ""
             ],
+            introduce: [
+                ""
+            ],
+            url: [
+                ""
+            ],
             bid: [
                 ""
             ],
@@ -116,14 +122,15 @@ class Pubilcblog extends Component {
                                                 }}
                                             ></div>
                                             <p className="pubilcblog_blog_name">{this.state.bloguser[index]}</p>
-                                            <p className="pubilcblog_blog_word">{this.state.comment[index]}</p>
+                                            <p className="pubilcblog_blog_word">{this.state.introduce[index]}</p>
                                             <div className="pubilcblog_blog_div">
                                                 <div className="pubilcblog_blog_img"
                                                     style={{
                                                         backgroundImage: 'url(' + this.state.filepath[index] + ')'
                                                     }}
                                                 ></div>
-                                                {/* <a className="pubilcblog_blog_link" href={this.state.links[index]}>{this.state.links[index]}</a> */}
+                                                <a className="pubilcblog_blog_link" href={this.state.url[index]}>{this.state.url[index]}</a>
+                                                <p className="pubilcblog_blog_massage">{this.state.comment[index]}</p>
                                             </div>
                                             <img className="pubilcblog_blog_logo2" src={this.state.islike[index] ? pubilcblog_zhan2 : pubilcblog_zhan1} onClick={this.dianZhan.bind(this, index)} />
                                             <img className="pubilcblog_blog_logo3" src={this.state.iscollection[index] ? pubilcblog_collect2 : pubilcblog_collect1} onClick={this.collect.bind(this, index)} />
@@ -256,6 +263,8 @@ class Pubilcblog extends Component {
                     var myislike = new Array()
                     var mybloguser = new Array()
                     var mybloguserimg = new Array()
+                    var myurl = new Array()
+                    var myintroduce = new Array()
                     for (var i = 0; i < response.data.length; i++) {
                         mybid[i] = response.data[i].blog.bid
                         mycomment[i] = response.data[i].blog.comment
@@ -267,6 +276,8 @@ class Pubilcblog extends Component {
                         myislike[i] = response.data[i].islike
                         mybloguser[i] = response.data[i].userinfo[0]
                         mybloguserimg[i] = response.data[i].userinfo[1]
+                        myurl[i] = response.data[i].blog.url
+                        myintroduce[i] = response.data[i].blog.introduce
                     }
                     myauthor.reverse()
                     mybid.reverse()
@@ -278,6 +289,8 @@ class Pubilcblog extends Component {
                     myiscollection.reverse()
                     mybloguser.reverse()
                     mybloguserimg.reverse()
+                    myintroduce.reverse()
+                    myurl.reverse()
                     This.setState({
                         bid: mybid,
                         comment: mycomment,
@@ -288,7 +301,9 @@ class Pubilcblog extends Component {
                         iscollection: myiscollection,
                         islike: myislike,
                         bloguser: mybloguser,
-                        bloguserimg: mybloguserimg
+                        bloguserimg: mybloguserimg,
+                        url: myurl,
+                        introduce: myintroduce
                     })
                 }
 
@@ -309,10 +324,13 @@ class Pubilcblog extends Component {
                     var mytid = new Array()
                     var mytitle = new Array()
                     var myideaimg = new Array()
+                  
                     for (let i = 0; i < response.data.length; i++) {
                         mytid[i] = response.data[i].tid
                         mytitle[i] = response.data[i].title
                         myideaimg[i] = idea_logo
+                        
+                        
                     }
                     myideaimg.reverse()
                     mytitle.reverse()
@@ -336,6 +354,7 @@ class Pubilcblog extends Component {
                 console.log(response.data)
                 var mylistname = new Array()
                 var mylistimg = new Array()
+                
                 for (let i = 0; i < response.data.length; i++) {
                     mylistname[i] = response.data[i].userinfo[0]
                     mylistimg[i] = response.data[i].userinfo[1]
@@ -376,6 +395,8 @@ class Pubilcblog extends Component {
                     var mylikenum = new Array()
                     var mybloguser = new Array()
                     var mybloguserimg = new Array()
+                    var myurl = new Array()
+                    var myintroduce = new Array()
                     for (var i = 0, j = 0; j < response.data.length;) {
                         if (response.data[j].blog.type == nowplatform) {
                             mybid[i] = response.data[j].blog.bid
@@ -386,6 +407,8 @@ class Pubilcblog extends Component {
                             mylikenum[i] = response.data[j].blog.likenum
                             mybloguser[i] = response.data[j].userinfo[0]
                             mybloguserimg[i] = response.data[j].userinfo[1]
+                            myurl[i] = response.data.data[j].blog.url
+                            myintroduce[i] = response.data.data[j].blog.introduce
                             i++
                             j++
                         } else {
@@ -400,7 +423,10 @@ class Pubilcblog extends Component {
                         author: myauthor,
                         likenum: mylikenum,
                         bloguser: mybloguser,
-                        bloguserimg: mybloguserimg
+                        bloguserimg: mybloguserimg,
+                        url: myurl,
+                        introduce: myintroduce
+                        
                     })
                 }
 

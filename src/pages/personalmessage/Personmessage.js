@@ -29,7 +29,8 @@ class Personmessage extends Component {
             title: "",
             platform: "",
             realname: "",
-            weibo: ""
+           
+            
         }
     }
     render() {
@@ -101,6 +102,10 @@ class Personmessage extends Component {
                         <textarea className="personmessage_change_body_input10" type="text" value={this.state.skill} onChange={this.personmessageChange10.bind(this)} />
                         <p className="personmessage_change_body_p11">证书荣誉：</p>
                         <textarea className="personmessage_change_body_input11" type="text" value={this.state.title} onChange={this.personmessageChange11.bind(this)} />
+                        <p className="personmessage_change_body_p14">用户头像：</p>
+                        <input className="personmessage_change_body_input14" type="file" data-value={this.state.userimg} onChange={this.personmessageChange14.bind(this)} style={{
+                            paddingLeft: "4px"
+                        }}/>
                         <button className="personmessage_change_body_btn1" onClick={this.personmessagechangeBack.bind(this)}>返回</button>
                         <button className="personmessage_change_body_btn2" onClick={this.personmessageChange.bind(this)}>确定</button>
 
@@ -183,6 +188,11 @@ class Personmessage extends Component {
             weibo: e.target.value
         })
     }
+    personmessageChange14(e) {
+        this.setState({
+            userimg: e.currentTarget.getAttribute("data-value")
+        })
+    }
 
     //////////////////////////////////////交互
 
@@ -217,10 +227,27 @@ class Personmessage extends Component {
             })
     }
 
-    personmessageChange() {
+    async personmessageChange() {
+        //console.log(document.querySelector(".personmessage_change_body_input14").files[0])
         let This = this
-        //console.log(this.state.sex)
-        this.$axios.post("/user/updateUser", {
+        let url = ""
+        let img = document.querySelector(".personmessage_change_body_input14").files[0]
+        let FormDataimg = new FormData()
+        FormDataimg.append("image", img)
+        await this.$axios.post("/user/uploadImages", FormDataimg)
+            .then(function (response) {
+                /////////////////得到返回的url
+                This.setState({
+                    url: response.data[0] 
+                })
+                url = response.data[0]
+                console.log("上传图片成功" + response.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+                alert("上传图片出错")
+            })
+        await this.$axios.post("/user/updateUser", {
             "birthday": this.state.birthday,
             "jointime": this.state.jointime,
             "mail": this.state.e_mail,
@@ -235,8 +262,8 @@ class Personmessage extends Component {
             "skills": this.state.skill,
             "title": this.state.title,
             "unam": this.state.username,
-            "upath": this.state.userimg,
-            "weibo": this.state.weibo
+            "upath": url,//document.querySelector(".personmessage_change_body_input14").files[0],
+            "weibo": this.state.weibo,
         })
             .then(function (response) {
                 console.log(response.data)
@@ -253,6 +280,7 @@ class Personmessage extends Component {
                 alert("修改失败！！！  未找到用户信息或服务器异常，请刷新页面重试")
             })
     }
+
 
 
 }

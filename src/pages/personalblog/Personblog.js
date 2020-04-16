@@ -31,6 +31,12 @@ class Personbolg extends Component {
             comment: [
 
             ],
+            introduce: [
+
+            ],
+            url: [
+
+            ],
             bid: [
 
             ],
@@ -96,18 +102,20 @@ class Personbolg extends Component {
                                                 }}
                                             ></div>
                                             <p className="personblog_blog_name">{this.state.bloguser[index]}</p>
-                                            <p className="personblog_blog_word">{this.state.comment[index]}</p>
+                                            <p className="personblog_blog_word">{this.state.introduce[index]}</p>
                                             <div className="personblog_blog_div">
                                             <div className="personblog_blog_img"
                                                     style={{
                                                         backgroundImage: 'url(' + this.state.filepath[index] + ')'
                                                     }}
                                                 ></div>
-                                                {/* <a className="personblog_blog_link" href={this.state.links[index]}>{this.state.links[index]}</a> */}
+                                                <a className="personblog_blog_link" href={this.state.url[index]}>{this.state.url[index]}</a>
+                                                <p className="personblog_blog_massage">{this.state.comment[index]}</p>
                                             </div>
                                             <img className="personblog_blog_logo2" src={this.state.islike[index] ? personblog_zhan2 : personblog_zhan1} onClick={this.dianZhan.bind(this, index)} />
                                             <img className="personblog_blog_logo3" src={this.state.iscollection[index] ? personblog_collect2 : personblog_collect1} onClick={this.collect.bind(this, index)} />
-                                            <div className="personblog_blog_logo4">{this.state.type[index]}</div>
+                                            <div className="personblog_blog_logo4"><div><p>{this.state.type[index]}</p></div></div>
+                                        
                                         </div>
                                     )
                                 })
@@ -130,6 +138,11 @@ class Personbolg extends Component {
                                 <input type="radio" name="platform" onChange={() => { this.setState({ submittype: "其他" }) }} />其他<br />
                             </div>
                             <div className="submitblog_body_right">
+                                <p>标题：</p>
+                                <input className="submitblog_title" />
+                                <p>链接：</p>
+                                <input className="submitblog_link" />
+                                <p>内容：</p>
                                 <textarea className="submitblog_message"></textarea>
                                 <p>选择图片 :</p>
                                 <input type="file" className="submitblog_img" />
@@ -191,6 +204,8 @@ class Personbolg extends Component {
                     var myislike = new Array()
                     var mybloguser = new Array()
                     var mybloguserimg = new Array()
+                    var myurl = new Array()
+                    var myintroduce = new Array()
                     for (var i = 0; i < response.data.length; i++) {
                         mybid[i] = response.data[i].blog.bid
                         mycomment[i] = response.data[i].blog.comment
@@ -202,6 +217,8 @@ class Personbolg extends Component {
                         myislike[i] = response.data[i].islike
                         mybloguser[i] = response.data[i].userinfo[0]
                         mybloguserimg[i] = response.data[i].userinfo[1]
+                        myurl[i] = response.data[i].blog.url
+                        myintroduce[i] = response.data[i].blog.introduce
                     }
                     myauthor.reverse()
                     mybid.reverse()
@@ -213,6 +230,8 @@ class Personbolg extends Component {
                     myiscollection.reverse()
                     mybloguser.reverse()
                     mybloguserimg.reverse()
+                    myintroduce.reverse()
+                    myurl.reverse()
                     This.setState({
                         bid: mybid,
                         comment: mycomment,
@@ -223,7 +242,9 @@ class Personbolg extends Component {
                         iscollection: myiscollection,
                         islike: myislike,
                         bloguser: mybloguser,
-                        bloguserimg: mybloguserimg
+                        bloguserimg: mybloguserimg,
+                        url: myurl,
+                        introduce: myintroduce
                     })
                 }
             })
@@ -250,6 +271,8 @@ class Personbolg extends Component {
         FormDatafile.append("name", This.state.username)
         FormDatafile.append("type", type)
         FormDatafile.append("comment", document.querySelector(".submitblog_message").value)
+        FormDatafile.append("url2", document.querySelector(".submitblog_link").value)
+        FormDatafile.append("introduce", document.querySelector(".submitblog_title").value)
         //console.log(FormDatafile)
         this.$axios.post("/blog/publish", FormDatafile, config)
             // {
@@ -264,6 +287,7 @@ class Personbolg extends Component {
                 document.querySelector("#submitblog").style.display = "none"
             }).catch(function (error) {
                 console.log(error)
+                alert("发表失败")
             })
     }
 
@@ -313,7 +337,7 @@ class Personbolg extends Component {
         let This = this
         let FormDatafile = new FormData()
         FormDatafile.append("blogId", This.state.bid[index])
-        FormDatafile.append("name", This.state.username)
+        FormDatafile.append("name", This.state.userNameData)
         console.log(This.state.username)
         console.log(This.state.bid[index])
         if (e.target.src == personblog_collect1) {
@@ -344,7 +368,7 @@ class Personbolg extends Component {
             //////////////////////////获取所有博客
             e.target.style.backgroundColor = '#fff'
             isLike = false
-            this.$axios.get("/blogs/by/userid?name=" + This.state.username)
+            this.$axios.get("/blogs/by/userid?name=" + This.state.userNameData)
                 ///////////////////////获取所有博客
                 .then(function (response) {
                     console.log(response.data)
@@ -366,6 +390,8 @@ class Personbolg extends Component {
                         var myislike = new Array()
                         var mybloguser = new Array()
                         var mybloguserimg = new Array()
+                        var myurl = new Array()
+                        var myintroduce = new Array()
                         for (var i = 0; i < response.data.length; i++) {
                             mybid[i] = response.data[i].blog.bid
                             mycomment[i] = response.data[i].blog.comment
@@ -377,6 +403,8 @@ class Personbolg extends Component {
                             myislike[i] = response.data[i].islike
                             mybloguser[i] = response.data[i].userinfo[0]
                             mybloguserimg[i] = response.data[i].userinfo[1]
+                            myurl[i] = response.data[i].blog.url
+                            myintroduce[i] = response.data[i].blog.introduce
                         }
                         myauthor.reverse()
                         mybid.reverse()
@@ -388,6 +416,8 @@ class Personbolg extends Component {
                         myiscollection.reverse()
                         mybloguser.reverse()
                         mybloguserimg.reverse()
+                        myintroduce.reverse()
+                        myurl.reverse()
                         This.setState({
                             bid: mybid,
                             comment: mycomment,
@@ -398,7 +428,9 @@ class Personbolg extends Component {
                             iscollection: myiscollection,
                             islike: myislike,
                             bloguser: mybloguser,
-                            bloguserimg: mybloguserimg
+                            bloguserimg: mybloguserimg,
+                            url: myurl,
+                            introduce: myintroduce
                         })
                     }
                 })
@@ -432,6 +464,8 @@ class Personbolg extends Component {
                         var myislike = new Array()
                         var mybloguser = new Array()
                         var mybloguserimg = new Array()
+                        var myurl = new Array()
+                        var myintroduce = new Array()
                         for (var i = 0; i < response.data.length; i++) {
                             mybid[i] = response.data[i].blog.bid
                             mycomment[i] = response.data[i].blog.comment
@@ -443,6 +477,8 @@ class Personbolg extends Component {
                             myislike[i] = response.data[i].islike
                             mybloguser[i] = response.data[i].userinfo[0]
                             mybloguserimg[i] = response.data[i].userinfo[1]
+                            myurl[i] = response.data[i].blog.url
+                            myintroduce[i] = response.data[i].blog.introduce
                         }
                         myauthor.reverse()
                         mybid.reverse()
@@ -454,6 +490,8 @@ class Personbolg extends Component {
                         myiscollection.reverse()
                         mybloguser.reverse()
                         mybloguserimg.reverse()
+                        myintroduce.reverse()
+                        myurl.reverse()
                         This.setState({
                             bid: mybid,
                             comment: mycomment,
@@ -464,7 +502,9 @@ class Personbolg extends Component {
                             iscollection: myiscollection,
                             islike: myislike,
                             bloguser: mybloguser,
-                            bloguserimg: mybloguserimg
+                            bloguserimg: mybloguserimg,
+                            url: myurl,
+                            introduce: myintroduce
                         })
                     }
                 })

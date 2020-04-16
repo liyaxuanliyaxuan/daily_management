@@ -487,7 +487,6 @@ button { border: none;}
     position: absolute;
     top: 30px;
     left: 335px;
-    width: 35px;
     height: 350px;
     background-color: #fff;
 }
@@ -517,7 +516,7 @@ button { border: none;}
     display: block;
     width: 40%;
     font-size: 14px;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 .addword_right ul li input {
     position: absolute;
