@@ -261,11 +261,11 @@ class Personmessage extends Component {
                     url: response.data.data[0] 
                 })
                 url = response.data.data[0]
-                console.log("上传图片成功" + response.data)
+                //console.log("上传图片成功" + response.data)
             })
             .catch(function (error) {
                 console.log(error)
-                alert("上传图片出错")
+                //alert("上传图片出错")
             })
         await axios.post("/user/updateUser", {
             "birthday": this.state.birthday,

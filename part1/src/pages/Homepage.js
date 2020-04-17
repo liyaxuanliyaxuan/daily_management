@@ -37,6 +37,7 @@ class Homepage extends Component {
             width: [],
             backgroundColor: ["#ffd100", "#f0842d", "#f36868"],
             ////////
+            realname: "",
             username: "",
             userimg: "",
             tel: "",
@@ -94,7 +95,7 @@ class Homepage extends Component {
                             backgroundImage: 'url(' + this.state.userimg + ')'
                         }}
                     ></div>
-                    <p className="name">姓名：{this.state.username}</p>
+                    <p className="name">姓名：{this.state.realname}</p>
                     <p className="tel">电话：{this.state.tel}</p>
                     <p className="qq">QQ：{this.state.qq}</p>
                     <p className="weibo">微博：{this.state.weibo}</p>
@@ -403,7 +404,7 @@ class Homepage extends Component {
     }
 
 
-    changePsw() {
+    changePsw() {     
         let This = this
         if (This.state.newpsw1 != This.state.newpsw2) {
             alert("两次输入密码不一致。请重新输入")
@@ -415,7 +416,7 @@ class Homepage extends Component {
         } else {
             axios.post("user/updatePassword", {
                 newpw: This.state.newpsw1,
-                oldpw: This.state.oldpsw1
+                oldpw: This.state.oldpsw
             }).then(function (response) {
                 console.log(response.data)
                 if (response.data.code == 200) {
