@@ -180,7 +180,7 @@ class Pubilcblog extends Component {
                             {
                                 this.state.tid.map((item, index) => {
                                     return (
-                                        <Link to={{ pathname: "/pages/Pubilcidea", state: this.state.tid[index] }}>
+                                        <Link to={{ pathname: "/pages/Pubilcidea/"+ this.state.tid[index] }}>
                                             <li key={index}>
                                                 <div
                                                     style={{
@@ -408,7 +408,7 @@ class Pubilcblog extends Component {
                             mybloguser[i] = response.data[j].userinfo[0]
                             mybloguserimg[i] = response.data[j].userinfo[1]
                             myurl[i] = response.data.data[j].blog.url
-                            myintroduce[i] = response.data.data[j].blog.introduce
+                            myintroduce[i] = response.data[j].blog.introduce
                             i++
                             j++
                         } else {

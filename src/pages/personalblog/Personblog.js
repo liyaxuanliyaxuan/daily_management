@@ -182,7 +182,7 @@ class Personbolg extends Component {
                 console.log(error)
             })
 
-        this.$axios.get("/blogs/by/userid?name=" + this.state.userNameData)
+        this.$axios.get("/blogs/by/userid?name=" + This.state.userNameData)
             ///////////////////////获取用户相关博客
             .then(function (response) {
                 console.log(response.data)

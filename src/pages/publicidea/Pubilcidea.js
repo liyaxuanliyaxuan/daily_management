@@ -156,19 +156,20 @@ class Pubilcidea extends Component {
     componentWillMount() {
         //////////////////////////////////
         // ↓↓↓
-        Data = this.props.location.state;
-        //console.log(Data)
-        ///////////////////////////////////
-        this.setState({
-            username: '',
-            now: Data
-        })
+        // Data = this.props.match.params.state
+        // //console.log(Data)
+        // ///////////////////////////////////
+        // this.setState({
+        //     username: '',
+        //     now: Data
+        // })
 
     }
 
     componentDidMount() {
         const userNameData = localStorage.getItem('userName')
         this.setState({
+            now:this.props.match.params.state,
             userNameData,
             username:userNameData,
 
@@ -180,7 +181,7 @@ class Pubilcidea extends Component {
         this.$axios.get("/user/getUserInfoByUnam?username=" + Data)
         .then(function (response) {
             This.setState({      
-                userimg: response.data.data.upath,
+                userimg: response.data.upath,
             })
         })
         .catch(function (error) {

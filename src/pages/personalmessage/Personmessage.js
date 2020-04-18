@@ -204,6 +204,7 @@ class Personmessage extends Component {
         });
         this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
+                console.log('yeap');
                 This.setState({
                     realname: response.data.realname,
                     username: response.data.unam,
@@ -214,9 +215,9 @@ class Personmessage extends Component {
                     e_mail: response.data.mail,
                     sex: response.data.sex,
                     school: response.data.school,
-                    jointime: response.data.jointime.substring(0, 10),
+                    jointime: response.data.jointime?response.data.jointime.substring(0, 10):'',
                     major: response.data.major,
-                    birthday: response.data.birthday.substring(0, 10),
+                    birthday: response.data.birthday?response.data.birthday.substring(0, 10):'',
                     prjHistory: response.data.prjHistory,
                     skill: response.data.skills,
                     title: response.data.title,
@@ -241,11 +242,11 @@ class Personmessage extends Component {
                     url: response.data[0] 
                 })
                 url = response.data[0]
-                console.log("上传图片成功" + response.data)
+                //console.log("上传图片成功" + response.data)
             })
             .catch(function (error) {
                 console.log(error)
-                alert("上传图片出错")
+                //alert("上传图片出错")
             })
         await this.$axios.post("/user/updateUser", {
             "birthday": this.state.birthday,

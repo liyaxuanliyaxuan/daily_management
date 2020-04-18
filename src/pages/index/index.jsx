@@ -33,9 +33,6 @@ class Index_ extends Component {
             
             <Switch>
                 <Route  exact path='/' component={Login} />
-                {/* <Route exact path="/" >
-                { userName?<Login/>:<Redirect to='/home'/>} 
-                </Route> */}
                 <Route path={"/home"}>
                 { userName?<Homepage/>:<Redirect to='/'/>} 
                 </Route>
@@ -45,32 +42,21 @@ class Index_ extends Component {
                 <Route path="/pages/Personmessage" >
                 { userName?<Personmessage/>:<Redirect to='/'/>} 
                 </Route>
-                <Route path="/pages/Personword" component={Personword} />
+                <Route path="/pages/Personword/:state" component={Personword} />
                 <Route path="/pages/Personblog" >
                 { userName?<Personblog/>:<Redirect to='/'/>} 
                 </Route>
                 <Route path="/pages/Pubilcblog" >
                 { userName?<Pubilcblog/>:<Redirect to='/'/>} 
                 </Route>
-                <Route path="/pages/Pubilcidea" >
-                { userName?<Pubilcidea/>:<Redirect to='/'/>} 
+                <Route path={"/pages/Pubilcidea/:state"}  component={Pubilcidea}>
+               
                 </Route>
                 <Route path='/file-share' component={FileShare}></Route>
                 <Route path='/display' component={Display}></Route>
                 <Route path='/meeting' component={Meeting}></Route>
                 <Route path='/vip-source' component={VipSource}></Route>
-                
-                
-                
-                {/* <Route path="/pages/Personmessage" component={Personmessage} />
-                <Route path="/pages/Personword" component={Personword} />
-                <Route path="/pages/Personblog" component={Personblog} />
-                <Route path="/pages/Pubilcblog" component={Pubilcblog} />
-                <Route path="/pages/Pubilcidea" component={Pubilcidea} />
-                <Route path='/file-share' component={FileShare}></Route>
-                <Route path='/display' component={Display}></Route>
-                <Route path='/meeting' component={Meeting}></Route>
-                <Route path='/vip-source' component={VipSource}></Route> */}
+        
                 <Route component={NotFound} />
             </Switch>
         );

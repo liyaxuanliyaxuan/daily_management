@@ -10,7 +10,8 @@ import addword_close from '../../img/addword_close.png'
 
 import Header from '../../components/header/header'
 
-
+import { connect } from 'react-redux'
+import { checkAdmin } from '../../actions/logger'
 var a = 0;
 
 
@@ -20,7 +21,7 @@ var a = 0;
 */ 
 ///////////////////////////////////////////////////////////////////////////
 
-class Homepage extends Component {
+class Homepage_ extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,12 +30,13 @@ class Homepage extends Component {
             width: [],
             backgroundColor: ["#ffd100", "#f0842d", "#f36868"],
             ////////
+            realname:'',
             username: "",
             userimg: "",
-            tel: "",
-            qq: "",
-            weibo: "",
-            e_mail: "",
+            tel: "暂无",
+            qq: "暂无",
+            weibo: "暂无",
+            e_mail: "暂无",
             ///////////////
             oldpsw: "",
             newpsw1: "",
@@ -43,11 +45,11 @@ class Homepage extends Component {
             beginTime: "",
             closeTime: "",
             image: "",
-            introduction: "",
+            introduction: "暂无",
             members: "",
             pRealname: "",
             //pid: "",
-            pname: "",
+            pname: "暂无",
             //////////////
             porgressImg: [
                 '../../img/homeword_left.png', 
@@ -72,7 +74,7 @@ class Homepage extends Component {
         }
     }
     render() {
-        const { ifAdmin } = {...this.state}
+        const { ifAdmin } = {...this.props}
          const renderNavTitle = ifAdmin?
          {prj:`葫芦娃的项目`,sum:'葫芦娃的总结',blog:'个人博客'}
          :{sum:`总结展望`,prj:'个人项目',blog:'个人博客'}
@@ -85,7 +87,7 @@ class Homepage extends Component {
                             backgroundImage: 'url(' + this.state.userimg + ')'
                         }}
                     ></div>
-                    <p className="name">姓名：{this.state.username}</p>
+                     <p className="name">姓名：{this.state.realname}</p>
                     <p className="tel">电话：{this.state.tel}</p>
                     <p className="qq">QQ：{this.state.qq}</p>
                     <p className="weibo">微博：{this.state.weibo}</p>
@@ -108,7 +110,9 @@ class Homepage extends Component {
                                         let b = this.state.porgress[index]
                                         if (b >= 0 && b <= 0.3) {
                                             return (
-                                                <Link to={{pathname:"/pages/Personword", state:this.state.pid[index]}} key={index} title={this.state.porgressname[index]}>
+                                                <Link to={{pathname:"/pages/Personword" + this.state.pid[index]}} 
+                                                key={index} 
+                                                title={this.state.porgressname[index]}>
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
@@ -133,7 +137,8 @@ class Homepage extends Component {
 
                                         } else if (b > 0.3 && b <= 0.6) {
                                             return (
-                                                <Link to={{pathname:"/pages/Personword", state:this.state.pid[index]}} key={index} title={this.state.porgressname[index]}>
+                                                <Link to={{pathname:"/pages/Personword/"+this.state.pid[index]}} 
+                                                key={index} title={this.state.porgressname[index]}>
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
@@ -156,7 +161,7 @@ class Homepage extends Component {
                                             )
                                         } else {
                                             return (
-                                                <a key={index} href={"/#/pages/Personword?id=" + index} >
+                                                <Link key={index} to={{pathname:"/pages/Personword/"+this.state.pid[index]}} >
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
@@ -176,7 +181,7 @@ class Homepage extends Component {
                                                             }}
                                                         />
                                                     </div>
-                                                </a>
+                                                </Link>
                                             )
                                         }
                                         // return (
@@ -389,7 +394,7 @@ class Homepage extends Component {
         } else {
             this.$axios.post("user/updatePassword", {
                 newpw: This.state.newpsw1,
-                oldpw: This.state.oldpsw1
+                oldpw: This.state.oldpsw
             }).then(function (response) {
                 console.log(response.data)
                 if (response.code == 200) {
@@ -549,5 +554,16 @@ class Homepage extends Component {
     }
 
 }
+
+const Homepage = connect(({ logger }) => {
+    return {
+        ifAdmin: logger.ifAdmin,
+    }
+
+}, (dispatch) => ({
+    checkAdmin(ifAdmin) {
+        dispatch(checkAdmin(ifAdmin))
+    }
+}))(Homepage_)
 
 export default Homepage;

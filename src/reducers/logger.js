@@ -2,8 +2,8 @@ import {  CHECK_ADMIN, SET_USER, SET_IMG } from '../constants/logger'
 
 
 const INITIAL_STATE = {
-    userImg:'',
-  ifAdmin: false || localStorage.getItem('ifAdmin'),
+  userImg:'',
+  ifAdmin: localStorage.getItem('ifAdmin')? true:false,
   userName: localStorage.getItem('userName')?localStorage.getItem('userName') : ''
 }
 

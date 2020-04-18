@@ -157,12 +157,13 @@ class Personword extends Component {
     //////////////////////////////交互
 
     componentWillMount() {
-        Data = this.props.location.state;////获取项目id
-        console.log(Data)
+        // Data = this.props.location.state;////获取项目id
+        // console.log(Data)
     }
 
     componentDidMount() {
         let This = this
+        const id = This.props.match.params.state
         const userNameData = localStorage.getItem('userName')
         this.setState({
             userNameData
@@ -185,7 +186,7 @@ class Personword extends Component {
                 console.log(error)
             })
 
-        this.$axios.get("/user/getUserProjects/" + Data)
+        this.$axios.get("/user/getUserProjects/" + id)
             /////////////////////////获取某一项目的具体信息
             .then(function (response) {
                 let mybeginTime = response.data.beginTime
@@ -200,7 +201,7 @@ class Personword extends Component {
                 } else {
                     mycloseTime = mycloseTime.substring(0, 10)
                 }
-                console.log(response.data.data)
+                //console.log(response.data.data)
                 This.setState({
                     beginTime: mybeginTime,
                     closeTime: mycloseTime,
@@ -228,7 +229,7 @@ class Personword extends Component {
             members: This.state.members,
             pRealname: This.state.pRealname,
             pname: This.state.pname,
-            pid: Data
+            pid: This.props.match.params.state
         }).then(function (response) {
             console.log(response.data)
             alert("上传成功")
@@ -243,6 +244,7 @@ class Personword extends Component {
         ////////////////////////下载相应项目文件
         let This = this
         let type = e.target.innerHTML
+        const id = This.props.match.params.state
         //console.log(e.target.innerHTML)
         // let isdownload = confirm("是否下载该文件")
         // if( isdownload){
@@ -250,7 +252,7 @@ class Personword extends Component {
         // }else{
 
         // }
-        this.$axios.get("/user/getProjectDocs?pid=" + Data + "&doctype=" + type)
+        this.$axios.get("/user/getProjectDocs?pid=" + id + "&doctype=" + type)
             .then(function(response){
                 console.log(response.data)
             }).catch(function(error){
