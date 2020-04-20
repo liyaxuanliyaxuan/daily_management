@@ -68,8 +68,6 @@ const Index = connect(({logger})=>{
         userName:logger.userName
     }
 
-},()=>{
-
 })(Index_)
 
 export default Index;

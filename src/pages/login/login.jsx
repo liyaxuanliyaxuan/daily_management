@@ -80,9 +80,10 @@ class Login_ extends Component {
                 console.log(res);
                 if (res.code === 200) {
                     setUser(username)
-                    if (username === 'admin') checkAdmin(true)//根据名字判断是否是管理员身份
-
-                    localStorage.setItem('ifAdmin', '1')
+                    if (username === 'admin'){
+                       checkAdmin(true);//根据名字判断是否是管理员身份 
+                       localStorage.setItem('ifAdmin', '1')
+                    } 
                     localStorage.setItem('token', res.data)//TODO
                     localStorage.setItem('userName', username)
                     Axios.defaults.headers.common['token'] = window.localStorage.getItem('token')
@@ -123,6 +124,7 @@ class Login_ extends Component {
                                 <input
                                     onChange={this.handleChange.bind(this, 'username')}
                                     onKeyDown={this.handleEnterBtn.bind(this)}
+                                    className={'name-input'}
                                     value={username}
                                     name='username'
                                     type="text"
@@ -134,6 +136,7 @@ class Login_ extends Component {
                                 <input
                                     onChange={this.handleChange.bind(this, 'password')}
                                     onKeyDown={this.handleEnterBtn.bind(this)}
+                                    className={'pass-input'}
                                     value={password}
                                     name='password'
                                     type="password"

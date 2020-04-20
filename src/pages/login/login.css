@@ -105,3 +105,6 @@ canvas{
     height: 720px;
     background: #ffffff;
 }
+.pass-input,.name-input{
+    border: transparent;
+}

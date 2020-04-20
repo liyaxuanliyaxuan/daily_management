@@ -60,6 +60,10 @@ div.header {
 
     .usr-name {
       font-size: 12px;
+      overflow: hidden;
+    /* flex-wrap: nowrap; */
+    width: 40px;
+    text-overflow: ellipsis;
 
     }
 

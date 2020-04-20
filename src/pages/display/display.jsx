@@ -11,9 +11,7 @@ class ResultInfoText extends Component {
         this.state = {
            
             currentPrj: {},
-            defaultPrj: `互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
-            增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
-            增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`,
+            defaultPrj: ``,
            
         }//通过项目id获取项目的相关信息
         
@@ -22,18 +20,19 @@ class ResultInfoText extends Component {
         const pid = this.props.match.params.pid;
         let allPrj;
         if(localStorage.getItem('ing')){
-         allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]   
-        }
-        
-        
-        for(let prjItem of allPrj){
+         allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+         for(let prjItem of allPrj){
             if(pid == prjItem.pid){
                 this.setState({
                     currentPrj: prjItem
                 })
             }
 
+        } 
         }
+        
+        
+
     }
     componentWillReceiveProps(nextProps){
         const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
@@ -98,17 +97,17 @@ class RewardsInfoText extends Component {
         let allPrj;
         if(localStorage.getItem('ing')){
             allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+            for(let prjItem of allPrj){
+                if(pid == prjItem.pid){
+                    this.setState({
+                        currentPrj: prjItem
+                    })
+                }
+            }
         }
      
  
-        for(let prjItem of allPrj){
-            if(pid == prjItem.pid){
-                this.setState({
-                    currentPrj: prjItem
-                })
-            }
-
-        }
+      
     }
     componentWillReceiveProps(nextProps){
         const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
@@ -136,7 +135,7 @@ class RewardsInfoText extends Component {
                 {
                     this.state.defaultList.map((item,index)=>{
                         return(
-                            <p key={item.index }>{item.pname}<span className='space'></span>{item.pgame}</p>
+                            <p key={item.pid}>{item.pname}<span className='space'></span>{item.pgame}</p>
                         )
                     })
                 }
