@@ -50,7 +50,7 @@ class VipInfo extends Component {
                 <div className='vip-img'>
                    {vipName}
                 </div>
-                <p className='vip-url'>网址<a href=""></a></p>
+                {/* <p className='vip-url'>网址<a href=""></a></p> */}
             </div>
             <div className='vip-info-list'>
                 {

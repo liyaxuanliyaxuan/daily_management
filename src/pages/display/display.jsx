@@ -3,7 +3,10 @@ import Header from '../../components/header/header'
 
 import { Route, Link } from 'react-router-dom'
 
+import { Menu } from 'antd'
 import './display.scss'
+import { MenuItem } from 'rc-menu';
+
 
 class ResultInfoText extends Component {
     constructor(props) {
@@ -147,17 +150,10 @@ class RewardsInfoText extends Component {
 
 }
 
-
-
-class PrjDetail extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
-    render() {
-        return (
-            <div className='prj-detail'>
-                <div className='result-info'>
+function Introduc(props){
+    return(
+        <div>
+            <div className='result-info'>
                     <div className='result-info-title'>
                         <i></i>
                         <h1>相关成果</h1>
@@ -181,6 +177,68 @@ class PrjDetail extends Component {
                     </Route>
 
                 </div>
+        </div>
+
+    )
+}
+
+function Detail(props){
+    return(
+        <div>
+              <div className='result-info'>
+                    <div className='result-info-title'>
+                        <i></i>
+                        <h1>相关成果</h1>
+                    </div>
+
+                    <Route path={['/display/:pid','/display']}
+                     component={ResultInfoText}>
+
+                    </Route>
+
+                </div>
+                <div className='rewards-info'>
+                    <div className='rewards-info-title'>
+                        <i></i>
+                        <h1>相关奖项</h1>
+                    </div>
+
+                    <Route path={['/display/:pid','/display']} 
+                    component={RewardsInfoText}>
+
+                    </Route>
+
+                </div>
+        </div>
+    )
+}
+
+class PrjDetail extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            current: 'introduc'
+        }
+      
+    }
+    handleClick = (e)=>{
+        this.setState({
+            current: e.key
+        })
+    }
+    render() {
+        const {current} = {...this.state}
+        const { ifChooseOne } = {...this.props}
+        return (
+            <div className='prj-detail'>
+                <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
+                    <MenuItem key='introduc'>总览</MenuItem>
+                    <MenuItem key='detail' disabled={ifChooseOne}>查看详情</MenuItem>
+                </Menu>
+                {
+                    current == 'introduc'?<Introduc/>:<Detail/>
+                }
+                
             </div>
         );
     }
@@ -237,6 +295,7 @@ class Navs extends Component {
     render() {
     
         const { endPrj, studyingPrj, ifSeeMoreEnd, ifSeeMoreIng } = {...this.state}
+        const { ChangeChooseState, ifChooseOne} = {...this.props}
         const renderIngPrj = ifSeeMoreIng? studyingPrj:studyingPrj.slice(0,3)
         const renderEndPrj = ifSeeMoreEnd? endPrj:endPrj.slice(0,3)  
         return (
@@ -255,7 +314,9 @@ class Navs extends Component {
                                 <li onClick={()=>{this.setState({
 
                                     currentPrjId: item.pid
-                                })}} 
+                                })
+                                ChangeChooseState();
+                            }} 
                                 className={ this.state.currentPrjId===item.pid?'studying-prj-list-item--active':'studying-prj-list-item'}
                                  key={index}>
                                         <Link className='studying-prj-list-item-name' to={'/display/' + item.pid}>{item.pname}</Link>
@@ -319,8 +380,15 @@ class Display extends Component {
     constructor(props) {
         super(props);
         this.path = this.props.location.pathname
-        this.state = {}
+        this.state = {
+            ifChooseOne: true
+        }
    
+    }
+    ChangeChooseState = ()=>{
+        this.setState({
+            ifChooseOne: false
+        })
     }
     render() {
         return (
@@ -338,8 +406,10 @@ class Display extends Component {
                     </div>
                 </div>
                 <div className='display-bottom'>
-                    <Navs />
-                    <PrjDetail />
+                    <Navs 
+                    ChangeChooseState={this.ChangeChooseState}
+                    ifChooseOne={this.state.ifChooseOne}/>
+                    <PrjDetail ifChooseOne={this.state.ifChooseOne}/>
                 </div>
             </div>
         );

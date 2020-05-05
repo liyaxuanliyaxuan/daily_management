@@ -20,7 +20,7 @@ class MeetingList extends Component {
         super(props);
   
         this.state = { 
-            //path:this.props.location.pathname,//根据path请求数据list//此处父组件props改变不能影响他的state，使用时用props来区分，请求数据
+           
 
             MeetingModalVisible: false,
             meetingList:[]
@@ -32,8 +32,8 @@ class MeetingList extends Component {
  
         const pathToUrl = new Map([
             ['all','/infoshare/alldoc'],
-            ['tech','/infoshare/doc1'],
-            ['prj','/infoshare/doc2'],
+            ['tech','/infoshare/doc2'],
+            ['prj','/infoshare/doc1'],
             ['meet-record','/infoshare/doc3']
         ])
         if(path.includes('search')){

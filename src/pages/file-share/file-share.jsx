@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux'
@@ -32,8 +32,8 @@ class FileList extends Component {
         const _this = this
         const pathToUrl = new Map([
             ['server','/infoshare/book1'],
-            ['product','/infoshare/book2'],
-            ['client','/infoshare/book3'],
+            ['product','/infoshare/book3'],
+            ['client','/infoshare/book2'],
             ['hardware','/infoshare/book4']
         ])
         if (path.includes('search')) {

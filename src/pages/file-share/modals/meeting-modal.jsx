@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Modal } from 'antd'
-import axios from 'axios'
+
 import './modal.scss'
 
 import {
@@ -115,12 +115,8 @@ class UpLoadMeetingModal extends Component {
     }
     beforeUpload(file) {
 
-        // this.setState(state => ({
-        //     fileList: [...state.fileList, file],
-        // }))
-
         return false
-        // return isJpgOrPng && isLt2M;
+        // 自定义上传而非自动上传
     }
     handleChange = ({ fileList }) => this.setState({ fileList });
     render() {
@@ -184,9 +180,7 @@ class UpLoadMeetingModal extends Component {
                         </Select>
                     </Form.Item>
                     <Form.Item>
-                        <Upload 
-                        
-                        
+                        <Upload      
                         onChange={this.handleChange}
                         showUploadList={false}
                         beforeUpload={this.beforeUpload.bind(this)}

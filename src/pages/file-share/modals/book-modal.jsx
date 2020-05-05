@@ -18,6 +18,8 @@ class BookModal extends Component {
             <Modal
                 title="查看书籍"
                 visible={visible}
+                okText="确定"
+                cancelText='取消'
                 onOk={handleOk}
                 onCancel={handleCancel}
                 centered={true}
