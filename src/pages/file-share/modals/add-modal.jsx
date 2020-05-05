@@ -81,8 +81,7 @@ class AddModal extends Component {
     }
     handleOk = () => {
         const { bookType, bookName, bookIntroduction, fileList } = { ...this.state }
-        //    console.log(fileList[0]);
-        // const file = fileList[0].orginFileObject
+       
         const formData = new FormData();
         const _this = this
 

@@ -542,6 +542,8 @@ button { border: none;}
     border-radius: 8px;
     margin-bottom: 20px;
     margin-left: 250px;
+    color: #fff;
+    background: #1d91ff;
 }
 .addword_body img {
     position: absolute;

@@ -80,7 +80,7 @@ class Summary extends Component {
                             }
                         </div>
                         <div className="mysummary_hidden">
-                            <a onClick={this.mysummaryShow.bind(this)}>展开</a>
+                            {/* <a onClick={this.mysummaryShow.bind(this)}>展开</a> */}
                         </div>
                     </div>
                     <div id="summary_submit">

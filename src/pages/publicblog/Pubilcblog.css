@@ -422,7 +422,7 @@ button { border: none; cursor: pointer;}
 }
 .addnewidea_body_back {
     width: 50px;
-    height: 20px;
+    height: 25px;
     border: 1px solid #c2c2c2;
     border-radius: 4px;
     position: absolute;
@@ -433,7 +433,7 @@ button { border: none; cursor: pointer;}
 }
 .addnewidea_body_submit {
     width: 50px;
-    height: 20px;
+    height: 25px;
     background-color: #2996fe;
     color: #fff;
     border-radius: 4px;

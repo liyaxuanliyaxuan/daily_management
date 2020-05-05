@@ -8,40 +8,41 @@ import './display.scss'
 import { MenuItem } from 'rc-menu';
 
 
+//状态
 class ResultInfoText extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           
+
             currentPrj: {},
             defaultPrj: ``,
-           
+
         }//通过项目id获取项目的相关信息
-        
+
     }
-    componentDidMount(){
+    componentDidMount() {
         const pid = this.props.match.params.pid;
         let allPrj;
-        if(localStorage.getItem('ing')){
-         allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
-         for(let prjItem of allPrj){
-            if(pid == prjItem.pid){
-                this.setState({
-                    currentPrj: prjItem
-                })
-            }
+        if (localStorage.getItem('ing')) {
+            allPrj = [...JSON.parse(localStorage.getItem('ing')), ...JSON.parse(localStorage.getItem('end'))]
+            for (let prjItem of allPrj) {
+                if (pid == prjItem.pid) {
+                    this.setState({
+                        currentPrj: prjItem
+                    })
+                }
 
-        } 
+            }
         }
-        
-        
+
+
 
     }
-    componentWillReceiveProps(nextProps){
-        const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+    componentWillReceiveProps(nextProps) {
+        const allPrj = [...JSON.parse(localStorage.getItem('ing')), ...JSON.parse(localStorage.getItem('end'))]
         const pid = nextProps.match.params.pid
-        for(let prjItem of allPrj){
-            if(pid == prjItem.pid){
+        for (let prjItem of allPrj) {
+            if (pid == prjItem.pid) {
                 this.setState({
                     currentPrj: prjItem
                 })
@@ -51,72 +52,68 @@ class ResultInfoText extends Component {
     }
 
     render() {
-        const {currentPrj, defaultPrj} = {...this.state}
-        const ifRender = this.props.match.params.pid
+        const { currentPrj, defaultPrj } = { ...this.state }
+
         return (
-           ifRender?(
-            <section className='info-txt'>
-            <p>项目名称：{currentPrj.pname}</p>
-            <p>开始时间：{currentPrj.beginTime}</p>
-            <p>截止日期：{currentPrj.closeTime}</p>
-            <p>负责人： {currentPrj.pRealname}</p>
-        </section>
-          ):(
-            <section className='info-txt'>
-            {
-                `互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
-                增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
-                增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`
-            }
-        </section>
-           )
-         
+            <div>
+                <div className='result-info-title'>
+                    <i></i>
+                    <h1>{currentPrj.pname}</h1>
+                </div>
+                <p className='sub-nav'>状态:</p>
+                <p>已参赛</p>
+                <section className='info-txt'>
+
+                    <p>开始时间：{currentPrj.beginTime}</p>
+                    <p>截止日期：{currentPrj.closeTime}</p>
+                    <p>负责人： {currentPrj.pRealname}</p>
+                </section>
+                <p>已获奖</p>
+                <section className='info-txt'>
+
+                    <p>开始时间：{currentPrj.beginTime}</p>
+                    <p>截止日期：{currentPrj.closeTime}</p>
+                    <p>负责人： {currentPrj.pRealname}</p>
+                </section>
+            </div>
+
+
         );
     }
 
 }
+//简介
 class RewardsInfoText extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPrj:{},
-            defaultList:[
-            {pname:'微信展览助手',
-            pgame:`xx大赛一等奖`},
-            {pname:'微信展览助手',
-            pgame:`xx大赛一等奖`},
-            {pname:'微信展览助手',
-            pgame:`xx大赛一等奖`},
-            {pname:'微信展览助手',
-            pgame:`xx大赛一等奖`},
-            {pname:'微信展览助手',
-            pgame:`xx大赛一等奖`}
-            ]
+            currentPrj: {},
+
         }
-      
+
     }
-    componentDidMount(){
+    componentDidMount() {
         const pid = this.props.match.params.pid;
         let allPrj;
-        if(localStorage.getItem('ing')){
-            allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
-            for(let prjItem of allPrj){
-                if(pid == prjItem.pid){
+        if (localStorage.getItem('ing')) {
+            allPrj = [...JSON.parse(localStorage.getItem('ing')), ...JSON.parse(localStorage.getItem('end'))]
+            for (let prjItem of allPrj) {
+                if (pid == prjItem.pid) {
                     this.setState({
                         currentPrj: prjItem
                     })
                 }
             }
         }
-     
- 
-      
+
+
+
     }
-    componentWillReceiveProps(nextProps){
-        const allPrj = [...JSON.parse(localStorage.getItem('ing')),...JSON.parse(localStorage.getItem('end'))]
+    componentWillReceiveProps(nextProps) {
+        const allPrj = [...JSON.parse(localStorage.getItem('ing')), ...JSON.parse(localStorage.getItem('end'))]
         const pid = nextProps.match.params.pid
-        for(let prjItem of allPrj){
-            if(pid == prjItem.pid){
+        for (let prjItem of allPrj) {
+            if (pid == prjItem.pid) {
                 this.setState({
                     currentPrj: prjItem
                 })
@@ -124,91 +121,93 @@ class RewardsInfoText extends Component {
         }
     }
 
-    render() { 
-        const {currentPrj} = {...this.state}
-        const ifRender = this.props.match.params.pid
-        return(
-            ifRender?(   
-                <section className='info-txt'>
-        {
-            currentPrj.introduction
-        }
-           </section>):(
-                <section className='info-txt'>
+    render() {
+        const { currentPrj } = { ...this.state }
+
+        return (
+            <div>
+                   <p className='sub-nav'>简介:</p>
+                 <section className='info-txt'>
                 {
-                    this.state.defaultList.map((item,index)=>{
-                        return(
-                            <p key={item.pid}>{item.pname}<span className='space'></span>{item.pgame}</p>
-                        )
-                    })
+                    currentPrj.introduction
                 }
-                      </section>
-            )
+            </section> 
+            </div>
+
+          
         )
 
     }
 
 }
 
-function Introduc(props){
-    return(
+function Introduc(props) {
+    const defaultList = [
+        { pname: '微信展览助手', pid: 1, pgame: 'xx大赛一等奖' },
+        { pname: '微信展览助手', pid: 1, pgame: 'xx大赛一等奖' },
+        { pname: '微信展览助手', pid: 1, pgame: 'xx大赛一等奖' },
+        { pname: '微信展览助手', pid: 1, pgame: 'xx大赛一等奖' }
+    ]
+    return (
         <div>
             <div className='result-info'>
-                    <div className='result-info-title'>
-                        <i></i>
-                        <h1>相关成果</h1>
-                    </div>
-
-                    <Route path={['/display/:pid','/display']}
-                     component={ResultInfoText}>
-
-                    </Route>
-
+                <div className='result-info-title'>
+                    <i></i>
+                    <h1>相关成果</h1>
                 </div>
-                <div className='rewards-info'>
-                    <div className='rewards-info-title'>
-                        <i></i>
-                        <h1>相关奖项</h1>
-                    </div>
 
-                    <Route path={['/display/:pid','/display']} 
-                    component={RewardsInfoText}>
+                <section className='info-txt'>
+                    {
+                        `互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+    增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+    增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`
+                    }
+                </section>
 
-                    </Route>
-
+            </div>
+            <div className='rewards-info'>
+                <div className='rewards-info-title'>
+                    <i></i>
+                    <h1>相关奖项</h1>
                 </div>
+
+                <section className='info-txt'>
+                    {
+                        defaultList.map((item, index) => {
+                            return (
+                                <p key={item.pid}>{item.pname}<span className='space'></span>{item.pgame}</p>
+                            )
+                        })
+                    }
+                </section>
+
+            </div>
         </div>
 
     )
 }
 
-function Detail(props){
-    return(
+function Detail(props) {
+    return (
         <div>
-              <div className='result-info'>
-                    <div className='result-info-title'>
-                        <i></i>
-                        <h1>相关成果</h1>
-                    </div>
+            <div className='result-info'>
 
-                    <Route path={['/display/:pid','/display']}
-                     component={ResultInfoText}>
 
-                    </Route>
+                <Route path={['/display/:pid', '/display']}
+                    component={ResultInfoText}>
 
-                </div>
-                <div className='rewards-info'>
-                    <div className='rewards-info-title'>
-                        <i></i>
-                        <h1>相关奖项</h1>
-                    </div>
+                </Route>
 
-                    <Route path={['/display/:pid','/display']} 
+            </div>
+            <div className='rewards-info'>
+               
+
+                <Route path={['/display/:pid', '/display']}
                     component={RewardsInfoText}>
 
-                    </Route>
+                </Route>
 
-                </div>
+            </div>
         </div>
     )
 }
@@ -219,26 +218,26 @@ class PrjDetail extends Component {
         this.state = {
             current: 'introduc'
         }
-      
+
     }
-    handleClick = (e)=>{
+    handleClick = (e) => {
         this.setState({
             current: e.key
         })
     }
     render() {
-        const {current} = {...this.state}
-        const { ifChooseOne } = {...this.props}
+        const { current } = { ...this.state }
+        const { ifChooseOne } = { ...this.props }
         return (
             <div className='prj-detail'>
                 <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-                    <MenuItem key='introduc'>总览</MenuItem>
-                    <MenuItem key='detail' disabled={ifChooseOne}>查看详情</MenuItem>
+                    <MenuItem style={{ marginLeft: 10 }} key='introduc'>总览</MenuItem>
+                    <MenuItem style={{ marginLeft: 10 }} key='detail' disabled={ifChooseOne}>查看详情</MenuItem>
                 </Menu>
                 {
-                    current == 'introduc'?<Introduc/>:<Detail/>
+                    current == 'introduc' ? <Introduc /> : <Detail />
                 }
-                
+
             </div>
         );
     }
@@ -248,56 +247,56 @@ class Navs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPrjId:'',
+            currentPrjId: '',
             ifSeeMoreIng: false,
             ifSeeMoreEnd: false,
-            studyingPrj:[],
-            endPrj:[]
+            studyingPrj: [],
+            endPrj: []
         }
-     
-    }
-    componentDidMount(){
-        const _this = this
-        this.$axios.get('/show/ing')
-        .then((res)=>{
-        
-            _this.setState({
-                studyingPrj: res.data
-            })
-            localStorage.setItem('ing',JSON.stringify(res.data))
-           
-        }).catch((err)=>{
-            console.log(err);
-        })
-        this.$axios.get('/show/end')
-        .then((res)=>{
-            _this.setState({
-                endPrj: res.data
-            })
-            localStorage.setItem('end',JSON.stringify(res.data))
-        }).catch((err)=>{
-            console.log(err);
-        })
 
     }
-    handleSeeEnd(){
+    componentDidMount() {
+        const _this = this
+        this.$axios.get('/show/ing')
+            .then((res) => {
+
+                _this.setState({
+                    studyingPrj: res.data
+                })
+                localStorage.setItem('ing', JSON.stringify(res.data))
+
+            }).catch((err) => {
+                console.log(err);
+            })
+        this.$axios.get('/show/end')
+            .then((res) => {
+                _this.setState({
+                    endPrj: res.data
+                })
+                localStorage.setItem('end', JSON.stringify(res.data))
+            }).catch((err) => {
+                console.log(err);
+            })
+
+    }
+    handleSeeEnd() {
         this.setState({
             ifSeeMoreEnd: !this.state.ifSeeMoreEnd
         })
 
     }
 
-    handleSeeStudying(){
+    handleSeeStudying() {
         this.setState({
             ifSeeMoreIng: !this.state.ifSeeMoreIng
         })
     }
     render() {
-    
-        const { endPrj, studyingPrj, ifSeeMoreEnd, ifSeeMoreIng } = {...this.state}
-        const { ChangeChooseState, ifChooseOne} = {...this.props}
-        const renderIngPrj = ifSeeMoreIng? studyingPrj:studyingPrj.slice(0,3)
-        const renderEndPrj = ifSeeMoreEnd? endPrj:endPrj.slice(0,3)  
+
+        const { endPrj, studyingPrj, ifSeeMoreEnd, ifSeeMoreIng } = { ...this.state }
+        const { ChangeChooseState, ifChooseOne } = { ...this.props }
+        const renderIngPrj = ifSeeMoreIng ? studyingPrj : studyingPrj.slice(0, 3)
+        const renderEndPrj = ifSeeMoreEnd ? endPrj : endPrj.slice(0, 3)
         return (
             <div className='navs-left'>
                 <nav className='studying-prj'>
@@ -307,18 +306,19 @@ class Navs extends Component {
                             </title>
                     <ul className='studying-prj-list'>
                         {
-                           
-                        
-                           renderIngPrj.map((item, index) => {
-                                return (
-                                <li onClick={()=>{this.setState({
 
-                                    currentPrjId: item.pid
-                                })
-                                ChangeChooseState();
-                            }} 
-                                className={ this.state.currentPrjId===item.pid?'studying-prj-list-item--active':'studying-prj-list-item'}
-                                 key={index}>
+
+                            renderIngPrj.map((item, index) => {
+                                return (
+                                    <li onClick={() => {
+                                        this.setState({
+
+                                            currentPrjId: item.pid
+                                        })
+                                        ChangeChooseState();
+                                    }}
+                                        className={this.state.currentPrjId === item.pid ? 'studying-prj-list-item--active' : 'studying-prj-list-item'}
+                                        key={index}>
                                         <Link className='studying-prj-list-item-name' to={'/display/' + item.pid}>{item.pname}</Link>
                                         <i className='see-info'>></i>
                                     </li>
@@ -328,7 +328,7 @@ class Navs extends Component {
                     </ul>
                     <p className='more' onClick={this.handleSeeStudying.bind(this)}>
                         {
-                            ifSeeMoreIng?(<span>收起</span>):(<span>更多</span>)
+                            ifSeeMoreIng ? (<span>收起</span>) : (<span>更多</span>)
                         }
                     </p>
                 </nav>
@@ -339,15 +339,15 @@ class Navs extends Component {
                             </title>
                     <ul className='end-prj-list'>
                         {
-                           renderEndPrj.map((item, index) => {
+                            renderEndPrj.map((item, index) => {
                                 return (
-                                    <li key={index} 
-                                    onClick={()=>{
-                                        this.setState({
-                                            currentPrjId: item.pid
-                                        })
-                                    }}
-                                    className={this.state.currentPrjId===item.pid?'end-prj-list-item--active':'end-prj-list-item'}>
+                                    <li key={index}
+                                        onClick={() => {
+                                            this.setState({
+                                                currentPrjId: item.pid
+                                            })
+                                        }}
+                                        className={this.state.currentPrjId === item.pid ? 'end-prj-list-item--active' : 'end-prj-list-item'}>
                                         <Link className='end-prj-list-item-name' to={'/display/' + item.pid}>{item.pname}</Link>
                                         <i className='see-info'>></i>
                                     </li>
@@ -357,7 +357,7 @@ class Navs extends Component {
                     </ul>
                     <p onClick={this.handleSeeEnd.bind(this)} className='more'>
                         {
-                            ifSeeMoreEnd?(<span>收起</span>):(<span>更多</span>)
+                            ifSeeMoreEnd ? (<span>收起</span>) : (<span>更多</span>)
                         }
                     </p>
                 </nav>
@@ -372,7 +372,7 @@ class Navs extends Component {
 
 class Display extends Component {
     static defaultProps = {
-        introduc:`互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
+        introduc: `互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
         增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
         增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。互联网移动工程研究中心,我愿意加入通信学院信息工程开放平台用自己的坚定意志维护研究中心的荣誉。
         增长自己的学习能力，并且坚持以成为研究中心的一员而感到骄傲。`
@@ -383,9 +383,9 @@ class Display extends Component {
         this.state = {
             ifChooseOne: true
         }
-   
+
     }
-    ChangeChooseState = ()=>{
+    ChangeChooseState = () => {
         this.setState({
             ifChooseOne: false
         })
@@ -393,7 +393,7 @@ class Display extends Component {
     render() {
         return (
             <div className='display-page'>
-                <Header path={ this.path }/>
+                <Header path={this.path} />
                 <div className='diaplay-top'>
                     <div className='display-top-contnet'>
                         <h1 className='display-top-title'>NMID简介</h1>
@@ -406,10 +406,10 @@ class Display extends Component {
                     </div>
                 </div>
                 <div className='display-bottom'>
-                    <Navs 
-                    ChangeChooseState={this.ChangeChooseState}
-                    ifChooseOne={this.state.ifChooseOne}/>
-                    <PrjDetail ifChooseOne={this.state.ifChooseOne}/>
+                    <Navs
+                        ChangeChooseState={this.ChangeChooseState}
+                        ifChooseOne={this.state.ifChooseOne} />
+                    <PrjDetail ifChooseOne={this.state.ifChooseOne} />
                 </div>
             </div>
         );
