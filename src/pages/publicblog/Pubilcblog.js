@@ -3,6 +3,8 @@ import './Pubilcblog.css'
 import axios from 'axios';
 import cookie from 'react-cookies';
 
+
+
 import pubilcblog_zhan1 from '../../img/personblog_zhan1.png'
 import pubilcblog_zhan2 from '../../img/personblog_zhan2.png'
 import pubilcblog_collect1 from '../../img/personblog_collect1.png'
@@ -14,6 +16,9 @@ import userimg from '../../img/userimg.jpg'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import Header from '../../components/header/header'
+
+
+const qs = require('qs')
 var Data = 'admin'
 class Pubilcblog extends Component {
     constructor(props) {
@@ -379,7 +384,11 @@ class Pubilcblog extends Component {
         document.querySelector(".pubilcblog_left_btn4").style.backgroundColor = "#fff"
         document.querySelector(".pubilcblog_left_btn5").style.backgroundColor = "#fff"
         e.target.style.backgroundColor = "#1d91ff"
-        await this.$axios.get("/blogs?name=" + This.state.userNameData)
+       const queryStr = qs.stringify({
+            type: nowplatform,
+            name: this.state.userNameData
+        })
+        await this.$axios.get("/blogs/by/type?"+queryStr)
             .then(function (response) {
                 if (response.data.length == 0) {
                     // This.setState({
@@ -407,7 +416,7 @@ class Pubilcblog extends Component {
                             mylikenum[i] = response.data[j].blog.likenum
                             mybloguser[i] = response.data[j].userinfo[0]
                             mybloguserimg[i] = response.data[j].userinfo[1]
-                            myurl[i] = response.data.data[j].blog.url
+                            myurl[i] = response.data[j].blog.url
                             myintroduce[i] = response.data[j].blog.introduce
                             i++
                             j++

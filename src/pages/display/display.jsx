@@ -64,18 +64,32 @@ class ResultInfoText extends Component {
                 <p className='status'><svg t="1588737857704" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8034" width="16" height="16">
                     <path d="M520.533333 597.333333l128-128 29.866667 29.866667-153.6 153.6-110.933333-110.933333 29.866666-29.866667 76.8 85.333333zM640 256v42.666667h-213.333333V234.666667c0-8.533333 0-12.8 4.266666-21.333334H298.666667v640h469.333333V213.333333h-132.266667c4.266667 8.533333 4.266667 12.8 4.266667 21.333334V256z m-42.666667 0v-21.333333c0-34.133333-29.866667-64-64-64S469.333333 200.533333 469.333333 234.666667V256h128z m-149.333333-85.333333c21.333333-25.6 51.2-42.666667 85.333333-42.666667s64 17.066667 85.333334 42.666667H810.666667v725.333333H256V170.666667h192z" fill="#1296db" p-id="8035"></path></svg>已参赛</p>
                 <section className='info-txt'>
+                    {
+                        (currentPrj.game == undefined)?
+                          ''
+                        :  currentPrj.game.map((item,index)=>{
+                            return(
+                                <p key={item.gid}>{item.gname}</p>
+                            )
+                        }) 
+                       
+                    }
 
-                    <p>开始时间：{currentPrj.beginTime}</p>
-                    <p>截止日期：{currentPrj.closeTime}</p>
-                    <p>负责人： {currentPrj.pRealname}</p>
                 </section>
                 <p className='status'><svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 1024 1024" width="16" height="16" p-id="7866" version="1.1" t="1588737467812">
                     <defs><style type="text/css" /></defs><path fill="#1296db" d="M 682.667 896 l -149.333 -42.6667 L 384 896 v -166.4 c -102.4 -55.4667 -170.667 -162.133 -170.667 -281.6 C 213.333 273.067 358.4 128 533.333 128 S 853.333 273.067 853.333 448 c 0 123.733 -68.2667 230.4 -170.667 281.6 V 896 Z m -42.6667 -55.4667 v -89.6 c -25.6 8.53333 -55.4667 17.0667 -85.3333 17.0667 v 51.2 l 85.3333 21.3333 Z m -213.333 0 l 85.3333 -25.6 V 768 c -29.8667 0 -59.7333 -8.53333 -85.3333 -17.0667 v 89.6 Z m 106.667 -115.2 c 153.6 0 277.333 -123.733 277.333 -277.333 S 686.933 170.667 533.333 170.667 S 256 294.4 256 448 S 379.733 725.333 533.333 725.333 Z m 0 -85.3333 C 426.667 640 341.333 554.667 341.333 448 S 426.667 256 533.333 256 S 725.333 341.333 725.333 448 S 640 640 533.333 640 Z m 0 -42.6667 c 81.0667 0 149.333 -68.2667 149.333 -149.333 S 614.4 298.667 533.333 298.667 S 384 366.933 384 448 s 68.2667 149.333 149.333 149.333 Z" p-id="7867" /></svg>已获奖</p>
                 <section className='info-txt'>
 
-                    <p>开始时间：{currentPrj.beginTime}</p>
-                    <p>截止日期：{currentPrj.closeTime}</p>
-                    <p>负责人： {currentPrj.pRealname}</p>
+                {
+                        (currentPrj.game == undefined)?
+                          ''
+                        :  currentPrj.game.map((item,index)=>{
+                            return(
+                                <p key={item.gid}>{item.gname}<span className='game-span-space'></span>{item.grecord}</p>
+                            )
+                        }) 
+                       
+                    }
                 </section>
             </div>
 
@@ -130,9 +144,13 @@ class RewardsInfoText extends Component {
             <div>
                    <p className='sub-nav'>简介:</p>
                  <section className='info-txt info-introduc'>
-                {
+              <p>  {
                     currentPrj.introduction
-                }
+                }</p>
+                
+                    <p>开始时间：{currentPrj.beginTime}</p>
+                    <p>截止日期：{currentPrj.closeTime}</p>
+                    <p>负责人： {currentPrj.pRealname}</p>
             </section> 
             </div>
 

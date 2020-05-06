@@ -24,12 +24,12 @@ class VipInfo extends Component {
             })
         }else{
             const _this = this
-            this.$axios.get(`/infoshare/findvip?vnam=${this.state.vipName}`
+            this.$axios.get(`/infoshare/vip/${this.state.vipName}`
             )
             .then((res)=>{
     
                 _this.setState({
-                    VipInfoList: res.data
+                    vipInfoList: res.data
                 })
     
             }).catch((err)=>{
@@ -41,6 +41,35 @@ class VipInfo extends Component {
     })(path);
    
 
+    }
+    componentWillReceiveProps(nextprops){
+        const path = nextprops.location.pathname
+        const getRenderVipList = ((path) =>{
+    
+            if(path.includes('search')){
+                this.setState({
+                    vipInfoList:JSON.parse(localStorage.getItem('vipSearch')),
+                    vipName:JSON.parse(localStorage.getItem('vipSearch'))[0].vnam
+                })
+            }else{
+                const _this = this
+                this.$axios.get(`/infoshare/vip/${this.state.vipName}`
+                )
+                .then((res)=>{
+        
+                    _this.setState({
+                        vipInfoList: res.data
+                    })
+        
+                }).catch((err)=>{
+                    console.log(err);
+                })
+            }
+    
+    
+        })(path);
+       
+    
     }
     render() { 
         const { vipInfoList, vipName } = {...this.state}

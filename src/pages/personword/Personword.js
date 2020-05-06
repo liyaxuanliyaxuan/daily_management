@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import cookie from 'react-cookies'
+import { TimePicker } from 'antd'
 
 import './Personword.css'
 import personword_img1 from '../../img/personword_img1.png'
 import Header from '../../components/header/header'
 
-import axios from 'axios';
+
 import addword_close from '../../img/addword_close.png'
 
 
@@ -134,10 +134,12 @@ class Personword extends Component {
                                 </li>
                                 <li>
                                     <p>立项时间：</p>
+                                   
                                     <input type="text" className="changeword_right_input4" value={this.state.beginTime} onChange={(e) => { this.setState({ beginTime: e.target.value }) }} placeholder="如2000-01-01" />
                                 </li>
                                 <li>
                                     <p>结题时间：</p>
+                                   
                                     <input type="text" className="changeword_right_input5" value={this.state.closeTime} onChange={(e) => { this.setState({ closeTime: e.target.value }) }} placeholder="如2000-01-01" />
                                 </li>
                                 <li>
@@ -216,6 +218,17 @@ class Personword extends Component {
             .catch(function (error) {
                 console.log(error)
             })
+    }
+    pickCreateTime = (data, dataStr)=>{
+        this.setState({
+            beginTime:dataStr
+
+        })
+    }
+    pickEndTime = (data, dataStr)=>{
+        this.setState({
+            closeTime: dataStr
+        })
     }
 
     changewordFile() {
