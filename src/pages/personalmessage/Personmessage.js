@@ -146,13 +146,13 @@ class Personmessage extends Component {
     }
     pickJoinData = (data, dataStr)=>{
         this.setState({
-            birthday:dataStr
+           jointime:dataStr
         })
 
     }
     pickBirthData = (data, dataStr) => {
         this.setState({
-            jointime: dataStr
+            birthday: dataStr
         })
 
     }

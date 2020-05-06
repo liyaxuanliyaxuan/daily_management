@@ -1,12 +1,10 @@
  /*css*/
 
-* { padding: 0; margin: 0; font-family: Adobe 黑体 Std; }
 li { list-style: none; }
 img { border: none; }
 a { text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: none}
 button { border: none;}
-
 ::-webkit-scrollbar {display:none}
 #Homepage_bg {
     height: 580px;
