@@ -155,7 +155,9 @@ class FileList extends Component {
                         )
                     })
                 }
-
+   <div className='share-footer'>
+   <a target='_blank' href='http://www.beian.miit.gov.cn'>渝ICP备19017063号</a>
+            </div>
             </main>
         );
 
@@ -202,6 +204,7 @@ class FileShare_ extends Component {
                 <Route exact path='/file-share/hardware' component={FileList}></Route>
                 <Route path='/file-share/search' component={FileList}></Route>
             </Switch>
+         
 
         </div>)
     }

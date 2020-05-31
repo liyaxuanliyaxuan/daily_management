@@ -83,7 +83,9 @@ class VipList extends Component {
                         )
                     })
                 }
-
+<div className='share-footer'>
+<a target='_blank' href='http://www.beian.miit.gov.cn'>渝ICP备19017063号</a>
+            </div>
             </main>
         );
     }
@@ -115,8 +117,7 @@ class VipSource extends Component {
                 <Route path='/vip-source/vip-info/:vipName' component={VipInfo}></Route>
                 <Route path='/vip-source/search/:vipName' component={VipInfo}></Route>
             </Switch>
-
-
+       
         </div>);
     }
 }

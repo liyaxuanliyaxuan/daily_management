@@ -118,10 +118,24 @@ button { border: none; cursor: pointer;}
     top: 18px;
     font-size: 12px;
 }
+.delectflie {
+    position: absolute;
+    color: #333;
+    right: 10px;
+    top: 18px;
+    font-size: 12px;
+}
 .personword_change {
     position: absolute;
     color: #a0a0a0;
     right: 27px;
+    bottom: 25px;
+    font-size: 12px;
+}
+.personword_addfile {
+    position: absolute;
+    color: #a0a0a0;
+    right: 85px;
     bottom: 25px;
     font-size: 12px;
 }
@@ -258,18 +272,60 @@ button { border: none; cursor: pointer;}
     width: 200px;
     font-size: 12px;
 }
-.changeword_right_input5{
+.changeword_right_input6{
     height: 70px;
     width: 250px;
     margin-left: 50px;
     margin-top: 5px;
     margin-bottom: 0px;
 }
+
+
+
+.changeword_right_li8 .slider1_p{
+    display: block;
+    position: relative;
+    left: 60px;
+}
+.slider1 {
+    -webkit-appearance: none;
+    max-width: 350px;
+    width: 100px;
+    height: 10px;
+    outline: none;
+    border: none;
+  }
+  .slider1::-webkit-slider-thumb{
+      -webkit-appearance: none;/*清除默认样式*/
+      height:25px;/*设置滑块高度*/
+      width:25px;/*设置滑块宽度*/
+      background: #fff;/*设置背景色*/
+      border-radius:50%;/*加个圆角边*/
+      /* margin-top:-1vw; 使用position的话会导致滑块不滑动,但是绑定的value是改变的,所以这里使用margin-top去做定位*/
+      box-shadow: 0 1px 1px rgba(0,0,0,.5);
+      cursor: pointer;
+  }
+  .slider1::-webkit-slider-runnable-track{
+      border-radius: 30px;
+      background:rgb(163, 163, 165);
+      height:25px;
+  }
+
+.changeword_right_li8{
+    margin-top: 30px;
+}
+.changeword_right_input7{
+    height: 30px;
+    width: 250px;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
 .changeword_right button {
     width: 60px;
     height: 25px;
     border-radius: 8px;
-    margin-top: 80px;
+    margin-top: 30px;
     margin-left: 145px;
     margin-bottom: 20px;
     cursor: pointer;
@@ -283,3 +339,155 @@ button { border: none; cursor: pointer;}
     right: 10px;
     cursor: pointer;
 } 
+.changeword_right_input7_P{
+    line-height: 20px;
+    display: block;
+    width: 40%;
+    font-size: 14px;
+    margin-left: 40px;
+    margin-top: 70px;
+}
+#delectprj {
+    display: none;
+    height: 580px;
+    width: 1020px;
+    position: absolute;
+    left: 50%;
+    margin-left: -510px;
+    background-color: #fff;
+    background: rgba(255, 255, 255, 0.4);
+}
+.delectprj_body {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #c2c2c2;
+}
+.delectprj_body1 {
+   width: 100%;
+   height: 160px;
+   margin-top: 20px;
+   background-color: #fff;
+   border-top: 1px solid rgb(168, 168, 168);
+   border-bottom: 1px solid rgb(168, 168, 168);
+}
+.delectprj_body p {
+    text-align: center;
+    padding-top: 30px;
+}
+.delectprj_btn1 {
+    border-radius: 6px;
+    width: 70px;
+    cursor: pointer;
+    border: 1px solid #2996fe;
+    background-color: #2996fe;
+    color: #fff;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+.delectprj_btn2 {
+    border-radius: 6px;
+    border: 1px solid #9e9e9e;
+    width: 70px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+#addword {
+    display: none;
+    height: 580px;
+    width: 1020px;
+    position: absolute;
+    left: 50%;
+    margin-left: -510px;
+    background-color: #fff;
+    background: rgba(255, 255, 255, 0.4);
+}
+.personword_addword_body {
+    width: 340px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -200px;
+    margin-left: -170px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #c2c2c2;
+}
+.addword_left {
+    position: relative;
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 300px;
+    height: 356px;
+    background-color: #fff;
+    border: 1px solid #c2c2c2;
+    overflow-x: hidden;
+ 
+}
+.addword_left_head {
+    width: 100%;
+    height: 40px;
+    margin-top: 4px;
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+    border-bottom: 1px solid #000;
+}
+.addword_left ul{
+    width: 100%;
+    height: 310px;
+    overflow-y: auto;
+}
+.addword_left ul li {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+}
+.addword_left ul li p {
+    line-height: 20px;
+    display: block;
+    width: 40%;
+    font-size: 12px;
+    margin-right: 0px;
+}
+.addword_left ul li input {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 19px;    
+    width: 160px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.personword_addword_body img {
+    position: absolute;
+    top: 6px;
+    right: 20px;
+    cursor: pointer;
+}
+.addword_left button {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 6px;
+    background: #2996fe;
+    color: #fff;
+    margin-left: 110px;
+    margin-bottom: 10px;
+}
+
+
+
+
+

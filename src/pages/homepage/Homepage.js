@@ -18,19 +18,19 @@ var a = 0;
 /*
     说明：
         用于请求数据的Data在state中存储为userNameData
-*/ 
+*/
 ///////////////////////////////////////////////////////////////////////////
 
 class Homepage_ extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userNameData:'',
+            userNameData: '',
             xiaoren: ["homeword_logo1", "homeword_logo2", "homeword_logo3"],
             width: [],
             backgroundColor: ["#ffd100", "#f0842d", "#f36868"],
             ////////
-            realname:'',
+            realname: '',
             username: "",
             userimg: "",
             tel: "暂无",
@@ -52,51 +52,55 @@ class Homepage_ extends Component {
             pname: "暂无",
             //////////////
             porgressImg: [
-                '../../img/homeword_left.png', 
                 '../../img/homeword_left.png',
-                 '../../img/homeword_left.png', 
-                 '../../img/homeword_left.png', 
-                 '../../img/homeword_left.png', 
-                 '../../img/homeword_left.png'
+                '../../img/homeword_left.png',
+                '../../img/homeword_left.png',
+                '../../img/homeword_left.png',
+                '../../img/homeword_left.png',
+                '../../img/homeword_left.png'
             ],
             porgress: [
-                0, 0.2, 0.3, 0.5, 0.8, 1
+                
             ],
             porgressname: [
 
             ],
             url: "",
-            pid:[
+            pid: [
 
             ],
+            ////////////////////////////////用于记录文件
+            updatafile: [],
+            //////////////////////////////////用于提交进度
+            nowprogress: "0",
             ifAdmin: false,
             ifLogin: localStorage.getItem('userName')
         }
     }
     render() {
-        const { ifAdmin } = {...this.props}
-         const renderNavTitle = ifAdmin?
-         {prj:`葫芦娃的项目`,sum:'葫芦娃的总结',blog:'个人博客'}
-         :{sum:`总结展望`,prj:'个人项目',blog:'个人博客'}
+        const { ifAdmin } = { ...this.props }
+        const renderNavTitle = ifAdmin ?
+            { prj: `葫芦娃的项目`, sum: '葫芦娃的总结', blog: '个人博客' }
+            : { sum: `总结展望`, prj: '个人项目', blog: '个人博客' }
         return (
             <div>
                 <div id="Homepage_bg">
-            <Header path='/home'/>
+                    <Header path='/home' />
                     <div className="Homepage_loge"
                         style={{
                             backgroundImage: 'url(' + this.state.userimg + ')'
                         }}
                     ></div>
-                     <p className="name">姓名：{this.state.realname}</p>
+                    <p className="name">姓名：{this.state.realname}</p>
                     <p className="tel">电话：{this.state.tel}</p>
                     <p className="qq">QQ：{this.state.qq}</p>
                     <p className="weibo">微博：{this.state.weibo}</p>
                     <p className="e_mail">邮箱：{this.state.e_mail}</p>
                     <a className="Homepage_more" href="/#/pages/Personmessage" >更多信息</a>
                     <a className="Homepage_change" onClick={this.changepswOut.bind(this)}>修改密码</a>
-                    <a href="/#/pages/Summary"><div className={ifAdmin?"Homepage_zhongjie Homepage_zhongjie-vip":"Homepage_zhongjie"}><div><p>{renderNavTitle.sum}</p></div></div></a>
-                    <a href="/#/pages/Personblog"><div className={ifAdmin?'Homepage_bolg-vip Homepage_bolg':'Homepage_bolg'}><div><p>{renderNavTitle.blog}</p></div></div></a>
-                    <a><div className={ifAdmin?'Homepage_wendang-vip Homepage_wendang':'Homepage_wendang'} onClick={this.homewordShow.bind(this)}><div><p>{renderNavTitle.prj}</p></div></div></a>
+                    <a href="/#/pages/Summary"><div className={ifAdmin ? "Homepage_zhongjie Homepage_zhongjie-vip" : "Homepage_zhongjie"}><div><p>{renderNavTitle.sum}</p></div></div></a>
+                    <a href="/#/pages/Personblog"><div className={ifAdmin ? 'Homepage_bolg-vip Homepage_bolg' : 'Homepage_bolg'}><div><p>{renderNavTitle.blog}</p></div></div></a>
+                    <a><div className={ifAdmin ? 'Homepage_wendang-vip Homepage_wendang' : 'Homepage_wendang'} onClick={this.homewordShow.bind(this)}><div><p>{renderNavTitle.prj}</p></div></div></a>
                 </div>
                 <div id="Homeword_bg" >
                     <div id="Homeword_back" onClick={this.homewordBack.bind(this)} ></div>
@@ -107,12 +111,13 @@ class Homepage_ extends Component {
                                 {
                                     this.state.porgress.map((item, index) => {
                                         let This = this
-                                        let b = this.state.porgress[index]
+                                        let b = this.state.porgress[index]/100
+                                        //console.log(b)
                                         if (b >= 0 && b <= 0.3) {
                                             return (
-                                                <Link to={{pathname:"/pages/Personword" + this.state.pid[index]}} 
-                                                key={index} 
-                                                title={this.state.porgressname[index]}>
+                                                <Link to={{ pathname: "/pages/Personword/" + this.state.pid[index] }}
+                                                    key={index}
+                                                    title={this.state.porgressname[index]}>
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
@@ -128,7 +133,7 @@ class Homepage_ extends Component {
                                                         ></div>
                                                         <img className="Homeword_progress_img2" src={homeword_logo1}
                                                             style={{
-                                                                left: this.state.porgress[index] * 180 + 'px'
+                                                                left: b * 180 + 'px'
                                                             }}
                                                         />
                                                     </div>
@@ -137,12 +142,13 @@ class Homepage_ extends Component {
 
                                         } else if (b > 0.3 && b <= 0.6) {
                                             return (
-                                                <Link to={{pathname:"/pages/Personword/"+this.state.pid[index]}} 
-                                                key={index} title={this.state.porgressname[index]}>
+                                                <Link to={{ pathname: "/pages/Personword/" + this.state.pid[index] }}
+                                                    key={index} title={this.state.porgressname[index]}>
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
-                                                                background: 'url(' + this.state.porgressImg[index] + ')'                                                            }}
+                                                                background: 'url(' + this.state.porgressImg[index] + ')'
+                                                            }}
                                                         ></div>
                                                         <div className="Homeword_progress_div1"></div>
                                                         <div className="Homeword_progress_div2"
@@ -153,7 +159,7 @@ class Homepage_ extends Component {
                                                         ></div>
                                                         <img className="Homeword_progress_img2" src={homeword_logo2}
                                                             style={{
-                                                                left: this.state.porgress[index] * 180 + 'px'
+                                                                left: b * 180 + 'px'
                                                             }}
                                                         />
                                                     </div>
@@ -161,7 +167,7 @@ class Homepage_ extends Component {
                                             )
                                         } else {
                                             return (
-                                                <Link key={index} to={{pathname:"/pages/Personword/"+this.state.pid[index]}} >
+                                                <Link key={index} to={{ pathname: "/pages/Personword/" + this.state.pid[index] }} >
                                                     <div className="Homeword_progress" key={index} >
                                                         <div className="Homeword_progress_img1"
                                                             style={{
@@ -177,7 +183,7 @@ class Homepage_ extends Component {
                                                         ></div>
                                                         <img className="Homeword_progress_img2" src={homeword_logo3}
                                                             style={{
-                                                                left: this.state.porgress[index] * 180 - 10 + 'px'
+                                                                left: b * 180 - 10 + 'px'
                                                             }}
                                                         />
                                                     </div>
@@ -223,7 +229,15 @@ class Homepage_ extends Component {
                             <ul>
                                 <li>
                                     <p>项目进度文档</p>
-                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                    <input type="file" onChange={
+                                        (e) => {
+                                            if (e.target.value != "") {
+                                                e.target.className = "addwordfile"
+                                            } else {
+                                                e.target.className = ""
+                                            }
+                                        }
+                                    } />
                                 </li>
                                 <li>
                                     <p>项目计划文档</p>
@@ -284,11 +298,12 @@ class Homepage_ extends Component {
                                 </li>
                                 <li>
                                     <p>立项时间：</p>
-                                    <input type="text" className="addword_right_input4" value={this.state.beginTime} onChange={(e) => { this.setState({ beginTime: e.target.value }) }} placeholder="如2000-01-01" />
-                                </li>                            
+                                    <input type="date" className="addword_right_input4" value={this.state.beginTime} onChange={(e) => { this.setState({ beginTime: e.target.value }) }} />
+                                </li>
                                 <li>
                                     <p>结题时间：</p>
-                                    <input type="text" className="addword_right_input5" value={this.state.closeTime} onChange={(e) => { this.setState({ closeTime: e.target.value }) }} placeholder="如2000-01-01" />                                </li>
+                                    <input type="date" className="addword_right_input5" value={this.state.closeTime} onChange={(e) => { this.setState({ closeTime: e.target.value }) }} />
+                                </li>
                                 <li>
                                     <p>项目简介：</p>
                                     <textarea type="text" className="addword_right_input5" value={this.state.introduction} onChange={(e) => { this.setState({ introduction: e.target.value }) }} />
@@ -297,14 +312,24 @@ class Homepage_ extends Component {
                                     <p>上传图片：</p>
                                     <input type="file" className="addword_right_input6" />
                                 </li>
+                                {/* <li className="addword_right_li7" >
+                                    <p>项目进度：</p>
+                                    <input type="range" className="addword_right_input7 slider1" value={this.state.nowprogress} min="0" max="100" onChange={(e) => {
+                                        this.setState({
+                                            nowprogress: e.target.value
+                                        })
+                                        document.querySelector(".addword_right_li7 span").innerHTML = e.target.value + "%"
+                                    }} />
+                                    <span className="slider1_p">0%</span>
+                                </li> */}
                                 <button onClick={this.addwordFile.bind(this)}>确定</button>
                             </ul>
                         </div>
                     </div>
                 </div>
-            <div className='bottom-bg'>
+                <div className='bottom-bg'>
 
-            </div>
+                </div>
             </div>
         );
     }
@@ -349,20 +374,20 @@ class Homepage_ extends Component {
         })
     }
     /////////////////////////////////////////交互
-    componentWillMount(){
-      
+    componentWillMount() {
+
     }
 
     componentDidMount() {
-        
-        let ifAdmin = (this.state.ifLogin && localStorage.getItem('ifAdmin'))?true:false
+
+        let ifAdmin = (this.state.ifLogin && localStorage.getItem('ifAdmin')) ? true : false
         const userNameData = localStorage.getItem('userName')
         this.setState({
             ifAdmin,
             userNameData
         });
         let This = this
-        this.$axios.get( axios.get("/user/getUserInfoByUnam?username=" + userNameData)
+        this.$axios.get(axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             .then(function (response) {
                 This.setState({
                     realname: response.data.realname,
@@ -378,7 +403,7 @@ class Homepage_ extends Component {
                 console.log(error)
             })
         )
-        
+
     }
 
 
@@ -431,7 +456,7 @@ class Homepage_ extends Component {
                     var mypid = new Array()
                     for (var i = 0; i < response.data.length; i++) {
                         myporgressImg[i] = response.data[i].image
-                        myporgress[i] = response.data[i].porgress 
+                        myporgress[i] = response.data[i].progress
                         myporgressname[i] = response.data[i].pname
                         mypid[i] = response.data[i].pid
                     }
@@ -446,6 +471,13 @@ class Homepage_ extends Component {
             .catch(function (error) {
                 console.log(error)
             })
+
+        this.$axios.get("/user/getProjectDocs?pid=90&doctype=项目进度文档")
+            .then((res) => { console.log(res) })
+            .catch((res) => { console.log(res) })
+        this.$axios.get("/user/getDocTypes")
+            .then((res) => { console.log(res) })
+            .catch((res) => { console.log(res) })
     }
 
     async addwordFile() {
@@ -460,50 +492,66 @@ class Homepage_ extends Component {
                 'Content-Type': 'multipart/form-data;charset=UTF-8'  //'application/x-www-form-urlencoded' 
             }
         }
-        let img = document.querySelector(".addword_right_input6").files[0]
-        let FormDataimg = new FormData()
-        FormDataimg.append("image", img)
-        await this.$axios.post("/user/uploadImages", FormDataimg)
-            .then(function (response) {
-                /////////////////得到返回的url
-                This.setState({
-                    url: response.data[0] 
+        if (document.querySelector(".addword_right_input6").files.length != 0) {////如果有选择图片
+            let img = document.querySelector(".addword_right_input6").files[0]
+            let FormDataimg = new FormData()
+            FormDataimg.append("image", img)
+            await this.$axios.post("/user/uploadImages", FormDataimg)
+                .then(function (response) {
+                    /////////////////得到返回的url
+                    This.setState({
+                        url: response.data[0]
+                    })
+                    url = response.data[0]
+                    console.log("上传图片成功" + response.data)
+                    //console.log(response.data)
+
                 })
-                url = response.data[0]
-                console.log("上传图片成功" + response.data)
-                console.log(response.data)
-                
-            })
-            .catch(function (error) {
-                console.log(error)
-                alert("上传图片出错")
-                ture = 1
-            })
+                .catch(function (error) {
+                    console.log(error)
+                    alert("上传图片出错")
+                    ture = 1
+                })
+        } else {
+            console.log("未上传图片")
+        }
+
 
         //console.log(url)
         //////////////上传项目文件
-        let file = document.querySelector(".addword_right_input6").files[0]
-        let FormDatafile = new FormData()
-        FormDatafile.append("file", file)
         try {
-            FormDatafile.append("doctype", document.querySelector(".addwordfile").previousElementSibling.innerHTML)
+            if (document.querySelector(".addwordfile").files.length != 0) {
+                let file = document.querySelector(".addwordfile").files[0]
+                console.log(document.querySelector(".addwordfile").value)
+                let FormDatafile = new FormData()
+                FormDatafile.append("file", file)
+                try {
+                    FormDatafile.append("doctype", document.querySelector(".addwordfile").previousElementSibling.innerHTML)
+                } catch{
+                    alert("请正确填写信息")
+                    return
+                }
+                FormDatafile.append("username", this.state.username)
+                await this.$axios.post("/user/uploadFiles", FormDatafile, config)
+                    .then(function (response) {
+                        //////////////获取文件id
+                        fid = response.data[0] ////////////////////////////////////////
+                        console.log("上传文件成功" + response.data)
+                        //console.log(fid)
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                        alert("上传文件出错")
+                        ture = 1
+                    })
+            } else {
+                console.log("未上传文件")
+            }
         } catch{
-            alert("请正确填写信息")
-            return
+            console.log("未上传文件")
         }
-        FormDatafile.append("username", this.state.userNameDataData)
-        await this.$axios.post("/user/uploadFiles", FormDatafile, config)
-            .then(function (response) {
-                //////////////获取文件id
-                fid = response.data[0] ////////////////////////////////////////
-                console.log("上传文件成功" + response.data)
-                //console.log(fid)
-            })
-            .catch(function (error) {
-                console.log(error)
-                alert("上传文件出错")
-                ture = 1
-            })
+
+
 
 
         //////////////上传项目信息
@@ -516,11 +564,15 @@ class Homepage_ extends Component {
                 this.state.members
             ],
             "pRealname": this.state.pRealname,
-            "pname": this.state.pname
+            "pname": this.state.pname,
+            //"progress":  Number(document.querySelector(".slider1").value)//this.state.nowprogress
         })
             .then(function (response) {
+                //得到项目id
                 pid = response.data.pid
                 console.log("上传项目信息成功" + response.data)
+                alert("上传项目成功！")
+                document.querySelector("#addword").style.display = "none"
             })
             .catch(function (error) {
                 console.log(error)
@@ -528,28 +580,33 @@ class Homepage_ extends Component {
                 ture = 1
             })
 
-        console.log("pid:" + pid)
-        console.log("fid:" + fid)
-        if (ture == 0) {
-            //////////////文件与项目关联
-            await this.$axios.post("user/updateProjectDoc", {
-                "fid": fid,
-                "pid": pid
-            })
-                .then(function (response) {
-                    if (response.code == 200) {
-                        alert("上传成功")
-                        document.querySelector("#addword").style.display = "none"
-                    }
-                    console.log(response.data)
+        console.log("pid: " + pid)
+        console.log("fid: " + fid)
+        if (pid != "" && fid != "") {
+            if (ture == 0) {
+                //////////////文件与项目关联
+                await this.$axios.post("user/updateProjectDoc", {
+                    "fid": fid,
+                    "pid": pid
                 })
-                .catch(function (error) {
-                    console.log(error)
-                    alert("未知错误")
-                })
+                    .then(function (response) {
+                        if (response.code == 200) {
+                            //alert("上传成功")
+                            document.querySelector("#addword").style.display = "none"
+                        }
+                        console.log(response.data)
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                        alert("未知错误")
+                    })
+            } else {
+                ture = 0
+            }
         } else {
-            ture = 0
+            console.log("未进行项目和文件的关联")
         }
+
 
     }
 

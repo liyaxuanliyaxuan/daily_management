@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 import { TimePicker } from 'antd'
 
@@ -46,7 +47,7 @@ class Personword extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userNameData:'',
+            userNameData: '',
             username: "",
             userimg: "",
             tel: "",
@@ -63,14 +64,15 @@ class Personword extends Component {
             pid: "",
             pname: "",
             //////////////
+            nowprogress: "0",
         }
     }
     render() {
         return (
             <div>
                 <div id="personword_bg">
-                 <Header path='/pages/Personword'/>
-                 <div id="personword_left">
+                    <Header path='/pages/Personword' />
+                    <div id="personword_left">
                         <button className="personword_button1" onClick={this.downloadFile.bind(this)}>项目进度文档</button>
                         <button className="personword_button2" onClick={this.downloadFile.bind(this)}>项目计划文档</button>
                         <button className="personword_button3" onClick={this.downloadFile.bind(this)}>项目讨论会议纪要</button>
@@ -85,8 +87,11 @@ class Personword extends Component {
                     </div>
                     <div id="personword_right">
                         <div className="personword_right_up">
+                            <a className="delectflie" onClick={() => { document.querySelector("#delectprj").style.display = "block" }}>删除</a>
                             <a href="javascript:history.back(-1)" className="personword_back">返回</a>
+
                             <a className="personword_change" onClick={() => { document.querySelector("#changeword").style.display = "block" }}>信息修改</a>
+                            <a className="personword_addfile" onClick={() => { document.querySelector("#addword").style.display = "block" }}>提交文件</a>
                             <img src={this.state.image} />
                             <p className="personword_right_up_p1">项目名称：{this.state.pname}</p>
                             <p className="personword_right_up_p2">项目牵头人：{this.state.pRealname}</p>
@@ -134,20 +139,104 @@ class Personword extends Component {
                                 </li>
                                 <li>
                                     <p>立项时间：</p>
-                                   
-                                    <input type="text" className="changeword_right_input4" value={this.state.beginTime} onChange={(e) => { this.setState({ beginTime: e.target.value }) }} placeholder="如2000-01-01" />
+
+                                    <input type="date" className="changeword_right_input4" value={this.state.beginTime} onChange={(e) => { this.setState({ beginTime: e.target.value }) }} placeholder="如2000-01-01" />
                                 </li>
                                 <li>
                                     <p>结题时间：</p>
-                                   
-                                    <input type="text" className="changeword_right_input5" value={this.state.closeTime} onChange={(e) => { this.setState({ closeTime: e.target.value }) }} placeholder="如2000-01-01" />
+
+                                    <input type="date" className="changeword_right_input5" value={this.state.closeTime} onChange={(e) => { this.setState({ closeTime: e.target.value }) }} placeholder="如2000-01-01" />
                                 </li>
                                 <li>
                                     <p>项目简介：</p>
-                                    <textarea type="text" className="changeword_right_input5" value={this.state.introduction} onChange={(e) => { this.setState({ introduction: e.target.value }) }} />
+                                    <textarea type="text" className="changeword_right_input6" value={this.state.introduction} onChange={(e) => { this.setState({ introduction: e.target.value }) }} />
+                                </li>
+                                <p className="changeword_right_input7_P">项目图片：</p>
+                                <input type="file" className="changeword_right_input7"></input>
+                                <li className="changeword_right_li8" >
+                                    <p>项目进度：</p>
+                                    <input type="range" className="changeword_right_input8 slider1" value={this.state.nowprogress} min="0" max="100" onChange={(e) => {
+                                        this.setState({
+                                            nowprogress: e.target.value
+                                        })
+                                        document.querySelector(".changeword_right_li8 span").innerHTML = e.target.value + "%"
+                                    }} />
+                                    <span className="slider1_p">0%</span>
                                 </li>
                                 <button onClick={this.changewordFile.bind(this)}>确定</button>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="delectprj">
+                    <div className="delectprj_body">
+                        <div className="delectprj_body1">
+                            <p>是否删除该项目</p>
+                            <button className="delectprj_btn1" onClick={this.delectFile.bind(this)}>确定</button>
+                            <button className="delectprj_btn2" onClick={() => { document.querySelector("#delectprj").style.display = "none" }}>取消</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="addword">
+                    <div className="personword_addword_body">
+                        <img src={addword_close} onClick={() => { document.querySelector("#addword").style.display = "none" }} />
+                        <div className="addword_left" >
+                            <p className="addword_left_head">文档上传(选择其中一种)</p>
+                            <ul>
+                                <li>
+                                    <p>项目进度文档</p>
+                                    <input type="file" onChange={
+                                        (e) => {
+                                            if (e.target.value != "") {
+                                                e.target.className = "addwordfile"
+                                            } else {
+                                                e.target.className = ""
+                                            }
+                                        }
+                                    } />
+                                </li>
+                                <li>
+                                    <p>项目计划文档</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>项目会议纪要文档</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>接口文档</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>详细功能介绍文档</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>项目合同书</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>项目结题验收书</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>课题研究报告</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>学院结业报告</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>结业答辩评价表</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                                <li>
+                                    <p>项目实施过程</p>
+                                    <input type="file" onChange={(e) => { if (e.target.value != "") { e.target.className = "addwordfile" } else { e.target.className = "" } }} />
+                                </li>
+                            </ul>
+                            <button onClick={this.changeFile.bind(this)}>提交</button>
                         </div>
                     </div>
                 </div>
@@ -173,7 +262,7 @@ class Personword extends Component {
         this.$axios.get("/user/getUserInfoByUnam?username=" + userNameData)
             ///////////////////////获取用户信息
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 This.setState({
                     realname: response.data.realname,
                     username: response.data.unam,
@@ -219,44 +308,92 @@ class Personword extends Component {
                 console.log(error)
             })
     }
-    pickCreateTime = (data, dataStr)=>{
+    pickCreateTime = (data, dataStr) => {
         this.setState({
-            beginTime:dataStr
+            beginTime: dataStr
 
         })
     }
-    pickEndTime = (data, dataStr)=>{
+    pickEndTime = (data, dataStr) => {
         this.setState({
             closeTime: dataStr
         })
     }
 
-    changewordFile() {
+    async changewordFile() {
         /////////////////////////修改项目信息
         let This = this
-        console.log("aaa")
-        this.$axios.post("/user/updateProject", {
-            beginTime: This.state.beginTime,
-            closeTime: This.state.closeTime,
-            introduction: This.state.introduction,
-            members: This.state.members,
-            pRealname: This.state.pRealname,
-            pname: This.state.pname,
-            pid: This.props.match.params.state
-        }).then(function (response) {
-            console.log(response.data)
-            alert("上传成功")
-            document.querySelector("#changeword").style.display = "none"
-        }).catch(function (error) {
-            console.log(error)
-            alert("上传失败")
-        })
+        let url = ""
+        if (document.querySelector(".changeword_right_input7").files.length != 0) {////如果有选择图片
+            let img = document.querySelector(".changeword_right_input7").files[0]
+            let FormDataimg = new FormData()
+            FormDataimg.append("image", img)
+            await this.$axios.post("/user/uploadImages", FormDataimg)
+                .then(function (response) {
+                    /////////////////得到返回的url
+                    This.setState({
+                        url: response.data[0]
+                    })
+                    url = response.data[0]
+                    console.log("上传图片成功" + response.data)
+                    //console.log(response.data)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    alert("上传图片出错")
+                })
+
+            await this.$axios.post("/user/updateProject", {
+                ////修改项目信息
+                beginTime: This.state.beginTime,
+                closeTime: This.state.closeTime,
+                introduction: This.state.introduction,
+                members: This.state.members,
+                pRealname: This.state.pRealname,
+                pname: This.state.pname,
+                pid: This.props.match.params.state,
+                image: url,
+                progress:  Number(document.querySelector(".slider1").value)//this.state.nowprogress
+            }).then(function (response) {
+                console.log(response.data)
+                alert("上传成功")
+                document.querySelector("#changeword").style.display = "none"
+            }).catch(function (error) {
+                console.log(error)
+                alert("上传失败")
+            })
+        } else {
+            console.log("未上传图片")
+            await this.$axios.post("/user/updateProject", {
+                ////修改项目信息
+                beginTime: This.state.beginTime,
+                closeTime: This.state.closeTime,
+                introduction: This.state.introduction,
+                members: This.state.members,
+                pRealname: This.state.pRealname,
+                pname: This.state.pname,
+                pid: This.props.match.params.state,
+                progress:  Number(document.querySelector(".slider1").value)
+            }).then(function (response) {
+                console.log(response.data)
+                alert("上传成功")
+                document.querySelector("#changeword").style.display = "none"
+            }).catch(function (error) {
+                console.log(error)
+                alert("上传失败")
+            })
+        }
+
+
+
     }
 
-    downloadFile(e) {
+    async downloadFile(e) {
         ////////////////////////下载相应项目文件
         let This = this
         let type = e.target.innerHTML
+        let fid = ""
+        let fname = ""
         const id = This.props.match.params.state
         //console.log(e.target.innerHTML)
         // let isdownload = confirm("是否下载该文件")
@@ -265,13 +402,134 @@ class Personword extends Component {
         // }else{
 
         // }
-        this.$axios.get("/user/getProjectDocs?pid=" + id + "&doctype=" + type)
-            .then(function(response){
+        console.log("id:" + id + "type:" + type)
+        await this.$axios.get("/user/getProjectDocs?pid=" + id + "&doctype=" + type)
+            .then(function (response) {
                 console.log(response.data)
-            }).catch(function(error){
+                if (response.data.length == 0) {
+                    fid = ""
+                    fname = ""
+                } else {
+                    fid = response.data[0].fid
+                    fname = response.data[0].fname
+                }
+            }).catch(function (error) {
                 console.log(error)
             })
+        console.log(fid)
+        // await this.$axios.get("/user/getFile/" + fid)
+        //     .then(function (res) {
+        //         let url = window.URL.createObjectURL(new Blob([res.data]))
+        //         let link = document.createElement('a')
+        //         link.style.display = 'none'
+        //         link.href = url
+        //         link.setAttribute('download', "fileName")    // 自定义下载文件名（如exemple.txt）
+        //         document.body.appendChild(link)
+        //         link.click()
+        //     }).catch(function (error) {
+        //         console.log(error)
+        //     })
+        /**
+ * 下载文件
+ * @param content 文件流
+ * @param fileName 文件名称
+ */
+
+        await axios({
+            url: '/user/getFile/' + fid,
+            method: 'get',
+            responseType: 'blob'
+        }).then((res) => {
+            download(res, fname)
+        })
+
     }
+
+    delectFile() {
+        ///删除项目
+        let This = this
+        const id = This.props.match.params.state
+        const userNameData = localStorage.getItem('userName')
+
+        axios.delete("/user/project/" + id + "?username=" + This.state.realname)
+            .then(res => {
+                console.log(res)
+                if (res.code == 200) {
+                    alert("删除成功")
+                    document.querySelector('.personword_back').click()
+                }else{
+                    alert(res.message)
+                }
+
+                
+            })
+            .catch(res => {
+                console.log(res)
+                alert("删除失败")
+            })
+    }
+
+    async changeFile() {
+        let This = this
+        let fid = ""
+        const id = This.props.match.params.state
+        const userNameData = localStorage.getItem('userName')
+        let config = {
+            headers: {
+                'Content-Type': 'multipart/form-data;charset=UTF-8'  //'application/x-www-form-urlencoded' 
+            }
+        }
+
+        let file = document.querySelector(".addwordfile").files[0]
+        console.log(document.querySelector(".addwordfile").value)
+        let FormDatafile = new FormData()
+        FormDatafile.append("file", file)
+        FormDatafile.append("doctype", document.querySelector(".addwordfile").previousElementSibling.innerHTML)
+        FormDatafile.append("username", this.state.userNameData)
+        await this.$axios.post("/user/uploadFiles", FormDatafile, config)
+            .then(function (response) {
+                //////////////获取文件id
+                fid = response.data[0] ////////////////////////////////////////
+                console.log("上传文件成功" + response.data)
+                //console.log(fid)
+            })
+            .catch(function (error) {
+                console.log(error)
+                alert("上传文件出错")
+            })
+
+        await this.$axios.post("user/updateProjectDoc", {
+            "fid": fid,
+            "pid": id
+        })
+            .then(function (response) {
+                if (response.code == 200) {
+                    alert("上传成功")
+                    document.querySelector("#addword").style.display = "none"
+                }
+                console.log(response.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+                alert("未知错误")
+            })
+    }
+
+
+
 }
 
 export default Personword;
+
+export const download = (content, fileName) => {
+    const blob = new Blob([content], {
+        type: 'application/octet-stream'
+    });
+    const a = document.createElement("a");
+    const url = window.URL.createObjectURL(blob);
+    const filename = fileName;
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+}

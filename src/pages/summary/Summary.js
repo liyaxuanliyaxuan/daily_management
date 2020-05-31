@@ -108,6 +108,9 @@ class Summary extends Component {
                     </div>
                     </div>
                 </div>
+                <div className='footer'>
+                <a target='_blank' href='http://www.beian.miit.gov.cn'>渝ICP备19017063号</a>
+            </div>
             </div>
         );
     }

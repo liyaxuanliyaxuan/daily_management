@@ -126,7 +126,9 @@ class MeetingList extends Component {
                         )
                     })
                 }
-
+<div className='share-footer'>
+<a target='_blank' href='http://www.beian.miit.gov.cn'>渝ICP备19017063号</a>
+            </div>
             </main>
          );
     }
@@ -169,6 +171,7 @@ class Meeting extends Component {
                 <Route path='/meeting/meet-record' component={ MeetingList }></Route>
                 <Route path='/meeting/search' component={ MeetingList}></Route>
             </Switch>
+           
 
         </div> );
     }

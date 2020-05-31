@@ -91,6 +91,7 @@ class ResultInfoText extends Component {
                        
                     }
                 </section>
+                
             </div>
 
 
@@ -250,12 +251,12 @@ class PrjDetail extends Component {
         const { ifChooseOne } = { ...this.props }
         return (
             <div className='prj-detail'>
-                <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
+                {/* <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
                     <MenuItem style={{ marginLeft: 10 }} key='introduc'>总览</MenuItem>
                     <MenuItem style={{ marginLeft: 10 }} key='detail' disabled={ifChooseOne}>查看详情</MenuItem>
-                </Menu>
+                </Menu> */}
                 {
-                    current == 'introduc' ? <Introduc /> : <Detail />
+                    ifChooseOne? <Introduc /> : <Detail />
                 }
 
             </div>
@@ -320,6 +321,10 @@ class Navs extends Component {
         return (
             <div className='navs-left'>
                 <nav className='studying-prj'>
+                <title onClick={()=>{ChangeChooseState(true);}} className={ifChooseOne?'all-prj-title-clicked':'all-prj-title'}>
+                        <i></i>
+                        总览
+                            </title>
                     <title className='studying-prj-title'>
                         <i></i>
                         在研项目
@@ -335,9 +340,10 @@ class Navs extends Component {
 
                                             currentPrjId: item.pid
                                         })
-                                        ChangeChooseState();
+                                        ChangeChooseState(false);
+                                       
                                     }}
-                                        className={this.state.currentPrjId === item.pid ? 'studying-prj-list-item--active' : 'studying-prj-list-item'}
+                                        className={this.state.currentPrjId === item.pid && !ifChooseOne ? 'studying-prj-list-item--active' : 'studying-prj-list-item'}
                                         key={index}>
                                         <Link className='studying-prj-list-item-name' to={'/display/' + item.pid}>{item.pname}</Link>
                                         <i className='see-info'>></i>
@@ -366,8 +372,9 @@ class Navs extends Component {
                                             this.setState({
                                                 currentPrjId: item.pid
                                             })
+                                            ChangeChooseState(false);
                                         }}
-                                        className={this.state.currentPrjId === item.pid ? 'end-prj-list-item--active' : 'end-prj-list-item'}>
+                                        className={this.state.currentPrjId === item.pid && !ifChooseOne ? 'end-prj-list-item--active' : 'end-prj-list-item'}>
                                         <Link className='end-prj-list-item-name' to={'/display/' + item.pid}>{item.pname}</Link>
                                         <i className='see-info'>></i>
                                     </li>
@@ -381,6 +388,9 @@ class Navs extends Component {
                         }
                     </p>
                 </nav>
+                <div className='display-footer'>
+                <a target='_blank' href='http://www.beian.miit.gov.cn'>渝ICP备19017063号</a>
+            </div>
             </div>
         );
     }
@@ -401,13 +411,13 @@ class Display extends Component {
         super(props);
         this.path = this.props.location.pathname
         this.state = {
-            ifChooseOne: true
+            ifChooseOne: true//是否选中了总览
         }
 
     }
-    ChangeChooseState = () => {
+    ChangeChooseState = (val) => {
         this.setState({
-            ifChooseOne: false
+            ifChooseOne: val
         })
     }
     render() {
@@ -431,6 +441,7 @@ class Display extends Component {
                         ifChooseOne={this.state.ifChooseOne} />
                     <PrjDetail ifChooseOne={this.state.ifChooseOne} />
                 </div>
+              
             </div>
         );
     }

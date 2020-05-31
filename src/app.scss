@@ -10,7 +10,8 @@ body{
     
     // background-color:#f4f4f4;
     
-    background: linear-gradient(to right,#ffffff 18% , #f4f4f4 18% 82% ,#ffffff 82%);
+    
+    background: linear-gradient(to right,#ffffff 17% , #f4f4f4 17% 83% ,#ffffff 83%);
     font-family: Arial, Helvetica, sans-serif;
 }
 ul,li{
@@ -43,6 +44,7 @@ input:-ms-input-placeholder {
   font-size: 14px;
 }
 
+
 @media only screen and (max-width: 1600px) and (min-width: 1280px){
     html{
       font-size: 16px;
@@ -62,5 +64,8 @@ input:-ms-input-placeholder {
   @media only screen and (max-width: 1280px){
     body{
       background: #f4f4f4;
+    }
+    .display-footer{
+    
     }
   }

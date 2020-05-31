@@ -531,6 +531,35 @@ button { border: none;}
     margin-left: 50px;
     margin-top: 5px;
 }
+.slider1_p{
+    display: block;
+    position: relative;
+    left: 37px;
+
+}
+.slider1 {
+    -webkit-appearance: none;
+    max-width: 350px;
+    width: 100px;
+    height: 10px;
+    outline: none;
+    border: none;
+  }
+  .slider1::-webkit-slider-thumb{
+      -webkit-appearance: none;/*清除默认样式*/
+      height:25px;/*设置滑块高度*/
+      width:25px;/*设置滑块宽度*/
+      background: #fff;/*设置背景色*/
+      border-radius:50%;/*加个圆角边*/
+      /* margin-top:-1vw; 使用position的话会导致滑块不滑动,但是绑定的value是改变的,所以这里使用margin-top去做定位*/
+      box-shadow: 0 1px 1px rgba(0,0,0,.5);
+      cursor: pointer;
+  }
+  .slider1::-webkit-slider-runnable-track{
+      border-radius: 30px;
+      background:rgb(163, 163, 165);
+      height:25px;
+  }
 .addword_right_li6{
     margin-top: 80px;
 }
@@ -551,8 +580,9 @@ button { border: none;}
 }
 .bottom-bg{
     width: 1300px;
-    height: 142px;
+    height: 110px;
     background: #fff;
     position: absolute;
     bottom: 0;
 }
+
