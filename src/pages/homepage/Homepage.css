@@ -1,4 +1,13 @@
  /*css*/
+ .footer{
+    position: absolute;
+    bottom: 0;
+  
+    width: 100%;
+    justify-content: center;
+    font-size: 12px;
+    display: flex;
+}
 
 li { list-style: none; }
 img { border: none; }
@@ -578,11 +587,11 @@ button { border: none;}
     right: 20px;
     cursor: pointer;
 }
+
 .bottom-bg{
     width: 1300px;
-    height: 110px;
+    height: 142px;
     background: #fff;
     position: absolute;
     bottom: 0;
 }
-
