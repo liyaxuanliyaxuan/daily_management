@@ -108,3 +108,6 @@ canvas{
 .pass-input,.name-input{
     border: transparent;
 }
+.pass-input:focus,.name-input:focus{
+   outline: transparent;
+}

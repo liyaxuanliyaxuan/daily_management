@@ -488,6 +488,65 @@ button { border: none; cursor: pointer;}
 }
 
 
-
-
-
+#choosefile {
+    display: none;
+    height: 580px;
+    width: 1020px;
+    position: absolute;
+    left: 50%;
+    margin-left: -510px;
+    background-color: #fff;
+    background: rgba(255, 255, 255, 0.4);
+}
+.choosefile_body {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #c2c2c2;
+}
+.choosefile_body_h1{
+    text-align: center;
+}
+.choosefile_body1 {
+    width: 100%;
+    height: 240px;
+    margin-top: 5px;
+    border-top: 1px solid #9e9e9e;
+    border-bottom: 1px solid #9e9e9e;
+    overflow-y: auto;
+}
+.choosefile_body li {
+    border: 1px solid #dad9d9;
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+.choosefile_body li p {
+    line-height: 50px;
+    margin-left: 20px;
+}
+.choosefile_body li button {
+    border: 1px solid #9e9e9e;    
+    width: 60px;
+    height: 25px;
+    border-radius: 6px;
+    position: absolute;
+    right: 10px;
+    top: 12.5px;
+}
+.choosefile_body_back {
+    border: 1px solid #9e9e9e;    
+    width: 60px;
+    height: 25px;
+    border-radius: 6px;
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    margin-left: -30px;
+}

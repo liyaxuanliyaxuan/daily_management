@@ -9,8 +9,9 @@ import Header from '../../components/header/header'
 
 
 import addword_close from '../../img/addword_close.png'
+import Item from 'antd/lib/list/Item';
 
-
+var filenum = []
 
 ///////////////////////////////////////////////////////////////////////////
 ////↓↓↓用户名(username),不是真实名字(realname),字符型
@@ -65,6 +66,9 @@ class Personword extends Component {
             pname: "",
             //////////////
             nowprogress: "0",
+            /////////////文件列表
+            filenum: [],
+            sign: 1
         }
     }
     render() {
@@ -240,6 +244,28 @@ class Personword extends Component {
                         </div>
                     </div>
                 </div>
+                <div id="choosefile">
+                    <div className="choosefile_body">
+                        <p className="choosefile_body_h1">请选择下载的文件：</p>
+                        <div className="choosefile_body1">
+                            <ul>
+                                {
+                                    this.state.filenum.map((item, index) => {
+                                        let This = this
+
+                                        return (
+                                            <li key={index}>
+                                                <p>{this.state.filenum[index].fname}</p>
+                                                <button onClick={this.downloadThisfile.bind(this, index)}>下载</button>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                        <button className="choosefile_body_back" onClick={() => { document.querySelector("#choosefile").style.display = "none" }}>返回</button>
+                    </div>
+                </div>
                 <div className='footer'>
                 <a target='_blank' href='http://www.beian.miit.gov.cn'>渝ICP备19017063号</a>
             </div>
@@ -356,7 +382,7 @@ class Personword extends Component {
                 pname: This.state.pname,
                 pid: This.props.match.params.state,
                 image: url,
-                progress:  Number(document.querySelector(".slider1").value)//this.state.nowprogress
+                progress: Number(document.querySelector(".slider1").value)//this.state.nowprogress
             }).then(function (response) {
                 console.log(response.data)
                 alert("上传成功")
@@ -376,7 +402,7 @@ class Personword extends Component {
                 pRealname: This.state.pRealname,
                 pname: This.state.pname,
                 pid: This.props.match.params.state,
-                progress:  Number(document.querySelector(".slider1").value)
+                progress: Number(document.querySelector(".slider1").value)
             }).then(function (response) {
                 console.log(response.data)
                 alert("上传成功")
@@ -415,11 +441,17 @@ class Personword extends Component {
                 } else {
                     fid = response.data[0].fid
                     fname = response.data[0].fname
+
                 }
+                This.setState({
+                    filenum: response.data
+
+                })
+
             }).catch(function (error) {
                 console.log(error)
             })
-        console.log(fid)
+        //console.log(fid)
         // await this.$axios.get("/user/getFile/" + fid)
         //     .then(function (res) {
         //         let url = window.URL.createObjectURL(new Blob([res.data]))
@@ -438,14 +470,8 @@ class Personword extends Component {
  * @param fileName 文件名称
  */
 
-        await axios({
-            url: '/user/getFile/' + fid,
-            method: 'get',
-            responseType: 'blob'
-        }).then((res) => {
-            download(res, fname)
-        })
-
+        document.querySelector("#choosefile").style.display = "block"
+        console.log(filenum)
     }
 
     delectFile() {
@@ -460,11 +486,11 @@ class Personword extends Component {
                 if (res.code == 200) {
                     alert("删除成功")
                     document.querySelector('.personword_back').click()
-                }else{
+                } else {
                     alert(res.message)
                 }
 
-                
+
             })
             .catch(res => {
                 console.log(res)
@@ -518,6 +544,21 @@ class Personword extends Component {
             })
     }
 
+    async downloadThisfile(index) {
+        console.log(index)
+        console.log(this)
+        let This = this
+        let Fid = This.state.filenum[index].fid
+        let Fname = This.state.filenum[index].fname
+         await axios({
+             url: '/user/getFile/' + Fid,
+             method: 'get',
+             responseType: 'blob'
+         }).then((res) => {
+
+             download(res, Fname)
+         })
+    }
 
 
 }
